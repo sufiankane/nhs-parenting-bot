@@ -1,0 +1,23 @@
+{
+  "name": "nhs-parenting-bot",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "vitest run",
+    "test:redteam": "vitest run tests/redteam",
+    "deploy": "wrangler deploy",
+    "ingest": "tsx scripts/ingest/run.ts"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "wrangler": "^3.114.0"
+  },
+  "dependencies": {
+    "lancedb": "^0.0.1"
+  }
+}

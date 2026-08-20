@@ -1,0 +1,33 @@
+name = "nhs-parenting-bot"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+[vars]
+SIMILARITY_THRESHOLD = "0.5"
+RATE_LIMIT_PER_MINUTE = "20"
+
+[ai]
+binding = "AI"
+
+[[vectorize.indexes]]
+binding = "VECTOR_INDEX"
+index_name = "nhs-guidance"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nhs-parenting"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+
+[[r2.buckets]]
+binding = "RAW_CONTENT"
+bucket_name = "nhs-source-pages"
+
+[[queues.producers]]
+binding = "INGEST_QUEUE"
+queue = "nhs-ingest"
+
+[[queues.consumers]]
+queue = "nhs-ingest"
+max_batch_size = 10
