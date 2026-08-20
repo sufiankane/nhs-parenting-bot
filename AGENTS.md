@@ -1,7 +1,11 @@
 # AGENTS.md — NHS Parenting Companion Chatbot
 
 > Read this file in full before making any change.
-> Binding rule sets live in `.kilo/rules/`. Agent role definitions live in `.kilo/agents/`.
+> Binding rule sets live in `.kilo/rules/` — read all that apply before starting:
+> `01-project-context`, `02-safety-non-negotiables`, `03-cost-and-model-efficiency`,
+> `04-engineering-standards`, `05-workflow-and-definition-of-done`,
+> `06-git-and-commit-cadence`, `07-overnight-autonomy`.
+> Agent role definitions live in `.kilo/agents/`.
 > The authoritative design document is `docs/architecture-and-action-plan.md` (the Spec). If this file conflicts with the Spec, the Spec wins.
 
 ## 1. Project
@@ -15,7 +19,7 @@ This is safety-critical. Correct safety behaviour outweighs feature delivery, sp
 | Module | Name | Path | Criticality |
 |---|---|---|---|
 | M1 | Frontend widget and SSE client | `public/` | Standard |
-| M2 | API Gateway Worker (`/chat`, `/health`, `/admin/ingest`) | `src/index.ts` | High |
+| M2 | API Gateway Worker (`/chat`, `/health`, `/admin/ingest`) | `src/index.ts`, `src/gateway/` | High |
 | M3 | Safety and triage (lexicon plus classifier, tiers 1–4) | `src/triage/` | Safety-critical |
 | M4 | Retrieval (embed, Vectorize, D1 context) | `src/retrieval/` | High |
 | M5 | Grounded generation | `src/generation/` | High |
@@ -31,8 +35,8 @@ Platform services: Workers, Workers AI, AI Gateway, Vectorize, D1, KV, R2, and Q
 npm run dev
 npm run test
 npm run test:redteam
-npm run deploy
-npm run ingest
+npm run deploy      # human-only — never run autonomously
+npm run ingest      # requires approved content allow-list
 ```
 
 `npm run test:redteam` is mandatory before any deploy affecting M3, M5, M6, prompts, lexicon, or curated content.
@@ -55,7 +59,7 @@ Use the least-cost model that meets the work's quality and risk threshold. Model
 
 | Agent | Primary model | Role |
 |---|---|---|
-| `lead-integrator` | `google/gemini-3.7-flash` | Delegates, integrates, validates and reports |
+| `lead-integrator` | `google/gemini-3.7-flash` | Delegates, integrates, validates, commits, reports |
 | `architect` | `z-ai/glm-5.2` | Plans, contracts, risk and dependency analysis |
 | `repo-scout` | `upstage/solar-pro4` | Read-only codebase reconnaissance |
 | `worker-dev` | `deepseek/deepseek-v4-flash-0731` | Isolated production-code slices |
@@ -98,11 +102,12 @@ Rules:
 - Preserve subagent findings in the final handoff; do not silently discard a failing test or review finding.
 - Subagents cannot approve their own work. Safety approval always comes from `safety-reviewer` plus the required automated tests.
 
-## 8. Escalation policy
+## 8. Escalation and human gates
 
 - Escalate to `hard-problem-solver` only after a bounded Flash attempt fails, or for clearly non-local, concurrency, algorithmic, or complex refactor work.
 - Require `safety-reviewer` for changes involving triage, escalation, prompt construction, content ingestion, audit logging, privacy, authentication, permissions, secrets, production configuration, or deployment.
 - Stop and ask a human before changing tier definitions, Tier 1 lexicon terms, contact details, curated source allow-lists, data retention, deployment configuration, database schemas, or production bindings.
+- During unsupervised runs (rules-07), every gate in this section is a hard stop: record the question in `OVERNIGHT-REPORT.md` and end the run cleanly. Never improvise past a gate.
 
 ## 9. Definition of done
 
@@ -111,6 +116,9 @@ A task is complete only when all applicable criteria are met:
 - Acceptance criteria are demonstrably met.
 - Tests pass; cross-module changes include integration tests.
 - `npm run test:redteam` passes for changes affecting M3, M5, M6, prompts, lexicon, or content.
+- Required safety and independent review findings are resolved or explicitly accepted by a human.
 - No PII, secrets, or unvetted external content was introduced.
 - Delegation ledger, tests run, outcomes, review findings, and remaining risks are reported.
 - Deviations from the Spec are recorded in `CHANGELOG.md` with rationale.
+- Checkpoint commits were made per rules-06, and the task-close commit is pushed to `origin main`. A task is not complete until pushed (or a push failure is documented per rules-06.11).
+- During unsupervised runs, `OVERNIGHT-REPORT.md` is updated and committed with the task-close commit (rules-07.10–11).

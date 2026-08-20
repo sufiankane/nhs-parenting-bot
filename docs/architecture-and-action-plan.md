@@ -209,7 +209,8 @@ type SSEEnvelope =
 - **Purpose:** Keep the NHS knowledge base current and traceable.
 - **Paths:** `src/ingest/`, `scripts/ingest/` (content-pipeline owned).
 - **Components:** Admin endpoint → R2 raw storage → Queues batching → consumer Worker (chunk, embed, upsert Vectorize, insert D1 with provenance).
-- **Sources:** Ingests strictly from the curated, version-controlled allow-list in `content/sources.json`. New sources require human approval (AGENTS.md §8).
+- **Sources Allow-List (`content/sources.json`):** Ingests strictly from the curated, version-controlled allow-list in `content/sources.json`. Sources cover 7 canonical NHS parenting categories: `newborn-care`, `feeding`, `weaning-nutrition`, `sleep`, `teething-development`, `minor-ailments`, and `emotional-wellbeing`.
+- **Extensibility & Governance:** The source allow-list is version-controlled in `content/sources.json`. Developers and clinical leads can add or amend verified NHS sources at any time by updating this file. Any new non-NHS source domain requires explicit human approval (AGENTS.md §8, rule 02.7).
 - **Validation & Idempotency:** Validates source URL against allow-list; generates SHA-256 hash per chunk; verifies chunk token length (300–600 tokens); performs idempotent upserts (matching content hash prevents duplicate vector creation).
 - **Trigger:** On-demand (MVP) → scheduled re-ingestion (later phase).
 
@@ -350,6 +351,8 @@ max_batch_size = 10
 | LLM model drift on redeployment | Tone/safety degradation | Pinned model ID; automated golden-set regression test gate (rule 04.12) |
 | Vectorize index corruption / drift | Loss of retrieval quality | Provenance-backed re-ingestion from D1 / R2 (rule 04.12) |
 | Classifier model unavailability | Risk of triage failure | Deterministic degradation mode: fall back to keyword-only mode immediately (rules 02.2, 02.3) |
+| Unvetted / corrupted source content | Clinical misinformation | Curated, version-controlled allow-list (`content/sources.json`); SHA-256 chunk hashing; provenance tracking; human approval required for new non-NHS domains (rule 02.7) |
+| Source allow-list drift / broken links | Ingestion failure or stale advice | Source validation during ingestion; D1 provenance tracking; re-ingestion staleness alerts (P4-T4) |
 
 ---
 

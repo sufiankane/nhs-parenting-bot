@@ -7,22 +7,40 @@ and this project adheres to Semantic Versioning.
 ## [Unreleased]
 
 ### Added
+- `[P1-T5]` Regenerated curated NHS knowledge base: 74 verified chunks across all 7 approved categories (newborn-care 11, feeding 12, weaning-nutrition 12, sleep 11, teething-development 9, minor-ailments 11, emotional-wellbeing 8; 25 safety-relevant), each 150–400 words, UK terminology, with deterministic SHA-256 IDs (`id === content_hash === sha256(chunk_text)`) and full provenance.
+- `[P1-T5]` Rebuilt ingestion pipeline: `scripts/ingest/build-seed.ts` consumes `scripts/ingest/data/*` modules and enforces allow-list gates (source exists, `enabled: true`, exact canonical URL match, exact category match) before emitting `content/nhs_faq_seed.json`; `scripts/ingest/seed.ts` re-validates every gate (including closed category enum and hash integrity) before emitting D1 SQL via a single audited escaping helper.
+- `[P1-T5]` Expanded and re-baselined `tests/retrieval-golden.test.ts` to 102 passing tests: 24 golden questions across all 7 domains with full provenance chains, plural-aware UK-terminology gate, refined no-diagnosis/no-prescription deny-list (SafetyBatch S10 policy), and restored 150–400 word acceptance band.
+- `[P1-T4]` Implemented M6 Escalation & Signposting module in `src/escalation/` (`types.ts`, `contacts.ts`, `templates.ts`, `index.ts`) as a pure synchronous router (rule 04.13).
+- `[P1-T4]` Defined canonical UK contact constants in `src/escalation/contacts.ts` matching `.kilo/rules/01-project-context.md` §5 verbatim: 999, 111, NSPCC Helpline, Childline, Young Minds Parents Helpline, and National Domestic Abuse Helpline, deeply frozen at runtime (rule 02.4).
+- `[P1-T4]` Implemented immutable signpost templates for Tiers 1–3 in `src/escalation/templates.ts` using warm, non-judgmental, ~11 reading age UK English copy.
+- `[P1-T4]` Authored M6 unit test suite in `tests/escalation.test.ts` (10 passing tests) and red-team adversarial suite in `tests/redteam/escalation-redteam.test.ts` (13 passing tests) demonstrating zero user-text leakage into signpost payloads (rule 02.7).
+- `[P1-T3]` Implemented M3 safety & triage module v1 in `src/triage/` (`types.ts`, `normalize.ts`, `lexicon.ts`, `index.ts`) as a pure synchronous classification function (rule 04.13).
+- `[P1-T3]` Built deterministic keyword lexicon with 12 Tier 1 categories, 10 Tier 2 categories, and 8 Tier 3 categories with explicit human approval.
+- `[P1-T3]` Enforced strict Tier 1 lexicon precedence: any Tier 1 match immediately resolves to Tier 1, overriding all other signals (rule 02.3).
+- `[P1-T3]` Authored unit test suite in `tests/triage.test.ts` (91 passing tests) covering category coverage, compound signals, word boundaries, non-string edge cases, Unicode, deep immutability, and failsafe degradation.
+- `[P1-T3]` Authored adversarial red-team test suite in `tests/redteam/triage-redteam.test.ts` (25 passing tests) achieving zero Tier 1 false negatives across prompt injections, escalation suppressions, formatting/homoglyph bypasses, and DoS padding (rule 02.11).
+- `[P1-T2]` Implemented M2 gateway modules in `src/gateway/` (`error.ts`, `cors.ts`, `rateLimit.ts`, `validate.ts`) with the frozen `{type:"error", payload:{code,message}}` error envelope (rule 04.6).
+- `[P1-T2]` Wired `POST /chat` in `src/index.ts`: CORS allow-list → rate limit → validation → safe `SERVICE_UNAVAILABLE` stub until M3/M4/M5/M6 exist (rule 02.1: no code path bypasses triage).
+- `[P1-T2]` Added `ALLOWED_ORIGINS` to `Env`; rate limit reads `RATE_LIMIT_PER_MINUTE` (default 20 req/min/IP) from env.
+- `[P1-T2]` Added typed `Env` interface in `src/gateway/types.ts` and imported it in `cors.ts`, `rateLimit.ts`, and `src/index.ts`, replacing `any` (independent-reviewer finding).
+- `[P1-T2]` Added `"NOT_FOUND"` to the `ErrorCode` union and routed the catch-all 404 through `createErrorResponse` so every error path emits the frozen `{type:"error", payload:{code,message}}` envelope (rule 04.6).
 - `[P1-T1]` Scaffolded root `package.json` with scripts: `dev`, `test`, `test:redteam`, `deploy`, `ingest`.
 - `[P1-T1]` Created root `.gitignore` ignoring `.env`, `.dev.vars`, `node_modules`, `.wrangler`, `dist`, and `coverage`.
 - `[P1-T1]` Configured `wrangler.toml` with bindings `AI`, `VECTOR_INDEX`, `DB`, `SESSIONS`, `RAW_CONTENT`, `INGEST_QUEUE` and vars `SIMILARITY_THRESHOLD = "0.5"`, `RATE_LIMIT_PER_MINUTE = "20"`.
 - `[P1-T1]` Added TypeScript configuration in `tsconfig.json` and Vitest config in `vitest.config.ts`.
 - `[P1-T1]` Implemented minimal Cloudflare Worker entry point in `src/index.ts` with safe `GET /health` endpoint and generic 404 fallback.
 - `[P1-T1]` Authored health contract and safety leak-prevention test suite in `tests/health.test.ts` (6 passing tests).
-- `[P1-T2]` Implemented M2 gateway modules in `src/gateway/` (`error.ts`, `cors.ts`, `rateLimit.ts`, `validate.ts`) with the frozen `{type:"error", payload:{code,message}}` error envelope (rule 04.6).
-- `[P1-T2]` Wired `POST /chat` in `src/index.ts`: CORS allow-list → rate limit → validation → safe `SERVICE_UNAVAILABLE` stub until M3/M4/M5/M6 exist (rule 02.1: no code path bypasses triage).
-- `[P1-T2]` Added `ALLOWED_ORIGINS` to `Env`; rate limit reads `RATE_LIMIT_PER_MINUTE` (default 20 req/min/IP) from env.
-- `[P1-T2]` Added typed `Env` interface in `src/gateway/types.ts` and imported it in `cors.ts`, `rateLimit.ts`, and `src/index.ts`, replacing `any` (independent-reviewer finding).
-- `[P1-T2]` Added `"NOT_FOUND"` to the `ErrorCode` union and routed the catch-all 404 through `createErrorResponse` so every error path emits the frozen `{type:"error", payload:{code,message}}` envelope (rule 04.6).
 - `docs/architecture-and-action-plan.md`: Authoritative Spec moved from `.kilo/plans/` to `docs/` and updated under task `[P0-T1]`.
 - `docs/decisions/.gitkeep`: Directory initialized for Architecture Decision Records (ADRs).
 - `CHANGELOG.md`: Initialized to track task IDs, architectural changes, deviations, and rationale.
 
 ### Changed
+- `[P1-T5]` Applied safety-reviewer clinical corrections to the knowledge corpus: emergency red-flag chunks (non-blanching rash, unresponsiveness, respiratory distress, choking, anaphylaxis, perinatal crisis) now route to 999/A&E; cradle-cap olive-oil advice removed (contradicted cited NHS page); teething and mastitis medicine wording routed to pharmacist/GP instead of medicine selection; fever chunk leads with under-3-months escalation rule; fever source URL corrected to `https://www.nhs.uk/symptoms/fever-in-children/`; sticky-eyes source disabled (`enabled: false`) pending human URL verification and its chunk excluded (rule 02.7).
+- `[P1-T4]` Narrowed M6 public API in `src/escalation/index.ts` to strictly accept `tier: 1 | 2 | 3 | 4` only. Tier 3 always returns the full canonical `TIER_3_CONTACTS` list (all four safeguarding services: NSPCC, Childline, Young Minds, National DA Helpline) without omitting any service (rule 02.2). Zero user message text can flow into signposts (rule 02.7).
+- `[P1-T3]` Implemented NFKD Unicode normalization, Unicode format-character stripping (`\p{Cf}`, zero-width spaces, word joiners, bidi controls), combining mark stripping, modifier and curly apostrophe normalization, and Cyrillic/Greek homoglyph canonicalization in `src/triage/normalize.ts`.
+- `[P1-T3]` Aligned M3 triage output contract with Spec §4: `matched_signals` is `readonly string[]` (matched phrase strings, in-memory only, never persisted to D1 audit log — rule 02.8). `signal_categories` collects all matched categories across tiers for comprehensive audit logging.
+- `[P1-T3]` Deep-froze Tier 1, Tier 2, and Tier 3 lexicon rules and phrases at runtime via recursive `deepFreeze` helper to protect against runtime mutation (rule 02.3).
+- `[P1-T3]` Enforced pure synchronous contract with zero console I/O in `src/triage/index.ts` (rule 04.13) and verified degradation failsafe returns Tier 2 with `confidence: 0.0` on unexpected exceptions.
 - `[P1-T2]` Declared `corsHeaders` before the `try` block in `src/index.ts` and propagated it into the top-level 500 `catch (error)` handler so cross-origin error responses maintain valid CORS headers (rules 02.5, 04.14).
 - `[P0-T1]` Corrected Spec task dependencies: P1-T6 now explicitly depends on P1-T2, P1-T3, P1-T4, and P1-T5 to enforce triage and escalation before generation is wired into `/chat`.
 - `[P0-T1]` Enforced automated red-team safety gate in Phase 1 (P1-T9) and Phase 2 (P2-T5): mandatory `npm run test:redteam` with zero Tier 1 false negatives required before every deployment touching M3/M5/M6/prompts/lexicon/content (rule 02.11).
