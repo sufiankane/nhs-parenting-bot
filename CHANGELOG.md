@@ -7,6 +7,9 @@ and this project adheres to Semantic Versioning.
 ## [Unreleased]
 
 ### Added
+- `[P1-T8]` Implemented KV-backed session store in `src/sessions/` (`types.ts`, `store.ts`): `MessageEntry`/`SessionRecord` types, `createSessionId()` (crypto.randomUUID), `sessionKey()`, `getSession()` (fail-safe on corruption/miss, rule 04.14), and `appendMessage()` with 24h TTL on every put (rule 02.9) and a 50-entry cap dropping the oldest.
+- `[P1-T8]` Implemented KV-backed fixed-window rate limiter in `src/gateway/kvRateLimit.ts` (`checkKvRateLimit`, `resolveLimit`, `WINDOW_SECONDS=60`) keyed `ratelimit:<ip>` on `CF-Connecting-IP || X-Forwarded-For || "anonymous"`, default limit 20, failing OPEN on missing `SESSIONS` binding or any KV error (rule 02.1) and never logging or returning the client IP (rule 02.8).
+- `[P1-T8]` Authored contract-first test suites `tests/rateLimit.test.ts` (6 tests) and `tests/sessions.test.ts` (8 tests) pinning fail-open behaviour, TTL-on-every-put, 50-entry history cap, UUID format, and no-PII key sets.
 - `[P1-T5]` Regenerated curated NHS knowledge base: 74 verified chunks across all 7 approved categories (newborn-care 11, feeding 12, weaning-nutrition 12, sleep 11, teething-development 9, minor-ailments 11, emotional-wellbeing 8; 25 safety-relevant), each 150–400 words, UK terminology, with deterministic SHA-256 IDs (`id === content_hash === sha256(chunk_text)`) and full provenance.
 - `[P1-T5]` Rebuilt ingestion pipeline: `scripts/ingest/build-seed.ts` consumes `scripts/ingest/data/*` modules and enforces allow-list gates (source exists, `enabled: true`, exact canonical URL match, exact category match) before emitting `content/nhs_faq_seed.json`; `scripts/ingest/seed.ts` re-validates every gate (including closed category enum and hash integrity) before emitting D1 SQL via a single audited escaping helper.
 - `[P1-T5]` Expanded and re-baselined `tests/retrieval-golden.test.ts` to 102 passing tests: 24 golden questions across all 7 domains with full provenance chains, plural-aware UK-terminology gate, refined no-diagnosis/no-prescription deny-list (SafetyBatch S10 policy), and restored 150–400 word acceptance band.
@@ -52,3 +55,4 @@ and this project adheres to Semantic Versioning.
 - `[P0-T1]` Defined D1 audit schema in M8 (no PII, no raw text; coarse categorical tags only) and updated risk register with model drift, Vectorize corruption, and classifier unavailability mitigations.
 - `[P0-T1]` Expanded P1-T1 acceptance criteria to include root package.json scaffolding with required npm scripts (dev, test, test:redteam, deploy, ingest), root .gitignore configuration, and wrangler.toml bindings.
 - `[P0-T1]` Specified M7 ingestion validation rules (allow-list verification in `content/sources.json`, chunk length validation, SHA-256 content hashing for transactional idempotency).
+
