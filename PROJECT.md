@@ -6,7 +6,7 @@ Cloudflare Workers-based parenting advice chatbot with deterministic multi-tier 
 - M2: API Gateway Worker (`src/index.ts`, `src/gateway/`)
 - M3: Safety & Triage (`src/triage/`) — deterministic lexicon + classifier (Tiers 1-4)
 - M4: Retrieval (`src/retrieval/`) — BGE-base embeddings + Vectorize + D1
-- M5: Grounded Generation (`src/generation/`) — Llama 3.1-8b-instruct
+- M5: Grounded Generation (`src/generation/`) — Llama 3.1-8b-instruct-fp8-fast (ADR 0001)
 - M6: Escalation & Signposting (`src/escalation/`) — deterministic UK service contacts
 - M7: Ingestion Pipeline (`src/ingest/`, `scripts/ingest/`)
 - M8: Audit Log (`src/audit/`) — anonymised, PII-free triage metrics
