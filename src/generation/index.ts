@@ -102,10 +102,11 @@ export async function generateAnswer(
     if (!streamCandidate || typeof streamCandidate.getReader !== "function") {
       throw new Error("Unexpected AI response type: missing getReader");
     }
+    const streamReader = streamCandidate.getReader();
 
     return new ReadableStream({
       async start(controller) {
-        const reader = streamCandidate.getReader();
+        const reader = streamReader;
         let buffer = "";
 
         try {
