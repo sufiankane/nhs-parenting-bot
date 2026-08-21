@@ -8,6 +8,7 @@ import { escalate } from "./escalation/index";
 import { retrieve } from "./retrieval/index";
 import { generateAnswer } from "./generation/index";
 import { createSessionId, appendMessage } from "./sessions/store";
+import { logTriageAudit } from "./audit/index";
 
 export type { Env };
 
@@ -92,17 +93,30 @@ export default {
           }
 
           const { message, sessionId } = validation.data;
+          const session_id = sessionId || createSessionId();
 
           // ── Rule 02.1: M3 triage — mandatory, synchronous, before ANY
           //    retrieval, generation, or content logging ──
           const triageResult = triage(message);
+
+          // ── M8 Audit Log: asynchronous triage audit log via ctx.waitUntil ──
+          //    Rule 02.8: zero PII, coarse signal categories only.
+          const ctxObj = ctx as { waitUntil?: (p: Promise<unknown>) => void } | undefined;
+          if (ctxObj && typeof ctxObj.waitUntil === "function") {
+            ctxObj.waitUntil(
+              logTriageAudit(env.DB, {
+                tier: triageResult.tier,
+                signal_categories: triageResult.signal_categories,
+                session_id,
+              })
+            );
+          }
 
           // ── Tier 1 / 2 / 3: escalate via M6 signposts ──
           //    Rule 02.2: deterministic escalation, never the LLM.
           //    Rule 02.1: zero AI / Vectorize calls for Tier 1-3.
           if (triageResult.tier !== 4) {
             const signpost = escalate(triageResult.tier);
-            const session_id = sessionId || createSessionId();
 
             const encoder = new TextEncoder();
             const stream = new ReadableStream({
@@ -134,8 +148,6 @@ export default {
           }
 
           // ── Tier 4: safe everyday parenting query ──
-          const session_id = sessionId || createSessionId();
-
           // M4: Retrieve relevant NHS context
           const retrievalResult = await retrieve(env, message);
 
@@ -192,16 +204,15 @@ export default {
           }
 
           // Good confidence: persist session to KV via waitUntil (rule 02.9)
-          const ctxObj = ctx as {
-            waitUntil(p: Promise<unknown>): void;
-          };
-          ctxObj.waitUntil(
-            appendMessage(env.SESSIONS as Parameters<typeof appendMessage>[0], session_id, {
-              role: "user",
-              content: message,
-              at: new Date().toISOString(),
-            })
-          );
+          if (ctxObj && typeof ctxObj.waitUntil === "function") {
+            ctxObj.waitUntil(
+              appendMessage(env.SESSIONS as Parameters<typeof appendMessage>[0], session_id, {
+                role: "user",
+                content: message,
+                at: new Date().toISOString(),
+              })
+            );
+          }
 
           // M5: Generate grounded answer as SSE stream
           const answerStream = await generateAnswer(env, {
