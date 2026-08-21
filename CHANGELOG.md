@@ -7,6 +7,7 @@ and this project adheres to Semantic Versioning.
 ## [Unreleased]
 
 ### Added
+- `[P1-T7]` Implemented M1 single-box frontend in `public/index.html` and `public/widget.js`: accessible single input (labelled, keyboard operable, `aria-live` response region), SSE client parsing the frozen envelope (`token`/`signpost`/`error`/`done`), server-issued session IDs only (never client-invented on first message), verbatim signpost contact rendering via text nodes (rule 02.4), no `innerHTML`/`eval` injection surface (rule 02.5), safe generic error messages (rule 04.14). Contract suite `tests/frontend.test.ts` (29 tests).
 - `[P1-T8]` Implemented KV-backed session store in `src/sessions/` (`types.ts`, `store.ts`): `MessageEntry`/`SessionRecord` types, `createSessionId()` (crypto.randomUUID), `sessionKey()`, `getSession()` (fail-safe on corruption/miss, rule 04.14), and `appendMessage()` with 24h TTL on every put (rule 02.9) and a 50-entry cap dropping the oldest.
 - `[P1-T8]` Implemented KV-backed fixed-window rate limiter in `src/gateway/kvRateLimit.ts` (`checkKvRateLimit`, `resolveLimit`, `WINDOW_SECONDS=60`) keyed `ratelimit:<ip>` on `CF-Connecting-IP || X-Forwarded-For || "anonymous"`, default limit 20, failing OPEN on missing `SESSIONS` binding or any KV error (rule 02.1) and never logging or returning the client IP (rule 02.8).
 - `[P1-T8]` Authored contract-first test suites `tests/rateLimit.test.ts` (6 tests) and `tests/sessions.test.ts` (8 tests) pinning fail-open behaviour, TTL-on-every-put, 50-entry history cap, UUID format, and no-PII key sets.

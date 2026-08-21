@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NHS Parenting Companion</title>
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --panel: #ffffff;
+      --ink: #1f2a24;
+      --muted: #3a4a3f;
+      --accent: #005eb8;
+      --accent-dark: #004a92;
+      --border: #d8d4cd;
+      --disabled: #9aa3ab;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    main {
+      max-width: 640px;
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: var(--ink);
+    }
+    p.intro {
+      margin: 0 0 24px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    input#message-input {
+      width: 100%;
+      font-size: 18px;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #fff;
+    }
+    input#message-input:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+      border-color: var(--accent);
+    }
+    button#send-button {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button#send-button:hover {
+      background: var(--accent-dark);
+    }
+    button#send-button:disabled {
+      background: var(--disabled);
+      cursor: not-allowed;
+    }
+    #response {
+      margin-top: 24px;
+      min-height: 40px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fbfaf7;
+      color: var(--ink);
+      white-space: pre-wrap;
+    }
+    .signpost-card {
+      margin-top: 16px;
+      padding: 16px;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      background: #e8f0fe;
+      color: var(--ink);
+    }
+    .signpost-card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--ink);
+    }
+    .signpost-card p {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .signpost-card .service {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NHS Parenting Companion</h1>
+    <p class="intro">A gentle place to ask for help caring for your child. If you or your child are in immediate danger, call 999 now.</p>
+    <label for="message-input">Your question</label>
+    <input id="message-input" type="text" autocomplete="off" placeholder="Ask about caring for your child">
+    <button id="send-button" type="button">Send</button>
+    <div id="response" aria-live="polite" role="status"></div>
+  </main>
+  <script type="module" src="./widget.js"></script>
+</body>
+</html>
