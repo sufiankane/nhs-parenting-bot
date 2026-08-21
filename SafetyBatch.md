@@ -198,3 +198,4 @@ All items S1–S20 and A1–A4: **PASS** with file:line evidence (full report in
 | F3 | MINOR | No runtime assertion that seed `embedding_model` matches retrieval `EMBEDDING_MODEL` | Add runtime/startup check | worker-dev |
 
 **Human action outstanding:** confirm the 45 allow-listed NHS URLs resolve to live content before production ingestion (reviewer is read-only, no network).
+> **RESOLVED 2026-08-21:** dual-crawler verification (Exa + Serper) executed — 22/48 live as-listed, 26 dead (NHS IA migration), 2 retired/unverifiable. Full remediation map requiring human approval in `docs/url-verification-2026-08-21.md`.
