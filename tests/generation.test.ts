@@ -1,4 +1,4 @@
-﻿/**
+/**
  * M5 Generation module contract tests (P1-T6, TDD against the worker-dev brief).
  *
  * Spec task IDs / safety rules protected:
@@ -228,5 +228,68 @@ describe("generateAnswer failure fail-safe [P1-T6, rule 04.14, Spec §3.2 [7]]",
 
     // protects rule 04.14 — never leak raw error text or stack traces.
     expect(text).not.toContain("SIMULATED-GENERATION-FAILURE");
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 6. generateAnswer cross-realm stream duck-typing [P1-T9, rule 04.18]       */
+/* -------------------------------------------------------------------------- */
+
+describe("generateAnswer cross-realm stream duck-typing [P1-T9, rule 04.18]", () => {
+  it("streams tokens when ai.run returns an object with getReader that is NOT an instance of global ReadableStream", async () => {
+    const encoder = new TextEncoder();
+    const mockChunks = [
+      encoder.encode('data: {"response":"Grounded"}\n\n'),
+      encoder.encode('data: {"response":" answer"}\n\n'),
+    ];
+    let index = 0;
+
+    // Cross-realm stream object: has getReader(), but not instanceof ReadableStream
+    const duckTypedStream = {
+      getReader: () => ({
+        read: async () => {
+          if (index < mockChunks.length) {
+            return { done: false, value: mockChunks[index++] };
+          }
+          return { done: true, value: undefined };
+        },
+      }),
+    };
+
+    // Verify it is NOT an instance of the current realm's ReadableStream
+    expect(duckTypedStream instanceof ReadableStream).toBe(false);
+
+    const aiRun = vi.fn().mockResolvedValue(duckTypedStream);
+    const env = { AI: { run: aiRun } };
+
+    const stream = await generateAnswer(env, {
+      message: "SYNTHETIC-FIXTURE: question",
+      context: "SYNTHETIC-FIXTURE: context",
+      sources: ["https://www.nhs.uk/x"],
+      session_id: "ses-duck-1",
+    });
+
+    const text = await readStream(stream);
+    expect(text).toContain("Grounded");
+    expect(text).toContain("answer");
+    expect(text).toContain('"type":"done"');
+  });
+
+  it("fails safe to generation_error when ai.run returns an invalid object missing getReader", async () => {
+    const aiRun = vi.fn().mockResolvedValue({ notAStream: true });
+    const env = { AI: { run: aiRun } };
+
+    const stream = await generateAnswer(env, {
+      message: "SYNTHETIC-FIXTURE: question",
+      context: "SYNTHETIC-FIXTURE: context",
+      sources: [],
+      session_id: "ses-duck-2",
+    });
+
+    const text = await readStream(stream);
+    const events = parseSse(text);
+    const done = events.find((e) => (e as any).type === "done") as any;
+    expect(done.payload.fallback).toBe(true);
+    expect(done.payload.fallback_reason).toBe("generation_error");
   });
 });

@@ -42,3 +42,18 @@
 18. Every external binding (Workers AI, Vectorize, D1, KV, R2, Queues) must have at least one test using a recorded fixture of the service's real response shape, captured from the live API. Fixtures live next to the test with a comment noting capture date and model/service version.
 19. Mocks must validate the contract, not just satisfy it. A mock that ignores its inputs (SQL strings, query parameters, payload shapes) is a blind spot: mocks must throw on contract violations (e.g. unknown table names, wrong dimensions).
 20. No deploy is complete without one assertion against the live service (the smoke gate). Mock-only green is not deployable green. Rationale: P1-T9 shipped three bugs that 347 mocked tests could not see — wrong D1 table name, wrong Workers AI response shape, unvalidated Vectorize scores.
+
+## Contract integrity
+
+21. Bindings use `@cloudflare/workers-types` interfaces only. No structural
+    casts on `env` — if the official type doesn't fit, the code is wrong.
+22. Integration tests for D1/Vectorize/AI paths run under
+    `@cloudflare/vitest-pool-workers` (Miniflare), not hand mocks. Hand mocks
+    are for pure functions only.
+23. Every external response is parsed/validated at the boundary; unknown
+    shapes fail closed and log. Assumed shapes are defects.
+24. No silent catches. Every catch logs internally (console.error) or
+    rethrows. CI greps for violations.
+25. Deploys go to staging first; the smoke gate runs there before
+    production. A weekly scheduled smoke run against production catches
+    service drift.

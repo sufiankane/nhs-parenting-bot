@@ -37,13 +37,22 @@ interface ChunkRow {
   source_url: string;
 }
 
-/** D1 mock: prepare().bind(...ids).all() returns rows for the bound ids. */
+/** D1 mock: prepare().bind(...ids).all() returns { results: [...], success: true, meta: {} }. */
 function makeDb(rowsById: Record<string, ChunkRow>) {
-  const prepare = vi.fn(() => ({
-    bind: vi.fn((...ids: string[]) => ({
-      all: vi.fn(() => ids.map((id) => rowsById[id]).filter(Boolean)),
-    })),
-  }));
+  const prepare = vi.fn((sql?: string) => {
+    if (sql && !sql.includes("FROM guidance_chunks")) {
+      throw new Error(`no such table in query: ${sql}`);
+    }
+    return {
+      bind: vi.fn((...ids: string[]) => ({
+        all: vi.fn(() => ({
+          results: ids.map((id) => rowsById[id]).filter(Boolean),
+          success: true,
+          meta: {},
+        })),
+      })),
+    };
+  });
   return prepare;
 }
 
@@ -92,15 +101,24 @@ describe("retrieve happy path [P1-T6, Spec §4 M4]", () => {
       ],
     });
     // chunk-a and chunk-b share a source URL -> sources must be deduped.
-    dbPrepare.mockImplementation(() => ({
-      bind: vi.fn(() => ({
-        all: vi.fn(() => [
-          { chunk_text: "Chunk A text.", source_url: "https://www.nhs.uk/a" },
-          { chunk_text: "Chunk B text.", source_url: "https://www.nhs.uk/a" },
-          { chunk_text: "Chunk C text.", source_url: "https://www.nhs.uk/b" },
-        ]),
-      })),
-    }));
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({
+          all: vi.fn(() => ({
+            results: [
+              { chunk_text: "Chunk A text.", source_url: "https://www.nhs.uk/a" },
+              { chunk_text: "Chunk B text.", source_url: "https://www.nhs.uk/a" },
+              { chunk_text: "Chunk C text.", source_url: "https://www.nhs.uk/b" },
+            ],
+            success: true,
+            meta: {},
+          })),
+        })),
+      };
+    });
 
     const result = await retrieve(env, "how do i prepare baby formula safely");
 
@@ -135,14 +153,23 @@ describe("retrieve similarity threshold [P1-T6, Spec §4 M4 decision boundary]",
         { id: "weak", score: 0.3 }, // below 0.5 -> must be dropped
       ],
     });
-    dbPrepare.mockImplementation(() => ({
-      bind: vi.fn(() => ({
-        all: vi.fn(() => [
-          { chunk_text: "Good chunk.", source_url: "https://www.nhs.uk/good" },
-          { chunk_text: "Weak chunk.", source_url: "https://www.nhs.uk/weak" },
-        ]),
-      })),
-    }));
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({
+          all: vi.fn(() => ({
+            results: [
+              { chunk_text: "Good chunk.", source_url: "https://www.nhs.uk/good" },
+              { chunk_text: "Weak chunk.", source_url: "https://www.nhs.uk/weak" },
+            ],
+            success: true,
+            meta: {},
+          })),
+        })),
+      };
+    });
 
     const result = await retrieve(env, "safe parenting question");
 
@@ -164,14 +191,23 @@ describe("retrieve similarity threshold [P1-T6, Spec §4 M4 decision boundary]",
         { id: "mid", score: 0.7 }, // below 0.8 -> dropped
       ],
     });
-    dbPrepare.mockImplementation(() => ({
-      bind: vi.fn(() => ({
-        all: vi.fn(() => [
-          { chunk_text: "High chunk.", source_url: "https://www.nhs.uk/high" },
-          { chunk_text: "Mid chunk.", source_url: "https://www.nhs.uk/mid" },
-        ]),
-      })),
-    }));
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({
+          all: vi.fn(() => ({
+            results: [
+              { chunk_text: "High chunk.", source_url: "https://www.nhs.uk/high" },
+              { chunk_text: "Mid chunk.", source_url: "https://www.nhs.uk/mid" },
+            ],
+            success: true,
+            meta: {},
+          })),
+        })),
+      };
+    });
 
     const result = await retrieve(env, "safe parenting question");
 
@@ -201,9 +237,14 @@ describe("retrieve embedding model identity [P1-T6, Spec §4 M4 model check, rul
 
     aiRun.mockResolvedValue(embeddingResult());
     vectorQuery.mockResolvedValue({ matches: [] });
-    dbPrepare.mockImplementation(() => ({
-      bind: vi.fn(() => ({ all: vi.fn(() => []) })),
-    }));
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({ all: vi.fn(() => ({ results: [], success: true, meta: {} })) })),
+      };
+    });
 
     await retrieve(env, "how do i settle a newborn");
 
@@ -298,9 +339,14 @@ describe("Embedding-model identity gate [SafetyBatch F3, rule 04.12]", () => {
 
     aiRun.mockResolvedValue(embeddingResult());
     vectorQuery.mockResolvedValue({ matches: [] });
-    dbPrepare.mockImplementation(() => ({
-      bind: vi.fn(() => ({ all: vi.fn(() => []) })),
-    }));
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({ all: vi.fn(() => ({ results: [], success: true, meta: {} })) })),
+      };
+    });
 
     const result = await retrieve(env, "safe question");
 
@@ -391,9 +437,13 @@ describe("Real Workers AI embedding response shape regression [P1-T6, rule 04.12
       }
       return {
         bind: vi.fn(() => ({
-          all: vi.fn(() => [
-            { chunk_text: "Clean guidance text.", source_url: "https://www.nhs.uk/guidance" },
-          ]),
+          all: vi.fn(() => ({
+            results: [
+              { chunk_text: "Clean guidance text.", source_url: "https://www.nhs.uk/guidance" },
+            ],
+            success: true,
+            meta: {},
+          })),
         })),
       };
     });
@@ -411,5 +461,44 @@ describe("Real Workers AI embedding response shape regression [P1-T6, rule 04.12
     expect(extractEmbedding(null)).toBeNull();
     expect(extractEmbedding(undefined)).toBeNull();
     expect(extractEmbedding("invalid")).toBeNull();
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 9. D1 all() result unboxing [P1-T9, rule 04.18]                             */
+/* -------------------------------------------------------------------------- */
+
+describe("D1 all() result unboxing [P1-T9, rule 04.18]", () => {
+  it("retrieve() succeeds when D1 all() returns the real Cloudflare { results: [...] } object", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv();
+
+    aiRun.mockResolvedValue(embeddingResult());
+    vectorQuery.mockResolvedValue({
+      matches: [{ id: "chunk-d1-test", score: 0.89 }],
+    });
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({
+          all: vi.fn(() => ({
+            results: [
+              {
+                chunk_text: "Unboxed D1 guidance text.",
+                source_url: "https://www.nhs.uk/formula-prep",
+              },
+            ],
+            success: true,
+            meta: { duration: 1.2 },
+          })),
+        })),
+      };
+    });
+
+    const result = await retrieve(env, "how do i make formula");
+    expect(result.confidence).toBe(0.89);
+    expect(result.context).toBe("Unboxed D1 guidance text.");
+    expect(result.sources).toEqual(["https://www.nhs.uk/formula-prep"]);
   });
 });

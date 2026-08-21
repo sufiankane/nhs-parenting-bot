@@ -57,13 +57,14 @@ export async function generateAnswer(
       stream: true,
     });
 
-    if (!(aiResponse instanceof ReadableStream)) {
-      throw new Error("Unexpected AI response type");
+    const streamCandidate = aiResponse as { getReader?: () => ReadableStreamDefaultReader<Uint8Array> } | null | undefined;
+    if (!streamCandidate || typeof streamCandidate.getReader !== "function") {
+      throw new Error("Unexpected AI response type: missing getReader");
     }
 
     return new ReadableStream({
       async start(controller) {
-        const reader = aiResponse.getReader();
+        const reader = streamCandidate.getReader();
 
         try {
           for (;;) {
@@ -71,8 +72,12 @@ export async function generateAnswer(
             if (done) break;
             controller.enqueue(value);
           }
-        } catch {
-          // Stream read failure → emit error event, then fall through to done
+        } catch (streamErr) {
+          // Stream read failure → log internally, emit error event, then fall through to done
+          console.error(
+            "GENERATION_STREAM_ERROR:",
+            streamErr instanceof Error ? streamErr.message : String(streamErr)
+          );
           controller.enqueue(
             encoder.encode(
               sseEvent({
@@ -97,7 +102,12 @@ export async function generateAnswer(
         controller.close();
       },
     });
-  } catch {
+  } catch (err) {
+    // Rule 04.14: safe fallback to client, error detail logged internally
+    console.error(
+      "GENERATION_ERROR:",
+      err instanceof Error ? err.message : String(err)
+    );
     // AI.run threw or returned non-stream → error + done fallback
     return new ReadableStream({
       start(controller) {

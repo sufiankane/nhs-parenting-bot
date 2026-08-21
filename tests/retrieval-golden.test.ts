@@ -948,16 +948,18 @@ describe("M4 retrieve() end-to-end with SQL-validating D1 mock [P1-T6, rule 04.1
         }
         return {
           bind: (...ids: string[]) => ({
-            all: async () => {
-              return ids
+            all: async () => ({
+              results: ids
                 .map((id) => {
                   const found = chunkMap.get(id);
                   return found
                     ? { chunk_text: found.chunk_text, source_url: found.source_url }
                     : null;
                 })
-                .filter(Boolean);
-            },
+                .filter(Boolean),
+              success: true,
+              meta: {},
+            }),
           }),
         };
       },
