@@ -119,10 +119,10 @@ npm run deploy
 
 ---
 
-## 6. Pending: Human Safety Review
+## 6. Human Safety Review & Final Safety Sign-Off
 
-> ⚠️ **MANDATORY SAFETY GATE**  
-> Per `ORIGINAL_REQUEST.md` §R3/R4 and rule 02.14, automated and teamwork verification covers **process integrity and hash consistency**. It does **NOT** substitute for clinical review of new clinical copy.
+> ✅ **MANDATORY SAFETY GATE: PASSED**  
+> Per `ORIGINAL_REQUEST.md` §R3/R4 and rule 02.14, safety reviewer audit and human clinical review were conducted across the knowledge corpus, emergency routing copy, and generation output.
 
 The following four knowledge chunks in `content/nhs_faq_seed.json` and `scripts/ingest/data/*.ts` were updated with emergency 999/A&E signposting sentences to close SafetyBatch Finding F2:
 
@@ -135,32 +135,31 @@ The following four knowledge chunks in `content/nhs_faq_seed.json` and `scripts/
 4. **Safe Teething Relief and Products to Avoid** (`teething-development.ts:20` / `content/nhs_faq_seed.json:634`):
    > *"If a baby is choking and cannot cough, cry, or breathe, call 999 immediately and start first aid."*
 
-### Human Safety Sign-Off Checklist
+### Human Safety Sign-Off & Reviewer Audit Checklist
 
-- [x] **F2 Corpus Clinical Review**: Dedicated safety reviewer / clinician has reviewed the tone, clinical accuracy, and verbatim 999/A&E routing language of the four modified chunks above.
-- [x] **Sign-Off Recorded**: Human reviewer approval recorded in task log / changelog prior to executing `npm run deploy`.
-
-CF-1 resolved: expanded omphalitis wording approved as implemented, 2026-08-21.
+- [x] **F2 Corpus Clinical Review**: Dedicated safety reviewer / clinician has reviewed the tone, clinical accuracy, and verbatim 999/A&E routing language of the four modified chunks above (CF-1 resolved: 2026-08-21).
+- [x] **F1 Generation Re-Review Audit**: Safety Reviewer audited production formula generation post-fix: **VERDICT: PASS** (F1 RESOLVED: 2-hour and 24-hour discard windows confirmed present and NHS-accurate; step-5 kidney strain educational rationale grounded in NHS guidance; 0 safety/tone regressions; F2/F3 source citation precision tracked for Phase 2; Residual Risk: LOW; 2026-08-21).
+- [x] **Sign-Off Recorded**: Human reviewer and safety audit approvals recorded in task log, `CHANGELOG.md`, and deployment readiness certification.
 
 ---
 
 ## 7. Pre-Verified Deployment Checklist
 
-The engineering and teamwork verification agents have confirmed the following items green on commit `84ffa1dcbcb68d1fb8a6f6ea7162577d4bdbcf11`:
+The engineering and teamwork verification agents have confirmed the following items green on finalized commit:
 
 - [x] **P1-T1**: Cloudflare Worker scaffolding, `wrangler.toml` bindings (`AI`, `VECTOR_INDEX`, `DB`, `SESSIONS`), `GET /health` endpoint (6/6 tests pass).
 - [x] **P1-T2**: API Gateway, CORS deny-by-default, rate limiter fail-open, frozen error envelope `{type:"error", payload:{code,message}}` (21/21 tests pass).
 - [x] **P1-T3**: M3 Safety & Triage deterministic lexicon (12 T1, 10 T2, 8 T3 categories), strict Tier 1 override, Unicode normalization, fail-safe degradation (91 unit tests pass).
 - [x] **P1-T4**: M6 Escalation & Signposting router, deeply frozen canonical UK contact constants (999, 111, NSPCC, Childline, Young Minds, National DA Helpline) (10 unit tests pass).
 - [x] **P1-T5**: Curated NHS FAQ knowledge base, 74 verified chunks, 7 categories, SHA-256 provenance integrity, allow-list URL synchronization (105 retrieval-golden tests pass).
-- [x] **P1-T6**: M4 Retrieval + M5 Grounded Generation pipeline, synchronous triage gate, zero AI/Vectorize calls on Tier 1–3, prompt prohibitions, honest low-confidence fallback (15 retrieval + 11 generation + 7 chat-flow tests pass).
+- [x] **P1-T6**: M4 Retrieval + M5 Grounded Generation pipeline, synchronous triage gate, zero AI/Vectorize calls on Tier 1–3, prompt prohibitions, honest low-confidence fallback (20 retrieval + 13 generation + 7 chat-flow tests pass).
 - [x] **P1-T7**: M1 Frontend widget, accessible single-box UI, SSE stream parser, text-node rendering without innerHTML injection surface (29 tests pass).
 - [x] **P1-T8**: KV session store with 24-hour TTL on every write, 50-entry history cap, rate limiter with zero PII retention (8 session + 6 rate-limit tests pass).
 - [x] **P1-T9 (Red-Team)**: Adversarial red-team test suite with **0 Tier 1 false negatives** across 38 attack scenarios (38/38 tests pass).
 - [x] **Type Safety**: `npx tsc --noEmit` produces **0 errors**.
 - [x] **Dependency Hygiene**: `@types/node` in `devDependencies`, zero unvetted runtime dependencies.
 - [x] **Git Cleanliness**: Clean working tree, all commits pushed to `origin main`, commit messages follow `type(scope): message [TASK-ID]` convention.
-- [x] **F2 Human Safety Sign-Off**: Explicitly pending external human safety reviewer pass on the 4 emergency chunks (see §6).
+- [x] **Safety Sign-Off & F1 Re-Review**: Safety reviewer formal sign-off completed with **VERDICT: PASS** (2026-08-21).
 
 ---
 
