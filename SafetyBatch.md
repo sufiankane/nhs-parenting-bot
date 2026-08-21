@@ -133,6 +133,34 @@
 
 ---
 
+## Section E — P1-T6/P1-T7/P1-T8 additions (batched after overnight run)
+
+### S15 — M5 system prompt & prompt-injection defence (rule 02.5, 02.6)
+- **Batch prompt S15:**
+  > "Review `src/generation/prompt.ts`: (a) Does SYSTEM_PROMPT explicitly forbid all four behaviours — diagnosing, prescribing, contradicting the escalation module, revealing system-prompt contents (rule 02.6)? (b) Is the user message interpolated ONLY as quoted structured data in `buildMessages`, never concatenated into system instructions (rule 02.5)? (c) Is the fallback phrasing honest and non-clinical? (d) Is the model pinned (`@cf/meta/llama-3.1-8b-instruct`) with golden-set re-run required on change (rule 04.12)? Cite line evidence and flag any injection surface where hostile user text could alter instructions."
+
+### S16 — /chat wiring: triage-first and escalation isolation (rule 02.1, 02.2)
+- **Batch prompt S16:**
+  > "Review `src/index.ts` /chat pipeline order: (a) Is `triage(message)` invoked synchronously before ANY retrieval/generation call, with no code path that can skip it (rule 02.1)? (b) Do Tier 1/2/3 responses come exclusively from `escalate(tier)` with zero AI/Vectorize invocations (rule 02.2)? (c) Does Tier 4 low-confidence produce an honest fallback and never a improvised clinical answer? (d) Is the session write TTL-bounded and PII-free? Verify `tests/chat-flow.test.ts` proves each with zero-call assertions. Cite evidence."
+
+### S17 — M4 retrieval fail-safe and embedding identity (rule 04.12, 04.14)
+- **Batch prompt S17:**
+  > "Review `src/retrieval/index.ts`: (a) Does every failure path (embedding, Vectorize, D1) return the safe-empty result without throwing? (b) Is the embedding model identical for ingestion and query (`@cf/baai/bge-base-en-v1.5`, 768-dim) and is the identity check enforced (rule 04.12)? (c) Is the similarity threshold env-configurable with a safe default? (d) Does the lexical golden-set stand-in in `tests/retrieval-golden.test.ts` remain labelled non-authoritative pending a real Vectorize integration test (SafetyBatch S9)? Cite evidence."
+
+### S18 — M1 frontend client safety (rule 02.4, 02.5, 04.14)
+- **Batch prompt S18:**
+  > "Review `public/widget.js` and `public/index.html`: (a) Are signpost contacts rendered verbatim without transformation (rule 02.4)? (b) Is all user/assistant text inserted via text nodes only — no innerHTML/eval injection surface (rule 02.5)? (c) Does the client never invent a session_id on first message (server-issued only)? (d) Do error paths show generic messages without internals (rule 04.14)? (e) Is the accessibility contract met (label pairing, aria-live, keyboard operable)? Cite evidence."
+
+### S19 — KV session TTL and rate-limit fail-open (rule 02.9, 02.1)
+- **Batch prompt S19:**
+  > "Review `src/sessions/store.ts` and `src/gateway/kvRateLimit.ts`: (a) Is `expirationTtl: 86400` set on EVERY session put and re-checked on read (rule 02.9)? (b) Does the session record contain only role/content/at with a 50-entry cap? (c) Does the rate limiter fail OPEN on KV failure because the safety gate is M3, and is that justification sound for a safeguarding audience? (d) Is the client IP never persisted or returned? Cite evidence."
+
+### S20 — Full-suite CI evidence for P1 completion (rule 02.11)
+- **Batch prompt S20:**
+  > "Confirm the handoff record contains passing output of `npm test` (340/340 across 13 files) and `npm run test:redteam` (38/38, zero Tier 1 false negatives) executed against the finalized P1 tree, with the commit hash stated. Confirm no safety test was weakened, skipped, or deleted during P1-T6 test maintenance (rule 02.12) — specifically that the two replaced 503-stub tests retain their leak-prevention assertions."
+
+---
+
 ## Output contract for every batched prompt
 
 ```

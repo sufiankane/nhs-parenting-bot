@@ -54,6 +54,19 @@ function assertNoInternalDetails(raw: string): void {
   expect(found, `Response leaked stack traces: ${found.join(", ")}`).toEqual([]);
 }
 
+interface SseEvent {
+  type: string;
+  payload: Record<string, unknown>;
+}
+
+/** Parse SSE `data:` lines from a response body into typed events. */
+function parseSseEvents(raw: string): SseEvent[] {
+  return raw
+    .split("\n\n")
+    .filter((block) => block.startsWith("data: "))
+    .map((block) => JSON.parse(block.slice("data: ".length)) as SseEvent);
+}
+
 const mockKvStore = new Map<string, string>();
 const env: Env = {
   AI: { __brand: `${CANARY}-AI` },
@@ -376,7 +389,7 @@ describe("POST /chat rate limiting [P1-T2, Spec §4 M2]", () => {
     expect(body.payload.code).toBe("RATE_LIMITED");
   });
 
-  it("defaults to 20 req/min when RATE_LIMIT_PER_MINUTE is not set", async () => {
+  it("defaults to 20 req/min when RATE_LIMIT_PER_MINUTE is not set and passes the request through to the P1-T6 pipeline", async () => {
     const defaultEnv: Env = {
       ...env,
       RATE_LIMIT_PER_MINUTE: undefined,
@@ -387,7 +400,8 @@ describe("POST /chat rate limiting [P1-T2, Spec §4 M2]", () => {
       "CF-Connecting-IP": "192.0.2.99",
     };
 
-    // First request should be allowed under default limit of 20
+    // First request should be allowed under default limit of 20: the request
+    // is NOT rate-limited and reaches the P1-T6 pipeline (200 SSE, never 429).
     const res = await worker.fetch(
       new Request("http://localhost/chat", {
         method: "POST",
@@ -397,7 +411,13 @@ describe("POST /chat rate limiting [P1-T2, Spec §4 M2]", () => {
       defaultEnv,
       ctx
     );
-    expect(res.status).toBe(503); // passes rate limit and reaches safety stub
+    expect(res.status).toBe(200);
+    expect(res.status).not.toBe(429);
+    expect(res.headers.get("Content-Type")).toMatch(/text\/event-stream/);
+
+    const raw = await res.text();
+    const events = parseSseEvents(raw);
+    expect(events.some((e) => e.type === "done")).toBe(true);
   });
 });
 
@@ -416,8 +436,8 @@ describe("Unhandled routes return safe generic 404s [rule 04.6, rule 04.14]", ()
   });
 });
 
-describe("POST /chat valid request & safety stub [P1-T2, rule 02.1]", () => {
-  it("returns structured service unavailable response in P1-T2 without calling retrieval/generation", async () => {
+describe("POST /chat valid request & P1-T6 pipeline [P1-T6, rule 02.1]", () => {
+  it("returns a safe SSE fallback when retrieval fails safe in the P1-T6 pipeline", async () => {
     const res = await worker.fetch(
       new Request("http://localhost/chat", {
         method: "POST",
@@ -431,18 +451,24 @@ describe("POST /chat valid request & safety stub [P1-T2, rule 02.1]", () => {
       ctx
     );
 
-    // In P1-T2, triage/generation is not implemented yet; returns safe 503 error envelope
-    expect(res.status).toBe(503);
-    expect(res.headers.get("Content-Type")).toMatch(/application\/json/);
+    // P1-T6: a valid Tier 4 message reaches the real pipeline. The mock env
+    // has no AI/Vectorize bindings, so retrieve() fails safe (rule 04.14) and
+    // the response is a 200 SSE stream with an honest fallback — never a 500,
+    // never a stack trace, never an unsafe path (rule 02.1).
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Content-Type")).toMatch(/text\/event-stream/);
     expect(res.headers.get("Access-Control-Allow-Origin")).toBe("http://localhost:3000");
 
     const raw = await res.text();
-    const body = JSON.parse(raw);
-    expect(body.type).toBe("error");
-    expect(body.payload.code).toBe("SERVICE_UNAVAILABLE");
-    expect(body.payload.message).toContain("Service is currently unavailable");
+    const events = parseSseEvents(raw);
+    const doneEvent = events.find((e) => e.type === "done");
+    expect(doneEvent).toBeDefined();
+    expect(doneEvent!.payload.fallback).toBe(true);
+    expect(["low_confidence", "retrieval_error"]).toContain(
+      doneEvent!.payload.fallback_reason as string
+    );
 
-    // Must not leak internal state
+    // Must not leak internal state (rule 04.14)
     assertNoEnvLeak(raw);
     assertNoInternalDetails(raw);
   });
