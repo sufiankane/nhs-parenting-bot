@@ -69,7 +69,7 @@ function makeEnv(overrides: Record<string, unknown> = {}): MockEnv {
 }
 
 /** Standard embedding payload shape returned by Workers AI bge-base-en-v1.5. */
-function embeddingResult(dim = 4): { data: { embedding: number[] }[] } {
+function embeddingResult(dim = 768): { data: { embedding: number[] }[] } {
   return { data: [{ embedding: Array.from({ length: dim }, (_, i) => (i + 1) / 10) }] };
 }
 
@@ -272,4 +272,62 @@ describe("retrieve empty query [P1-T6, rule 04.14]", () => {
       expect(aiRun).not.toHaveBeenCalled();
     }
   );
+});
+
+/* -------------------------------------------------------------------------- */
+/* 7. Embedding-model identity gate [SafetyBatch F3, rule 04.12]              */
+/* -------------------------------------------------------------------------- */
+
+describe("Embedding-model identity gate [SafetyBatch F3, rule 04.12]", () => {
+  it("fails closed when EXPECTED_EMBEDDING_MODEL differs — zero AI and Vectorize calls", async () => {
+    const { env, aiRun, vectorQuery } = makeEnv({
+      EXPECTED_EMBEDDING_MODEL: "@cf/baai/wrong-model",
+    });
+
+    const result = await retrieve(env, "safe question");
+
+    expect(result).toEqual(SAFE_EMPTY);
+    expect(aiRun).not.toHaveBeenCalled();
+    expect(vectorQuery).not.toHaveBeenCalled();
+  });
+
+  it("proceeds normally when EXPECTED_EMBEDDING_MODEL matches the pinned model", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv({
+      EXPECTED_EMBEDDING_MODEL: EMBEDDING_MODEL,
+    });
+
+    aiRun.mockResolvedValue(embeddingResult());
+    vectorQuery.mockResolvedValue({ matches: [] });
+    dbPrepare.mockImplementation(() => ({
+      bind: vi.fn(() => ({ all: vi.fn(() => []) })),
+    }));
+
+    const result = await retrieve(env, "safe question");
+
+    expect(aiRun).toHaveBeenCalledTimes(1);
+    expect(result.confidence).toBe(0); // no matches above threshold
+    expect(result.context).toBe("");
+  });
+
+  it("fails closed on a wrong-dimension embedding vector — Vectorize never queried", async () => {
+    const { env, aiRun, vectorQuery } = makeEnv();
+
+    aiRun.mockResolvedValue(embeddingResult(767));
+
+    const result = await retrieve(env, "safe question");
+
+    expect(result).toEqual(SAFE_EMPTY);
+    expect(vectorQuery).not.toHaveBeenCalled();
+  });
+
+  it("fails closed when the embedding response contains no vector", async () => {
+    const { env, aiRun, vectorQuery } = makeEnv();
+
+    aiRun.mockResolvedValue({});
+
+    const result = await retrieve(env, "safe question");
+
+    expect(result).toEqual(SAFE_EMPTY);
+    expect(vectorQuery).not.toHaveBeenCalled();
+  });
 });

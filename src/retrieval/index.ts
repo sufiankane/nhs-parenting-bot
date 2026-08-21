@@ -9,7 +9,10 @@
  *    filtered out so M5 never improvises on weak evidence.
  */
 
-const EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
+export const EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
+// Must match content/nhs_faq_seed.json embedding_model (SafetyBatch F3, rule 04.12)
+export const INGESTION_EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
+export const EMBEDDING_DIMENSIONS = 768;
 const DEFAULT_TOP_K = 5;
 const DEFAULT_THRESHOLD = 0.5;
 
@@ -66,6 +69,19 @@ export async function retrieve(
     return SAFE_EMPTY;
   }
 
+  // SafetyBatch F3 / rule 04.12: fail closed on embedding-model identity
+  // mismatch. If the runtime expects a different embedding model than the one
+  // this module is pinned to, never answer ungrounded — return safe empty
+  // BEFORE any AI/Vectorize/DB call.
+  const expected = env.EXPECTED_EMBEDDING_MODEL;
+  if (
+    typeof expected === "string" &&
+    expected.trim() !== "" &&
+    expected !== EMBEDDING_MODEL
+  ) {
+    return SAFE_EMPTY;
+  }
+
   try {
     const ai = env.AI as {
       run: (model: string, input: unknown) => Promise<unknown>;
@@ -74,7 +90,10 @@ export async function retrieve(
     // 1. Embed the query
     const embeddingResult = await ai.run(EMBEDDING_MODEL, { text: query });
     const vector = extractEmbedding(embeddingResult);
-    if (!vector) return SAFE_EMPTY;
+    // Rule 04.12: a missing or wrong-dimension vector means the embedding
+    // model is not producing the pinned output — fail closed, never call
+    // Vectorize with an unverified vector.
+    if (!vector || vector.length !== EMBEDDING_DIMENSIONS) return SAFE_EMPTY;
 
     // 2. Query Vectorize
     const vectorIndex = env.VECTOR_INDEX as {
