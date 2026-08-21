@@ -24,10 +24,10 @@ This is safety-critical. Correct safety behaviour outweighs feature delivery, sp
 | M4 | Retrieval (embed, Vectorize, D1 context) | `src/retrieval/` | High |
 | M5 | Grounded generation | `src/generation/` | High |
 | M6 | Escalation and signposting (hard-coded UK contacts) | `src/escalation/` | Safety-critical |
-| M7 | Ingestion pipeline | `src/ingest/`, `scripts/ingest/` | Standard |
+| M7 | Ingestion pipeline | `src/ingest/`, `scripts/ingest/` | High |
 | M8 | Anonymised triage audit log | `src/audit/` | High |
 
-Platform services: Workers, Workers AI, AI Gateway, Vectorize, D1, KV, R2, and Queues. Embeddings use `@cf/baai/bge-base-en-v1.5`; generation uses `@cf/meta/llama-3.1-8b-instruct` unless the configured environment changes.
+Platform services: Workers, Workers AI, AI Gateway, Vectorize, D1, and KV (R2 and Queues are planned for Phase 2 and are not yet provisioned). Embeddings use `@cf/baai/bge-base-en-v1.5`; generation uses `@cf/meta/llama-3.1-8b-instruct-fp8-fast` (ADR 0001) unless the configured environment changes.
 
 ## 3. Commands
 
@@ -35,7 +35,7 @@ Platform services: Workers, Workers AI, AI Gateway, Vectorize, D1, KV, R2, and Q
 npm run dev
 npm run test
 npm run test:redteam
-npm run deploy      # human-only — never run autonomously
+npm run deploy      # human-supervised only — agent may deploy in a supervised session with the human present; never during unsupervised runs (rules-07)
 npm run ingest      # requires approved content allow-list
 ```
 
@@ -50,6 +50,7 @@ npm run ingest      # requires approved content allow-list
 5. Do not persist PII or free-text messages in audit logs. Sessions in KV require a TTL.
 6. Never weaken, skip, or delete a safety test to obtain a passing build.
 7. Any uncertainty involving clinical accuracy, safeguarding, tier definitions, contact details, or a new content source requires human approval.
+8. Corpus content changes require human approval of the exact wording before ingestion; approved clinical text is applied verbatim, never paraphrased by an LLM (rule 02.15).
 
 See `.kilo/rules/02-safety-non-negotiables.md` for binding detail.
 
@@ -116,6 +117,7 @@ A task is complete only when all applicable criteria are met:
 - Acceptance criteria are demonstrably met.
 - Tests pass; cross-module changes include integration tests.
 - `npm run test:redteam` passes for changes affecting M3, M5, M6, prompts, lexicon, or content.
+- For any deploy-affecting change, the production golden smoke check passes, including answer-content assertions for safety-critical corpus guidance.
 - Required safety and independent review findings are resolved or explicitly accepted by a human.
 - No PII, secrets, or unvetted external content was introduced.
 - Delegation ledger, tests run, outcomes, review findings, and remaining risks are reported.
