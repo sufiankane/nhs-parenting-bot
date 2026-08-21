@@ -1,6 +1,7 @@
-﻿import { TIER_1_RULES, TIER_2_RULES, TIER_3_RULES } from "./lexicon";
+import { TIER_1_RULES, TIER_2_RULES, TIER_3_RULES } from "./lexicon";
 import { normalizeText } from "./normalize";
 import { LexiconRule, TriageResult } from "./types";
+import { classifyRisk, resolveTier } from "./classifier";
 
 export * from "./types";
 export * from "./lexicon";
@@ -100,3 +101,40 @@ export function triage(message: unknown): TriageResult {
     };
   }
 }
+
+/**
+ * Enhanced asynchronous triage with lightweight classifier pass (P2-T1).
+ *
+ * Enforces rule 02.2 & 02.3:
+ *  1. Synchronous lexicon check runs first.
+ *  2. Tier 1 lexicon match resolves immediately with zero extra latency.
+ *  3. Optional classifier runs in background on non-Tier-1 queries.
+ *  4. Classifier can escalate, NEVER downgrade a lexicon hit.
+ *  5. On any classifier failure, degrades instantly to deterministic lexicon result.
+ */
+export async function triageWithClassifier(
+  message: unknown,
+  env?: unknown
+): Promise<TriageResult> {
+  const lexiconResult = triage(message);
+
+  // If already Tier 1, return immediately (rule 02.2: Tier 1 precedence is absolute)
+  if (lexiconResult.tier === 1) {
+    return lexiconResult;
+  }
+
+  // If no env or string message, return lexicon result
+  if (!env || typeof message !== "string") {
+    return lexiconResult;
+  }
+
+  try {
+    const prediction = await classifyRisk(env, message);
+    return resolveTier(lexiconResult, prediction);
+  } catch {
+    // Instant deterministic degradation on any error (rule 02.3)
+    return lexiconResult;
+  }
+}
+
+export * from "./classifier";
