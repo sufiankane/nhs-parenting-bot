@@ -1,4 +1,4 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -7,6 +7,7 @@ and this project adheres to Semantic Versioning.
 ## [Unreleased]
 
 ### Added
+- `[P1-T9]` **tooling:** workerd win32-arm64 x64 emulation patch — added a patch to `node_modules/workerd/lib/main.js` mapping `win32 arm64 LE` to the x64 binary under emulation, force-installed `@cloudflare/workerd-windows-64`, added `patch-package` to `devDependencies`, and configured a `postinstall` hook.
 - `[P1-T9]` **F1 preparation:** created `scripts/smoke/remote-golden-check.ts` — manual post-deploy smoke check posting 10 golden questions (all 7 categories) to `SMOKE_TARGET_URL`, asserting HTTP 200, frozen SSE envelope conformance, grounded answers (`fallback !== true`), exactly one `done` event, and zero binding-name/model/stack-trace leaks; per-question PASS/FAIL table, 30s timeouts, exit code 1 on any failure. NOT part of CI; never executed against a live URL; deploy remains human-only. Added dev-only `@types/node`; `npx tsc` type-check passes.
 - `[P1-T9]` **F3 resolved:** fail-closed embedding-model identity gate in `src/retrieval/index.ts` — exported `EMBEDDING_MODEL` / `INGESTION_EMBEDDING_MODEL` / `EMBEDDING_DIMENSIONS`; if `env.EXPECTED_EMBEDDING_MODEL` is set and differs from the pinned model, or the embedding vector is missing or wrong-dimensioned (≠768), retrieval returns safe-empty BEFORE any AI/Vectorize call so M5 can never answer ungrounded (rule 04.12). 4 new gate unit tests (15/15 in `tests/retrieval.test.ts`); chat-flow mock embeddings aligned to 768 dims (mock-contract alignment, not a safety weakening).
 - `[P1-T9]` **F2 test landed (gate RED on 4 true corpus findings — held uncommitted pending human decision):** emergency-routing regression suite appended to `tests/retrieval-golden.test.ts`: every chunk matching an acute-emergency indicator must contain 999/A&E routing; inverse guard (999/A&E text ⇒ `safety_relevant`); non-vacuous sanity guard. One indicator false-positive (`fitting` vs "well-fitting") refined to seizure-context phrasing. **Findings reported, chunk content NOT edited:** (1) Umbilical Cord Infection chunk routes floppy/drowsy newborn to GP/NHS 111 — M3 lexicon treats "floppy" as Tier 1; sepsis red flags require 999/A&E [clinical defect]; (2) Foods-to-Avoid (honey/choking), (3) Highchair Safety, (4) Safe Teething Relief — choking-hazard prevention chunks without emergency routing language [minor]. See SafetyBatch.md for proposed remediation sentences.

@@ -193,3 +193,9 @@ npx wrangler rollback [DEPLOYMENT_ID]
 - **KV Sessions (`SESSIONS`)**: Session keys use a strict 24-hour TTL (`expirationTtl: 86400`). No manual session migration or purge is required during a rollback.
 - **D1 Database (`DB`)**: D1 schema contains read-only chunk knowledge tables seeded via transactional SHA-256 hashes. Rolling back worker code does not corrupt D1 tables.
 - **Vectorize Index (`VECTOR_INDEX`)**: Vectors match the pinned embedding model `@cf/baai/bge-base-en-v1.5` (768 dimensions). The fail-closed embedding gate (`src/retrieval/index.ts`) ensures that any mismatched query will fail safe to empty rather than hallucinate.
+
+---
+
+## 9. Local Development on Windows ARM64
+
+Local development using Wrangler (`npx wrangler dev`) on Windows ARM64 relies on running the x64 binary under emulation via `patch-package`. Note that upgrading wrangler or workerd requires re-validating the patch.

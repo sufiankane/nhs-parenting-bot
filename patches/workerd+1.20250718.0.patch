@@ -1,0 +1,16 @@
+diff --git a/node_modules/workerd/lib/main.js b/node_modules/workerd/lib/main.js
+index a75b989..5bbe30e 100644
+--- a/node_modules/workerd/lib/main.js
++++ b/node_modules/workerd/lib/main.js
+@@ -55,6 +55,11 @@ function pkgAndSubpathForCurrentPlatform() {
+   if (platformKey in knownPackages) {
+     pkg = knownPackages[platformKey];
+     subpath = `bin/workerd${maybeExeExtension}`;
++  } else if (platformKey === "win32 arm64 LE") {
++    // win32-arm64: no official binary; run x64 under Windows emulation
++    pkg = "@cloudflare/workerd-windows-64";
++    subpath = "bin/workerd.exe";
++    let binExt = ".exe";
+   } else {
+     throw new Error(`Unsupported platform: ${platformKey}`);
+   }
