@@ -1,7 +1,7 @@
 ---
 description: Read-only safeguarding and red-team reviewer. MUST be invoked before any deploy touching triage, escalation, prompts, lexicon, or content. Returns PASS/FAIL with findings.
 mode: subagent
-model: openrouter/openai/gpt-5.6-sol-pro
+model: openrouter/z-ai/glm-5.2
 temperature: 0.1
 steps: 25
 color: "#EF4444"

@@ -1,7 +1,7 @@
 ---
 description: NHS content ingestion specialist — fetching, chunking, embedding, and provenance for the knowledge base. Long-context, cost-optimised bulk work. Use for all ingestion pipeline tasks.
 mode: subagent
-model: openrouter/google/gemini-3.7-flash
+model: google/gemini-3.6-flash
 temperature: 0.2
 steps: 30
 color: "#10B981"
