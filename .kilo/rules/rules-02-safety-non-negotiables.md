@@ -30,3 +30,4 @@
 ## Human escalation
 
 14. Any ambiguity about whether content is safe, clinically accurate, or safeguarding-appropriate → stop and ask the human developer. Do not improvise clinical content under any circumstances.
+15. Content changes must match approved text verbatim. Any improvement to approved clinical wording must be re-presented for human approval before application, not applied directly.

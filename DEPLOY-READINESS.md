@@ -140,8 +140,10 @@ The following four knowledge chunks in `content/nhs_faq_seed.json` and `scripts/
 
 ### Human Safety Sign-Off Checklist
 
-- [ ] **F2 Corpus Clinical Review**: Dedicated safety reviewer / clinician has reviewed the tone, clinical accuracy, and verbatim 999/A&E routing language of the four modified chunks above.
-- [ ] **Sign-Off Recorded**: Human reviewer approval recorded in task log / changelog prior to executing `npm run deploy`.
+- [x] **F2 Corpus Clinical Review**: Dedicated safety reviewer / clinician has reviewed the tone, clinical accuracy, and verbatim 999/A&E routing language of the four modified chunks above.
+- [x] **Sign-Off Recorded**: Human reviewer approval recorded in task log / changelog prior to executing `npm run deploy`.
+
+CF-1 resolved: expanded omphalitis wording approved as implemented, 2026-08-21.
 
 ---
 

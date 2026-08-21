@@ -214,7 +214,7 @@ All items S1–S20 and A1–A4: **PASS** with file:line evidence (full report in
 
 | # | Chunk title | Indicator matched | Classification | Proposed remediation sentence |
 |---|---|---|---|---|
-| 1 | Recognising Signs of Umbilical Cord Infection (Omphalitis) | `floppy` (M3 Tier 1 sign) | **Clinical defect** — routes floppy/drowsy newborn to GP/NHS 111; sepsis red flags need 999/A&E | Replace "seek urgent medical assessment immediately" with: "If your baby becomes floppy or unusually drowsy, or develops a fever of 38°C or higher, call 999 or go to your nearest A&E immediately." |
+| 1 | Recognising Signs of Umbilical Cord Infection (Omphalitis) | `floppy` (M3 Tier 1 sign) | **Clinical defect** — routes floppy/drowsy newborn to GP/NHS 111; sepsis red flags need 999/A&E | Replace "seek urgent medical assessment immediately" with: "Additionally, if your baby develops a fever of 38°C or higher, becomes floppy or unusually drowsy, or refuses feeds, call 999 or go to your nearest A&E immediately — these can be signs of a serious infection needing emergency care." (Approved as implemented by human reviewer, 2026-08-21. Deviation from proposed text (added 'refuses feeds' + contextualising clause) reviewed and accepted — see safety review CF-1.) |
 | 2 | Foods to Avoid… Honey and Choking Risks | `chok` | Minor — prevention chunk without routing | Append: "If a baby is choking and cannot cough, cry, or breathe, call 999 immediately and start first aid." |
 | 3 | Highchair Safety and Safe Eating Practices | `chok` | Minor — same class as #2 | Append same sentence as #2. |
 | 4 | Safe Teething Relief and Products to Avoid | `chok` (amber necklace strangulation/choking risks) | Minor — same class as #2 | Append same sentence as #2. |
