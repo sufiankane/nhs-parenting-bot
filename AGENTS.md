@@ -57,32 +57,32 @@ See `.kilo/rules/02-safety-non-negotiables.md` for binding detail.
 
 Use the least-cost model that meets the work's quality and risk threshold. Models are pinned in agent frontmatter; do not substitute models casually.
 
-| Agent | Primary model | Role |
-|---|---|---|
-| `lead-integrator` | `google/gemini-3.7-flash` | Delegates, integrates, validates, commits, reports |
-| `architect` | `z-ai/glm-5.2` | Plans, contracts, risk and dependency analysis |
-| `repo-scout` | `upstage/solar-pro4` | Read-only codebase reconnaissance |
-| `worker-dev` | `deepseek/deepseek-v4-flash-0731` | Isolated production-code slices |
-| `test-engineer` | `deepseek/deepseek-v4-flash-0731` | Test design and test-file ownership |
-| `hard-problem-solver` | `deepseek/deepseek-v4-pro` | Escalation-only hard implementation and debugging |
-| `safety-reviewer` | `openai/gpt-5.6-sol-pro` | Read-only safety, privacy and high-risk review |
-| `independent-reviewer` | `inclusionai/ring-2.6-1t` | Independent adversarial design and diff review |
-| `content-pipeline` | `google/gemini-3.7-flash` | Scoped ingestion and provenance work |
-| `docs-writer` | `inclusionai/ling-2.6-1t` | Documentation and changelog work |
-| `explorer` | `nvidia/nemotron-3-ultra-550b-a55b:free` or `google/gemma-4-31b-it:free` | Read-only exploration and hypotheses |
+| Agent | Primary model | Role | Rationale |
+|---|---|---|---|
+| `lead-integrator` | `Claude Sonnet 4.6 (thinking)` | Delegates, integrates, validates, commits, reports | Strongest agentic-coding capability; thinking mode suits plan→delegate→integrate loops |
+| `architect` | `Gemini 3.1 Pro` | Plans, contracts, risk and dependency analysis | 1M context for whole-repo audits; deep reasoning for architectural trade-offs |
+| `repo-scout` | `Gemini 3.5 Flash` | Read-only codebase reconnaissance | Cheapest adequate tier for fast structural mapping |
+| `worker-dev` | `Gemini 3.7 Flash` | Isolated production-code slices | Fast code generation, separate quota pool from Claude |
+| `test-engineer` | `Gemini 3.7 Flash` | Test design and test-file ownership | Fast test scaffolding and deterministic transforms |
+| `hard-problem-solver` | `Gemini 3.1 Pro` | Escalation-only hard implementation and debugging | 1M context, high reasoning capability for non-local debugging |
+| `safety-reviewer` | `Claude Opus 4.6 (thinking)` | Read-only safety, privacy and high-risk review | Highest-scrutiny gate; reserved quota for safety sign-off |
+| `independent-reviewer` | `Gemini 3.1 Pro` | Independent adversarial design and diff review | Deep reasoning for challenging assumptions and edge cases |
+| `content-pipeline` | `Gemini 3.7 Flash` | Scoped ingestion and provenance work | Fast bulk processing and ingestion transformations |
+| `docs-writer` | `Gemini 3.5 Flash` | Documentation and changelog work | Cheapest adequate tier for prose and changelogs |
+| `explorer` | `GPT-OSS-120b` | Read-only exploration and hypotheses | Disposable hypotheses on a third quota family |
 
-Free models may not approve designs, change production code, set safety policy, or provide final review.
+Disposable exploratory models (`GPT-OSS-120b`) may not approve designs, change production code, set safety policy, or provide final review.
 
 ## 6. Mandatory primary execution path
 
 For non-trivial feature work, bug fixes across module boundaries, or safety-path changes, execute this sequence:
 
-1. **Architect (`z-ai/glm-5.2`)**: create a file-level plan, acceptance criteria, dependencies, risks, and explicit ownership boundaries. Do not edit implementation files.
-2. **Repo scout (`upstage/solar-pro4`)**: map the relevant implementation, contracts, conventions, call paths, and test locations. Read-only.
-3. **Test engineer (`deepseek/deepseek-v4-flash-0731`)**: design or implement tests within its exclusive test-file scope. It does not modify production code.
-4. **Worker dev (`deepseek/deepseek-v4-flash-0731`)**: implement one isolated production-code slice. It does not modify test files owned by the test engineer.
-5. **Lead integrator (`google/gemini-3.7-flash`)**: integrate delegated outputs, resolve conflicts, make only necessary glue edits, and run full validation. It must not duplicate delegated work without recording why.
-6. **Review**: invoke `safety-reviewer` for M3/M5/M6, prompts, lexicon, content, data handling, auth, or deployment-impacting work. Use `independent-reviewer` for non-safety adversarial review when justified.
+1. **Architect (`Gemini 3.1 Pro`)**: create a file-level plan, acceptance criteria, dependencies, risks, and explicit ownership boundaries. Do not edit implementation files.
+2. **Repo scout (`Gemini 3.5 Flash`)**: map the relevant implementation, contracts, conventions, call paths, and test locations. Read-only.
+3. **Test engineer (`Gemini 3.7 Flash`)**: design or implement tests within its exclusive test-file scope. It does not modify production code.
+4. **Worker dev (`Gemini 3.7 Flash`)**: implement one isolated production-code slice. It does not modify test files owned by the test engineer.
+5. **Lead integrator (`Claude Sonnet 4.6 (thinking)`)**: integrate delegated outputs, resolve conflicts, make only necessary glue edits, and run full validation. It must not duplicate delegated work without recording why.
+6. **Review**: invoke `safety-reviewer` (`Claude Opus 4.6 (thinking)`) for M3/M5/M6, prompts, lexicon, content, data handling, auth, or deployment-impacting work. Use `independent-reviewer` (`Gemini 3.1 Pro`) for non-safety adversarial review when justified.
 
 For a small, self-contained mechanical change, the lead may use only a worker-dev task, but must state why the full path is disproportionate.
 

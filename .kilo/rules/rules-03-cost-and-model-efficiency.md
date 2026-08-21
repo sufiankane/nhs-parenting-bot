@@ -7,15 +7,15 @@
 
 | Work | Default model | Escalate only when |
 |---|---|---|
-| Lead integration, tool use, validation | `google/gemini-3.7-flash` | The work is a hard implementation problem |
-| Architecture, contracts, dependency and risk analysis | `z-ai/glm-5.2` | Human approval is required for a safety or clinical decision |
-| Read-only reconnaissance | `upstage/solar-pro4` | Analysis needs architecture-level synthesis |
-| Routine isolated code or tests | `deepseek/deepseek-v4-flash-0731` | One bounded attempt fails or the problem is non-local |
-| Complex algorithms, concurrency, difficult debugging, large refactors | `deepseek/deepseek-v4-pro` | Not applicable; use only after explicit escalation |
-| Safety, privacy, auth, sensitive-data and production-impact review | `openai/gpt-5.6-sol-pro` | Never downgrade this review for a high-risk change |
-| Independent adversarial review | `inclusionai/ring-2.6-1t` | Not applicable |
-| Documentation and changelog work | `inclusionai/ling-2.6-1t` | The work needs design clarification |
-| Low-stakes exploration only | `nvidia/nemotron-3-ultra-550b-a55b:free`, `google/gemma-4-31b-it:free` | Never escalate their output directly into a decision |
+| Lead integration, tool use, validation | `Claude Sonnet 4.6 (thinking)` | The work needs full whole-repo context (`Gemini 3.1 Pro`) |
+| Architecture, contracts, dependency and risk analysis | `Gemini 3.1 Pro` | Human approval is required for a safety or clinical decision |
+| Read-only reconnaissance | `Gemini 3.5 Flash` | Analysis needs architecture-level synthesis |
+| Routine isolated code or tests | `Gemini 3.7 Flash` | One bounded attempt fails or the problem is non-local |
+| Complex algorithms, concurrency, difficult debugging, large refactors | `Gemini 3.1 Pro` | Not applicable; use only after explicit escalation |
+| Safety, privacy, auth, sensitive-data and production-impact review | `Claude Opus 4.6 (thinking)` | Never downgrade this review for a high-risk change |
+| Independent adversarial review | `Gemini 3.1 Pro` | Not applicable |
+| Documentation and changelog work | `Gemini 3.5 Flash` | The work needs design clarification |
+| Low-stakes exploration only | `GPT-OSS-120b` | Never escalate their output directly into a decision |
 
 ## Mandatory execution order
 
@@ -25,10 +25,10 @@ The lead agent must delegate rather than defaulting to self-execution. It may in
 
 ## Escalation rules
 
-1. Use `deepseek/deepseek-v4-pro` only after a bounded Flash attempt fails, or when the task explicitly involves concurrency, algorithmic reasoning, non-local behaviour, or a substantial refactor.
-2. Use `openai/gpt-5.6-sol-pro` for all changes involving M3/M5/M6, prompts, lexicon, content, audit data, privacy, authentication, permissions, secrets, production configuration, or deploy decisions.
-3. Use `inclusionai/ring-2.6-1t` as an independent challenge to a completed plan or diff; it does not own the implementation.
-4. Free models are read-only. Their outputs are hypotheses that require validation by a designated agent; they may not edit, approve, or close tasks.
+1. Use `Gemini 3.1 Pro` (hard-problem-solver) only after a bounded Flash attempt fails, or when the task explicitly involves concurrency, algorithmic reasoning, non-local behaviour, or a substantial refactor / whole-repo context.
+2. Use `Claude Opus 4.6 (thinking)` (safety-reviewer) for all changes involving M3/M5/M6, prompts, lexicon, content, audit data, privacy, authentication, permissions, secrets, production configuration, or deploy decisions. Reserve Opus quota strictly for this gate.
+3. Use `Gemini 3.1 Pro` (independent-reviewer) as an independent challenge to a completed plan or diff; it does not own the implementation.
+4. `GPT-OSS-120b` (explorer) output is disposable hypotheses that require validation by a designated agent; it may not edit, approve, or close tasks.
 5. Pin the assigned model in agent frontmatter. Do not use an expensive model for boilerplate, formatting, or a mechanical change.
 
 ## Token and context discipline

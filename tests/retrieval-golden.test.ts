@@ -1,4 +1,4 @@
-﻿/**
+/**
  * P1-T5 — Golden-Set Retrieval & Knowledge-Base Provenance Test Suite
  * -----------------------------------------------------------------
  * Protects: Spec task P1-T5 (Seed Vectorize with curated NHS FAQ set),
@@ -18,30 +18,6 @@
  * touches /chat. It exists to prove the *knowledge base* the safe path reads.
  */
 
-/* ============================================================================
- * Ambient Node typings.
- * The project does not depend on @types/node (verified: only @types/estree is
- * installed), so these declarations give this single file precise types for
- * the Node builtins it uses. If @types/node is ever added, delete this block
- * and let the real typings win.
- * ========================================================================== */
-declare module "node:fs" {
-  export function readFileSync(path: string, options?: { encoding: string } | string): string;
-  export function existsSync(path: string): boolean;
-}
-declare module "node:crypto" {
-  export function createHash(algorithm: string): {
-    update(data: string): { digest(encoding: "hex"): string };
-  };
-}
-declare module "node:sqlite" {
-  export class DatabaseSync {
-    constructor(path: string);
-    exec(sql: string): void;
-    prepare(sql: string): { all(...params: unknown[]): Record<string, unknown>[] };
-    close(): void;
-  }
-}
 
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
@@ -888,3 +864,64 @@ describe("SafetyBatch S10 — deny-list regression (synthetic fixtures; no real 
 });
 
 
+/* ============================================================================
+ * SafetyBatch F2 — Emergency routing regression [rule 02.14]
+ *
+ * Protects: rule 02.14 (any ambiguity about whether content is safe,
+ * clinically accurate, or safeguarding-appropriate → stop and ask the human),
+ * and the SafetyBatch F2 follow-up: every knowledge chunk that describes a
+ * life-threatening or safeguarding emergency MUST carry the 999/A&E routing
+ * language so the safe path (M3 → M6) is never left without a deterministic
+ * signpost. A chunk that flags an emergency indicator but omits 999/A&E is a
+ * corpus defect — the DATA is wrong, never weaken this gate (rule 02.12).
+ * ========================================================================== */
+const EMERGENCY_INDICATORS: RegExp[] = [
+  /non-blanching|glass test/i,
+  /won'?t wake|unresponsive|floppy/i,
+  /chest (is )?(pulling|sucking|recession)|struggling to breathe|gasping|not breathing/i,
+  /chok/i,
+  /anaphylax|throat closing/i,
+  /seizure|febrile fit|\b(?:is|was|are|started|continuous)\s+fitting\b/i,
+  /button battery|swallowed battery|bleach|poison/i,
+  /purple rash|meningitis/i,
+  /blood spurting|severe bleeding/i,
+  /severe burn|badly scalded|large scald/i,
+  /suicide|self[- ]harm|want to die|end my life/i,
+];
+const EMERGENCY_ROUTING = /(\b999\b|A&E)/i;
+
+describe("Emergency routing regression [SafetyBatch F2, rule 02.14]", () => {
+  it("every chunk that flags an emergency indicator also carries 999/A&E routing", () => {
+    const violations = chunks
+      .filter((c) => EMERGENCY_INDICATORS.some((re) => re.test(c.chunk_text)))
+      .filter((c) => !EMERGENCY_ROUTING.test(c.chunk_text))
+      .map((c) => ({ title: c.title, id: c.id }));
+
+    expect(
+      violations,
+      `SafetyBatch F2: ${violations.length} chunk(s) flag an emergency indicator but omit 999/A&E routing: ` +
+        violations.map((v) => `"${v.title}" (${v.id})`).join("; ")
+    ).toEqual([]);
+  });
+
+  it("inverse guard — every chunk carrying 999/A&E routing is marked safety_relevant", () => {
+    const violations = chunks
+      .filter((c) => EMERGENCY_ROUTING.test(c.chunk_text))
+      .filter((c) => c.safety_relevant !== true)
+      .map((c) => ({ title: c.title, id: c.id }));
+
+    expect(
+      violations,
+      `SafetyBatch F2: ${violations.length} chunk(s) carry 999/A&E routing but are not safety_relevant: ` +
+        violations.map((v) => `"${v.title}" (${v.id})`).join("; ")
+    ).toEqual([]);
+  });
+
+  it("sanity guard — at least 5 chunks flag an emergency indicator (non-vacuous)", () => {
+    const flagged = chunks.filter((c) => EMERGENCY_INDICATORS.some((re) => re.test(c.chunk_text)));
+    expect(
+      flagged.length,
+      `SafetyBatch F2: only ${flagged.length} chunk(s) flag an emergency indicator; expected >= 5 (non-vacuous guard)`
+    ).toBeGreaterThanOrEqual(5);
+  });
+});

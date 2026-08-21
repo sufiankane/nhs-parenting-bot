@@ -106,17 +106,17 @@
       "content_hash": "3037203644302a48e356aa3f5dabf6c0b09f30b1fd92b32109714a6f5089f683"
     },
     {
-      "id": "8a1411361896c96bffb5a400a7e9e84153d7e92c504571649f0f76ce71f86beb",
+      "id": "4388685eb8cace26de0806fea7732c2d5133a421411935d37903e07dc211704e",
       "source_id": "nhs-umbilical-cord-care",
       "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/",
       "title": "Recognising Signs of Umbilical Cord Infection (Omphalitis)",
       "category": "newborn-care",
-      "chunk_text": "While a small amount of dry crusting or an occasional tiny smear of dried blood on the nappy as the cord stump separates can be completely normal, parents should closely monitor the navel area for any signs of infection (omphalitis). In newborn infants, umbilical infections can spread quickly if left untreated, so early medical attention is important. Contact your GP, midwife, or NHS 111 immediately if you notice any of the following signs: spreading redness, warmth, or swelling on the skin around the base of the belly button; yellow, white, or greenish pus oozing from the stump; a strong, foul, or unpleasant odour coming from the cord area; active bleeding from the stump that does not stop after applying gentle pressure with a clean pad; or if your baby seems distressed, crying when you touch the skin around their tummy. Additionally, if your baby develops a fever of 38°C or higher, becomes floppy or unusually drowsy, or refuses feeds, seek urgent medical assessment immediately.",
+      "chunk_text": "While a small amount of dry crusting or an occasional tiny smear of dried blood on the nappy as the cord stump separates can be completely normal, parents should closely monitor the navel area for any signs of infection (omphalitis). In newborn infants, umbilical infections can spread quickly if left untreated, so early medical attention is important. Contact your GP, midwife, or NHS 111 immediately if you notice any of the following signs: spreading redness, warmth, or swelling on the skin around the base of the belly button; yellow, white, or greenish pus oozing from the stump; a strong, foul, or unpleasant odour coming from the cord area; active bleeding from the stump that does not stop after applying gentle pressure with a clean pad; or if your baby seems distressed, crying when you touch the skin around their tummy. Additionally, if your baby develops a fever of 38°C or higher, becomes floppy or unusually drowsy, or refuses feeds, call 999 or go to your nearest A&E immediately — these can be signs of a serious infection needing emergency care.",
       "chunk_index": 1,
-      "token_count": 213,
+      "token_count": 234,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "8a1411361896c96bffb5a400a7e9e84153d7e92c504571649f0f76ce71f86beb"
+      "content_hash": "4388685eb8cace26de0806fea7732c2d5133a421411935d37903e07dc211704e"
     },
     {
       "id": "7590068eb6927482be3d74e3da194d8ab2d9fe385871d531b6ba177f3147a92e",
@@ -366,17 +366,17 @@
       "content_hash": "60eb6736b0239ae6700884877fdf0866190c2f66292428a9eb4aef32d5f1ad12"
     },
     {
-      "id": "f81e810401d247f43ba5dbba054dbff4150edc4b311490cd26ec7db9e4cda95a",
+      "id": "1b35694008def0553f2e3fb8611e099142111740f739330df596b429afd4abc0",
       "source_id": "nhs-foods-to-avoid-giving-babies",
       "source_url": "https://www.nhs.uk/conditions/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/",
       "title": "Foods to Avoid for Babies Under 12 Months: Honey and Choking Risks",
       "category": "weaning-nutrition",
-      "chunk_text": "Certain foods pose serious health and choking hazards for babies under 12 months and must be strictly avoided: 1. Honey: Never give honey to a baby under 1 year of age, including honey baked into snacks, cakes, or cereals. Honey can occasionally contain spores of Clostridium botulinum bacteria, which can cause infant botulism, a rare but life-threatening illness in immature digestive systems. 2. Whole nuts and peanuts: Never give whole nuts, peanuts, or hard nut chunks to children under 5 years old due to severe choking risks (smooth peanut butter or nut paste is safe to introduce). 3. Unpasteurised cheeses: Avoid unpasteurised or mould-ripened soft cheeses (such as Brie, Camembert, and blue cheeses) due to the risk of listeria infection. 4. Raw jelly cubes: Never give raw jelly cubes, as they can get lodged in the throat. 5. Raw shellfish and undercooked eggs (ensure eggs carry the British Lion mark if runny). 6. Whole round foods: Foods like grapes, cherry tomatoes, and large blueberries must always be sliced lengthways into quarters before offering to prevent airway blockage.",
+      "chunk_text": "Certain foods pose serious health and choking hazards for babies under 12 months and must be strictly avoided: 1. Honey: Never give honey to a baby under 1 year of age, including honey baked into snacks, cakes, or cereals. Honey can occasionally contain spores of Clostridium botulinum bacteria, which can cause infant botulism, a rare but life-threatening illness in immature digestive systems. 2. Whole nuts and peanuts: Never give whole nuts, peanuts, or hard nut chunks to children under 5 years old due to severe choking risks (smooth peanut butter or nut paste is safe to introduce). 3. Unpasteurised cheeses: Avoid unpasteurised or mould-ripened soft cheeses (such as Brie, Camembert, and blue cheeses) due to the risk of listeria infection. 4. Raw jelly cubes: Never give raw jelly cubes, as they can get lodged in the throat. 5. Raw shellfish and undercooked eggs (ensure eggs carry the British Lion mark if runny). 6. Whole round foods: Foods like grapes, cherry tomatoes, and large blueberries must always be sliced lengthways into quarters before offering to prevent airway blockage. If a baby is choking and cannot cough, cry, or breathe, call 999 immediately and start first aid.",
       "chunk_index": 0,
-      "token_count": 230,
+      "token_count": 254,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "f81e810401d247f43ba5dbba054dbff4150edc4b311490cd26ec7db9e4cda95a"
+      "content_hash": "1b35694008def0553f2e3fb8611e099142111740f739330df596b429afd4abc0"
     },
     {
       "id": "2ac9ab22ba9f2f2dfdfe509b3e801ef8ceb8f958623e86b5fc6ba884b5443529",
@@ -405,17 +405,17 @@
       "content_hash": "2359e98b238e82a10b08c67c1fe97ecf289443802584ed9eb417ee7dff160aef"
     },
     {
-      "id": "2f96cf55e8e55ed581287849c957dcc6ee966e2a84a52bc4fc635ee0dac4190e",
+      "id": "127b5fd163af8b630d874c16eb1b4262ebd37b731dc86f91bddf673260e99347",
       "source_id": "nhs-finger-foods-and-safe-weaning",
       "source_url": "https://www.nhs.uk/start-for-life/baby/weaning/safe-weaning/",
       "title": "Highchair Safety and Safe Eating Practices",
       "category": "weaning-nutrition",
-      "chunk_text": "To keep mealtimes safe and minimise the risk of choking during weaning, always ensure your baby is seated in a safe, upright position: Always secure your baby in a sturdy highchair with the five-point safety harness fastened whenever food is present. Make sure your baby is sitting fully upright at a 90-degree angle, never reclined or slouching. If your highchair has an adjustable footrest, set it so your baby's feet rest flat and supported, which provides core physical stability needed for chewing and swallowing effectively. Never feed your baby while they are in a car seat, reclined bouncer, pram, or while they are moving around, crawling, or playing. Never leave your baby alone while eating for any reason, even for a moment; always stay within arm's reach and maintain direct eye contact throughout the entire meal. Minimise distracting screens like televisions, tablets, or phones during mealtimes so your baby can concentrate fully on eating, chewing, and recognising when they feel full.",
+      "chunk_text": "To keep mealtimes safe and minimise the risk of choking during weaning, always ensure your baby is seated in a safe, upright position: Always secure your baby in a sturdy highchair with the five-point safety harness fastened whenever food is present. Make sure your baby is sitting fully upright at a 90-degree angle, never reclined or slouching. If your highchair has an adjustable footrest, set it so your baby's feet rest flat and supported, which provides core physical stability needed for chewing and swallowing effectively. Never feed your baby while they are in a car seat, reclined bouncer, pram, or while they are moving around, crawling, or playing. Never leave your baby alone while eating for any reason, even for a moment; always stay within arm's reach and maintain direct eye contact throughout the entire meal. Minimise distracting screens like televisions, tablets, or phones during mealtimes so your baby can concentrate fully on eating, chewing, and recognising when they feel full. If a baby is choking and cannot cough, cry, or breathe, call 999 immediately and start first aid.",
       "chunk_index": 1,
-      "token_count": 209,
+      "token_count": 233,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "2f96cf55e8e55ed581287849c957dcc6ee966e2a84a52bc4fc635ee0dac4190e"
+      "content_hash": "127b5fd163af8b630d874c16eb1b4262ebd37b731dc86f91bddf673260e99347"
     },
     {
       "id": "4c9d88d8db6a22c8a29fcbcc9c881ce59b35c516e5f55715f620977672e306ba",
@@ -626,17 +626,17 @@
       "content_hash": "13a2d35c9f2e5841b03b3e1066e1a55da60fcd95ce998defb01d5dd04d78584b"
     },
     {
-      "id": "9bfd820d32c3548796a671306a1c63587a55b9953e2bb18d637fcbe2d87d9257",
+      "id": "6ad39f61035f2bc57426ba56e4a70a597bf5d2901991ae8b9a43e9794cd1627d",
       "source_id": "nhs-baby-teething-signs-and-relief",
       "source_url": "https://www.nhs.uk/conditions/baby/babys-development/teething/tips-for-helping-your-teething-baby/",
       "title": "Safe Teething Relief and Products to Avoid",
       "category": "teething-development",
-      "chunk_text": "To help soothe your teething baby's sore gums safely and comfortably: 1. Teething rings: Offer a clean, chilled teething ring that has been cooled in the fridge (never place teething rings in the freezer, as frozen rings can become too hard and damage delicate gums). 2. Healthy chilled finger foods: If your baby is over 6 months old and eating solid foods, you can offer chilled fruit or vegetable sticks, such as cold cucumber batons or chilled cooked carrots, under direct supervision. 3. Gentle gum massage: Gently rub your baby's sore gums using a clean finger. 4. Professional pain relief guidance: If your baby is clearly distressed, a pharmacist, health visitor, or GP can advise whether sugar-free infant pain relief is suitable for your baby and how to use it safely. Never give any medicine to a baby without checking with one of these professionals first. 5. Products to avoid: Avoid amber teething necklaces, beads, or anklets, which pose severe strangulation and choking risks and have no proven medical benefit. Also avoid homeopathic teething gels or unlicensed remedies.",
+      "chunk_text": "To help soothe your teething baby's sore gums safely and comfortably: 1. Teething rings: Offer a clean, chilled teething ring that has been cooled in the fridge (never place teething rings in the freezer, as frozen rings can become too hard and damage delicate gums). 2. Healthy chilled finger foods: If your baby is over 6 months old and eating solid foods, you can offer chilled fruit or vegetable sticks, such as cold cucumber batons or chilled cooked carrots, under direct supervision. 3. Gentle gum massage: Gently rub your baby's sore gums using a clean finger. 4. Professional pain relief guidance: If your baby is clearly distressed, a pharmacist, health visitor, or GP can advise whether sugar-free infant pain relief is suitable for your baby and how to use it safely. Never give any medicine to a baby without checking with one of these professionals first. 5. Products to avoid: Avoid amber teething necklaces, beads, or anklets, which pose severe strangulation and choking risks and have no proven medical benefit. Also avoid homeopathic teething gels or unlicensed remedies. If a baby is choking and cannot cough, cry, or breathe, call 999 immediately and start first aid.",
       "chunk_index": 1,
-      "token_count": 231,
+      "token_count": 255,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "9bfd820d32c3548796a671306a1c63587a55b9953e2bb18d637fcbe2d87d9257"
+      "content_hash": "6ad39f61035f2bc57426ba56e4a70a597bf5d2901991ae8b9a43e9794cd1627d"
     },
     {
       "id": "d40f3d9ba7f34330998567a073369f740fb2aa20e242ee91f9aae3122c8c6f35",

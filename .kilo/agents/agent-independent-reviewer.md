@@ -1,7 +1,7 @@
 ---
 description: Read-only independent reviewer for completed plans and diffs. Challenges assumptions, edge cases, contracts, maintainability, and regressions.
 mode: subagent
-model: openrouter/inclusionai/ring-2.6-1t
+model: "Gemini 3.1 Pro"
 temperature: 0.1
 steps: 25
 color: "#EC4899"

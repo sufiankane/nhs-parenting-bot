@@ -1,7 +1,7 @@
 ---
 description: Low-cost, read-only exploratory agent for locating likely files, summarising logs, and proposing clearly-labelled hypotheses.
 mode: subagent
-model: openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+model: "GPT-OSS-120b"
 temperature: 0.2
 steps: 15
 color: "#6B7280"

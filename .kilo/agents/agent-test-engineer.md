@@ -1,7 +1,7 @@
 ---
 description: Writes and maintains unit, integration, retrieval golden-set, and red-team tests. Use after any module change and before any deploy.
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash-0731
+model: "Gemini 3.7 Flash"
 temperature: 0.1
 steps: 35
 color: "#F59E0B"

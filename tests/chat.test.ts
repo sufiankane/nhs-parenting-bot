@@ -1,4 +1,4 @@
-﻿import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import worker from "../src/index";
 
 const CANARY = "CANARY-LEAK-MARKER-9f3c7a1e";
@@ -68,6 +68,9 @@ function parseSseEvents(raw: string): SseEvent[] {
 }
 
 const mockKvStore = new Map<string, string>();
+beforeEach(() => {
+  mockKvStore.clear();
+});
 const env: Env = {
   AI: { __brand: `${CANARY}-AI` },
   VECTOR_INDEX: { __brand: `${CANARY}-VECTOR_INDEX` },

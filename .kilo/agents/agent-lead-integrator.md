@@ -1,7 +1,7 @@
 ---
 description: Lead integrator for multi-agent work. Delegates planning, reconnaissance, tests, isolated implementation, and review; integrates and validates without absorbing delegated work.
 mode: primary
-model: openrouter/google/gemini-3.7-flash
+model: "Claude Sonnet 4.6 (thinking)"
 temperature: 0.1
 steps: 45
 color: "#2563EB"

@@ -1,7 +1,7 @@
 ---
 description: Read-only safeguarding and red-team reviewer. MUST be invoked before any deploy touching triage, escalation, prompts, lexicon, or content. Returns PASS/FAIL with findings.
 mode: subagent
-model: openrouter/z-ai/glm-5.2
+model: "Claude Opus 4.6 (thinking)"
 temperature: 0.1
 steps: 25
 color: "#EF4444"

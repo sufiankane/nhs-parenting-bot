@@ -1,7 +1,7 @@
 ---
 description: Implements Cloudflare Worker modules (M1-M8) per the Spec. Use for all TypeScript/Workers feature work, bindings, and SSE streaming.
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash-0731
+model: "Gemini 3.7 Flash"
 temperature: 0.2
 steps: 40
 color: "#2563EB"

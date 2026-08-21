@@ -1,4 +1,4 @@
-﻿import { createErrorResponse } from "./gateway/error";
+import { createErrorResponse } from "./gateway/error";
 import { getCorsHeaders, handleCorsPreflight } from "./gateway/cors";
 import { checkKvRateLimit } from "./gateway/kvRateLimit";
 import { validateChatRequest } from "./gateway/validate";
@@ -196,7 +196,7 @@ export default {
             waitUntil(p: Promise<unknown>): void;
           };
           ctxObj.waitUntil(
-            appendMessage(env.SESSIONS as Record<string, unknown>, session_id, {
+            appendMessage(env.SESSIONS as Parameters<typeof appendMessage>[0], session_id, {
               role: "user",
               content: message,
               at: new Date().toISOString(),

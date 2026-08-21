@@ -1,7 +1,7 @@
 ---
 description: Senior solution architect. Planning, task breakdown, and design decisions against the Spec. Use before starting any new phase, module, or any change that alters a module contract.
 mode: primary
-model: openrouter/z-ai/glm-5.2
+model: "Gemini 3.1 Pro"
 temperature: 0.2
 steps: 30
 color: "#7C3AED"

@@ -1,7 +1,7 @@
 ---
 description: Escalation-only specialist for difficult implementation, concurrency, algorithmic work, non-local failures, and substantial refactors.
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-pro
+model: "Gemini 3.1 Pro"
 temperature: 0.1
 steps: 40
 color: "#7C3AED"

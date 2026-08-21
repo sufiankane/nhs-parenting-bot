@@ -1,7 +1,7 @@
 ---
 description: Read-only repository reconnaissance agent. Maps relevant files, contracts, call paths, conventions, and tests before implementation.
 mode: subagent
-model: openrouter/upstage/solar-pro4
+model: "Gemini 3.5 Flash"
 temperature: 0.1
 steps: 20
 color: "#14B8A6"

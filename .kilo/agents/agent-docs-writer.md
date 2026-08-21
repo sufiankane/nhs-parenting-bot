@@ -1,7 +1,7 @@
 ---
 description: Documentation writer — README, runbooks, module docs, and changelog hygiene. Cheap, fast model for prose tasks. Use for any documentation work.
 mode: subagent
-model: openrouter/inclusionai/ling-2.6-1t
+model: "Gemini 3.5 Flash"
 temperature: 0.3
 steps: 15
 color: "#6B7280"
