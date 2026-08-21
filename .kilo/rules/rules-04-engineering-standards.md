@@ -36,3 +36,9 @@
 
 16. Conventional commits referencing Spec task IDs: `feat(triage): keyword lexicon v1 [P1-T3]`.
 17. One task per branch/PR. Safety-path changes are always their own PR, never bundled with feature work.
+
+## Live-service fidelity
+
+18. Every external binding (Workers AI, Vectorize, D1, KV, R2, Queues) must have at least one test using a recorded fixture of the service's real response shape, captured from the live API. Fixtures live next to the test with a comment noting capture date and model/service version.
+19. Mocks must validate the contract, not just satisfy it. A mock that ignores its inputs (SQL strings, query parameters, payload shapes) is a blind spot: mocks must throw on contract violations (e.g. unknown table names, wrong dimensions).
+20. No deploy is complete without one assertion against the live service (the smoke gate). Mock-only green is not deployable green. Rationale: P1-T9 shipped three bugs that 347 mocked tests could not see — wrong D1 table name, wrong Workers AI response shape, unvalidated Vectorize scores.

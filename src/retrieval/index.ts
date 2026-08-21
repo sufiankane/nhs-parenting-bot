@@ -124,7 +124,22 @@ export async function retrieve(
 
     // 1. Embed the query
     const embeddingResult = await ai.run(EMBEDDING_MODEL, { text: query });
+    console.log(
+      "EMBED_SHAPE:",
+      JSON.stringify({
+        topLevelType: typeof embeddingResult,
+        isArray: Array.isArray(embeddingResult),
+        keys:
+          embeddingResult && typeof embeddingResult === "object"
+            ? Object.keys(embeddingResult)
+            : null,
+        dataFirstType: typeof (embeddingResult as Record<string, unknown>)?.data,
+        dataFirstIsArray: Array.isArray((embeddingResult as Record<string, unknown>)?.data),
+        firstElementIsArray: Array.isArray(((embeddingResult as Record<string, unknown>)?.data as unknown[])?.[0]),
+      })
+    );
     const vector = extractEmbedding(embeddingResult);
+    console.log("EMBED_EXTRACTED:", vector === null ? "NULL" : vector.length);
     // Rule 04.12: a missing or wrong-dimension vector means the embedding
     // model is not producing the pinned output — fail closed, never call
     // Vectorize with an unverified vector.
