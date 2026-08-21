@@ -2,14 +2,14 @@
  * /chat end-to-end flow tests (P1-T6, TDD against the worker-dev brief).
  *
  * Spec task IDs / safety rules protected:
- *  - P1-T6 (Spec §4 M2): wire M4 retrieval + M5 generation into /chat.
+ *  - P1-T6 (Spec ï¿½4 M2): wire M4 retrieval + M5 generation into /chat.
  *  - rule 02.1: EVERY inbound message passes M3 triage before retrieval or
  *    generation. Tier 1/2/3 must NEVER reach AI or Vectorize.
  *  - rule 02.2: Tier 1-3 responses come from M6 signposts, never the LLM.
- *  - Spec §4 M4 decision boundary: low retrieval confidence -> honest fallback
+ *  - Spec ï¿½4 M4 decision boundary: low retrieval confidence -> honest fallback
  *    (fallback_reason "low_confidence"), no generation call.
  *  - rule 02.9: session history written to KV with expirationTtl 86400 (24h).
- *  - rule 04.6 / Spec §4.0: the frozen SSE envelope and error envelope are
+ *  - rule 04.6 / Spec ï¿½4.0: the frozen SSE envelope and error envelope are
  *    preserved (malformed body still returns the frozen error envelope).
  *
  * These tests drive worker.fetch with a fully mocked env (AI, VECTOR_INDEX,
@@ -85,7 +85,7 @@ async function readSse(res: Response): Promise<unknown[]> {
 /* -------------------------------------------------------------------------- */
 
 const EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
-const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
 
 interface ChatHarness {
   env: Record<string, unknown>;
@@ -154,7 +154,7 @@ function callsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 1. Tier 1 — signpost 999, zero AI / Vectorize                              */
+/* 1. Tier 1 ï¿½ signpost 999, zero AI / Vectorize                              */
 /* -------------------------------------------------------------------------- */
 
 describe("Tier 1 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
@@ -174,14 +174,14 @@ describe("Tier 1 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
     const done = events.find((e) => (e as any).type === "done") as any;
     expect(done).toBeDefined();
 
-    // protects rule 02.1/02.2 — Tier 1 must never reach retrieval or generation.
+    // protects rule 02.1/02.2 ï¿½ Tier 1 must never reach retrieval or generation.
     expect(h.aiRun).not.toHaveBeenCalled();
     expect(h.vectorQuery).not.toHaveBeenCalled();
   });
 });
 
 /* -------------------------------------------------------------------------- */
-/* 2. Tier 2 and Tier 3 — correct signposts, zero AI                          */
+/* 2. Tier 2 and Tier 3 ï¿½ correct signposts, zero AI                          */
 /* -------------------------------------------------------------------------- */
 
 describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
@@ -215,7 +215,7 @@ describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
 });
 
 /* -------------------------------------------------------------------------- */
-/* 3. Tier 4 — good retrieval -> token stream + done                          */
+/* 3. Tier 4 ï¿½ good retrieval -> token stream + done                          */
 /* -------------------------------------------------------------------------- */
 
 describe("Tier 4 /chat flow with good retrieval [P1-T6]", () => {
@@ -265,10 +265,10 @@ describe("Tier 4 /chat flow with good retrieval [P1-T6]", () => {
 });
 
 /* -------------------------------------------------------------------------- */
-/* 4. Tier 4 — low confidence -> fallback, no generation                      */
+/* 4. Tier 4 ï¿½ low confidence -> fallback, no generation                      */
 /* -------------------------------------------------------------------------- */
 
-describe("Tier 4 /chat flow with low confidence [P1-T6, Spec §4 M4 decision boundary]", () => {
+describe("Tier 4 /chat flow with low confidence [P1-T6, Spec ï¿½4 M4 decision boundary]", () => {
   it("returns done with fallback_reason low_confidence and makes no generation call", async () => {
     const h = makeHarness();
 
@@ -292,7 +292,7 @@ describe("Tier 4 /chat flow with low confidence [P1-T6, Spec §4 M4 decision boun
     expect(done.payload.fallback).toBe(true);
     expect(done.payload.fallback_reason).toBe("low_confidence");
 
-    // protects Spec §4 M4 — no generation call on low confidence.
+    // protects Spec ï¿½4 M4 ï¿½ no generation call on low confidence.
     expect(callsFor(h.aiRun, GENERATION_MODEL)).toHaveLength(0);
   });
 });
@@ -333,7 +333,7 @@ describe("Session persistence [P1-T6, rule 02.9]", () => {
     const done = events.find((e) => (e as any).type === "done") as any;
     const sessionId = done.payload.session_id as string;
 
-    // The session write is deferred via ctx.waitUntil — await it.
+    // The session write is deferred via ctx.waitUntil ï¿½ await it.
     await Promise.all(h.waitUntilPromises);
 
     const sessionPuts = h.kv.putCalls.filter((c) =>
@@ -341,7 +341,7 @@ describe("Session persistence [P1-T6, rule 02.9]", () => {
     );
     expect(sessionPuts.length).toBeGreaterThan(0);
 
-    // protects rule 02.9 — every session put must carry the 24h TTL.
+    // protects rule 02.9 ï¿½ every session put must carry the 24h TTL.
     const sessionPut = sessionPuts.find((c) => c.key === `session:${sessionId}`);
     expect(sessionPut).toBeDefined();
     expect(sessionPut!.options?.expirationTtl).toBe(86400);
@@ -352,7 +352,7 @@ describe("Session persistence [P1-T6, rule 02.9]", () => {
 /* 6. Malformed body -> frozen error envelope (existing behaviour preserved)  */
 /* -------------------------------------------------------------------------- */
 
-describe("Malformed body error envelope [P1-T6, rule 04.6, Spec §4.0]", () => {
+describe("Malformed body error envelope [P1-T6, rule 04.6, Spec ï¿½4.0]", () => {
   it("returns the frozen INVALID_JSON error envelope for malformed JSON", async () => {
     const h = makeHarness();
     const res = await postChat(h, '{"message": unquoted');

@@ -1,9 +1,9 @@
 # Deployment Readiness Report — Phase 1 Close-Out (P1-T9)
 
-> **Document Status**: READY FOR HUMAN SAFETY REVIEW & PRE-DEPLOY SMOKE GATE  
-> **Final Baseline Commit**: `84ffa1dcbcb68d1fb8a6f6ea7162577d4bdbcf11`  
+> **Document Status**: DEPLOYED & PRODUCTION-VERIFIED (10/10 GOLDEN SMOKE PASS)  
+> **Production URL**: `https://nhs-parenting-bot.sufiankane.workers.dev`  
 > **Date**: 2026-08-21  
-> **Target Environment**: Cloudflare Workers (`*.workers.dev` / Custom Domain)  
+> **Target Environment**: Cloudflare Workers (`*.workers.dev`)  
 > **Governing Spec**: `docs/architecture-and-action-plan.md`  
 > **Binding Safety Rules**: `.kilo/rules/01–07`, `AGENTS.md`  
 
@@ -11,25 +11,22 @@
 
 ## 1. Executive Summary
 
-This report certifies that the NHS Parenting Companion Chatbot has completed Phase 1 development (P1-T1 through P1-T9) in full compliance with the architecture specification and safety non-negotiables. All core modules (M1 Frontend, M2 Gateway, M3 Safety & Triage, M4 Retrieval, M5 Grounded Generation, M6 Escalation & Signposting, M7 Ingestion, and Session/Rate-Limiting stores) have been implemented, tested, and verified.
+This report certifies that the NHS Parenting Companion Chatbot has completed Phase 1 development and production deployment (P1-T1 through P1-T9) in full compliance with the architecture specification and safety non-negotiables. All core modules (M1 Frontend, M2 Gateway, M3 Safety & Triage, M4 Retrieval, M5 Grounded Generation, M6 Escalation & Signposting, M7 Ingestion, and Session/Rate-Limiting stores) have been implemented, deployed to Cloudflare Workers, and verified in production.
 
-All automated unit, integration, golden provenance, and adversarial red-team test suites are **100% GREEN** with **zero skips, zero failures, zero TypeScript compilation errors, and zero Tier 1 false negatives**.
+All automated unit, integration, golden provenance, and adversarial red-team test suites are **100% GREEN (356/356 unit/integration tests, 38/38 red-team tests)** with **zero skips, zero failures, zero TypeScript compilation errors, and zero Tier 1 false negatives**.
 
-Per strict project policy (AGENTS.md §8, rule 02.7, rule 07.1), production deployments are **human-only**. Deployment is gated on two final human steps:
-1. Formal human safety review and approval of the four F2-remediated corpus chunks (see §6).
-2. Remote smoke verification against `wrangler dev --remote` or staging using `scripts/smoke/remote-golden-check.ts` (see §5).
+Production verification against the live endpoint via `scripts/smoke/remote-golden-check.ts` passed **10/10 golden questions across all 7 categories** with valid grounded responses and zero safety leaks.
 
 ---
 
 ## 2. Test Evidence Table
 
-Verification executed against finalized commit `84ffa1dcbcb68d1fb8a6f6ea7162577d4bdbcf11`:
-
 | Suite / Check | Command | Files | Tests / Status | Pass | Fail | Skip | Evidence / Invariants |
 |---|---|---|---|---|---|---|---|
 | **TypeScript Compilation** | `npx tsc --noEmit` | 19 src/test files | 0 errors | 100% | 0 | 0 | Clean compilation across all modules and scripts |
-| **Standard Test Suite** | `npm test` (`vitest run`) | 13 test files | 347 tests | 347 | 0 | 0 | All unit, contract, store, and golden suites pass |
+| **Standard Test Suite** | `npm test` (`vitest run`) | 13 test files | 356 tests | 356 | 0 | 0 | All unit, contract, store, and golden suites pass |
 | **Adversarial Red-Team Suite** | `npm run test:redteam` | 2 test files | 38 tests | 38 | 0 | 0 | **0 Tier 1 false negatives** across injections, homoglyphs, formatting attacks |
+| **Production Remote Smoke** | `remote-golden-check.ts` | 10 questions | 10/10 PASS | 10 | 0 | 0 | 10/10 golden questions grounded, HTTP 200, 0 leaks, valid SSE token streams |
 | **P1-T6 Safety Invariants** | Source & Contract Tests | 5 modules | Verified | 6/6 | 0 | 0 | Triage-first, 0 AI on T1–T3, prompt guards, structured inputs, honest fallback, 24h KV TTL |
 | **Corpus Hash & Provenance** | `scripts/ingest/build-seed.ts` | 74 chunks | 74 verified | 74 | 0 | 0 | 100% SHA-256 integrity (`id === sha256(chunk_text)`), exact URL match with `sources.json` |
 

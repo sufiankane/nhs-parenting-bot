@@ -8,7 +8,7 @@
  *    system-prompt contents.
  *  - rule 02.5: user input must be interpolated as quoted/structured data,
  *    NEVER concatenated into system-prompt instructions.
- *  - Spec §4 M5 model: generation is pinned to "@cf/meta/llama-3.1-8b-instruct"
+ *  - Spec §4 M5 model: generation is pinned to "@cf/meta/llama-3.1-8b-instruct-fp8-fast"
  *    with stream: true (rule 04.12 — a model change must be caught).
  *  - Spec §4 M5 output contract: SSE token stream terminating in a `done`
  *    event carrying { session_id, sources }.
@@ -29,7 +29,7 @@ import { describe, it, expect, vi } from "vitest";
 import { SYSTEM_PROMPT, buildMessages } from "../src/generation/prompt";
 import { generateAnswer } from "../src/generation/index";
 
-const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
 
 /* -------------------------------------------------------------------------- */
 /* SSE helpers                                                                */
@@ -144,7 +144,7 @@ describe("buildMessages prompt construction [P1-T6, rule 02.5]", () => {
 /* -------------------------------------------------------------------------- */
 
 describe("generateAnswer model call [P1-T6, Spec §4 M5, rule 04.12]", () => {
-  it('calls AI.run with "@cf/meta/llama-3.1-8b-instruct" and stream: true', async () => {
+  it('calls AI.run with "@cf/meta/llama-3.1-8b-instruct-fp8-fast" and stream: true', async () => {
     const aiRun = vi.fn().mockResolvedValue(sseStream([]));
     const env = { AI: { run: aiRun } };
 

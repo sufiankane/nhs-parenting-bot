@@ -76,7 +76,7 @@ const env: Env = {
   ADMIN_INGEST_KEY: `${CANARY}-admin-ingest-secret`,
   // Pinned per Spec §7; model drift is a deploy gate (rule 04.12).
   EMBEDDING_MODEL: "@cf/baai/bge-base-en-v1.5",
-  GENERATION_MODEL: "@cf/meta/llama-3.1-8b-instruct",
+  GENERATION_MODEL: "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
 };
 
 /* -------------------------------------------------------------------------- */

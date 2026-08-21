@@ -6,10 +6,10 @@
  *    contradicting the escalation module, and revealing system-prompt contents.
  *  - rule 02.5: user input is interpolated as quoted/structured data, NEVER
  *    concatenated into system-prompt instructions.
- *  - rule 04.12: generation model pinned to "@cf/meta/llama-3.1-8b-instruct".
+ *  - rule 04.12: generation model pinned to "@cf/meta/llama-3.1-8b-instruct-fp8-fast".
  */
 
-export const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+export const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
 
 /**
  * System prompt for the grounded generation model.

@@ -39,11 +39,41 @@ function sseEvent(event: unknown): string {
  * with fallback: true and fallback_reason: "generation_error". Never leaks raw
  * error text or stack traces (rule 04.14).
  */
+/** Helper to extract plain token text from Workers AI or mock SSE chunks. */
+function extractTokenText(jsonStr: string): string | null {
+  if (jsonStr.trim() === "[DONE]") return null;
+  try {
+    const parsed = JSON.parse(jsonStr);
+    if (typeof parsed.response === "string" && parsed.response.length > 0) {
+      return parsed.response;
+    }
+    if (
+      Array.isArray(parsed.choices) &&
+      parsed.choices.length > 0 &&
+      typeof parsed.choices[0]?.delta?.content === "string" &&
+      parsed.choices[0].delta.content.length > 0
+    ) {
+      return parsed.choices[0].delta.content;
+    }
+    if (
+      parsed.type === "token" &&
+      typeof parsed.payload?.text === "string" &&
+      parsed.payload.text.length > 0
+    ) {
+      return parsed.payload.text;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export async function generateAnswer(
   env: Record<string, unknown>,
   input: GenerateInput
 ): Promise<ReadableStream> {
   const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
   const { message, context, sources, session_id } = input;
 
   try {
@@ -65,12 +95,47 @@ export async function generateAnswer(
     return new ReadableStream({
       async start(controller) {
         const reader = streamCandidate.getReader();
+        let buffer = "";
 
         try {
           for (;;) {
             const { done, value } = await reader.read();
             if (done) break;
-            controller.enqueue(value);
+            if (value) {
+              buffer += typeof value === "string" ? value : decoder.decode(value, { stream: true });
+              const lines = buffer.split(/\r?\n/);
+              buffer = lines.pop() || "";
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith("data:")) {
+                  const payloadStr = trimmed.slice(5).trim();
+                  const tokenText = extractTokenText(payloadStr);
+                  if (tokenText) {
+                    controller.enqueue(
+                      encoder.encode(
+                        sseEvent({
+                          type: "token",
+                          payload: { text: tokenText },
+                        })
+                      )
+                    );
+                  }
+                }
+              }
+            }
+          }
+          if (buffer.trim().startsWith("data:")) {
+            const tokenText = extractTokenText(buffer.trim().slice(5).trim());
+            if (tokenText) {
+              controller.enqueue(
+                encoder.encode(
+                  sseEvent({
+                    type: "token",
+                    payload: { text: tokenText },
+                  })
+                )
+              );
+            }
           }
         } catch (streamErr) {
           // Stream read failure → log internally, emit error event, then fall through to done
