@@ -210,30 +210,30 @@
       "content_hash": "3c31b8365cf1514cd17b4aba714f1dc2bfffd186482baf4971e9e9365763dd82"
     },
     {
-      "id": "459ce582f1cee5c805df94435696a5f8c328e754235adfb4d1eecdf9902b394c",
+      "id": "016b4bf25aa988c4e17119c53d5f8cc274efe56e210decaebb87cd82163554d4",
       "source_id": "nhs-bottle-feeding-formula-prep",
       "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/bottle-feeding/making-up-baby-formula/",
       "title": "Making Up Baby Formula: Safe Temperature and Water Guidelines",
       "category": "feeding",
-      "chunk_text": "Powdered infant formula is not a sterile product and can occasionally contain harmful bacteria, such as Cronobacter sakazakii or Salmonella, which can make babies seriously unwell. To prepare powdered formula safely, the NHS and World Health Organization set out strict hygiene guidelines: Always fill the kettle with fresh tap water from the cold water tap (do not use artificially softened water, bottled mineral water with high sodium, or water that has been boiled previously). Boil the water and then let it cool in the kettle for no longer than 30 minutes, ensuring the water temperature remains at at least 70°C when you add the powder. Water at 70°C is hot enough to kill any dangerous bacteria present in the powder while preserving necessary nutrients. Pour the exact amount of boiled water into a sterilised bottle first, then add the exact number of level scoops of powder stated on the manufacturer's packaging using only the scoop provided. Level each scoop with a clean, sterile knife edge. Never add extra scoops or dilute with extra water, as incorrect ratios can lead to serious dehydration, malnutrition, or kidney strain.",
+      "chunk_text": "Powdered infant formula is not a sterile product and can occasionally contain harmful bacteria, such as Cronobacter sakazakii or Salmonella, which can make babies seriously unwell. To prepare powdered formula safely, the NHS and World Health Organization set out strict hygiene guidelines: Always fill the kettle with fresh tap water from the cold water tap (do not use artificially softened water, bottled mineral water with high sodium, or water that has been boiled previously). Boil the water and then let it cool in the kettle for no longer than 30 minutes, ensuring the water temperature remains at at least 70°C when you add the powder. Water at 70°C is hot enough to kill any dangerous bacteria present in the powder while preserving necessary nutrients. Pour the exact amount of boiled water into a sterilised bottle first, then add the exact number of level scoops of powder stated on the manufacturer's packaging using only the scoop provided. Level each scoop with a clean, sterile knife edge. Never add extra scoops or dilute with extra water, as incorrect ratios can lead to serious dehydration, malnutrition, or kidney strain. Throw away any formula left in the bottle after a feed. If you make up a feed in advance, use it within 2 hours if kept at room temperature, or within 24 hours if stored in the back of the fridge at 5°C or below.",
       "chunk_index": 0,
-      "token_count": 242,
+      "token_count": 300,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "459ce582f1cee5c805df94435696a5f8c328e754235adfb4d1eecdf9902b394c"
+      "content_hash": "016b4bf25aa988c4e17119c53d5f8cc274efe56e210decaebb87cd82163554d4"
     },
     {
-      "id": "bc12e12603e11dbc83049babdd3706a8cf12b1305784fc2998f61f8e68c509ca",
+      "id": "fae8da58eab7c5be06642fe7cb6fbb342c7fe60e12b4a1bbf9762c905cb1259b",
       "source_id": "nhs-bottle-feeding-formula-prep",
       "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/bottle-feeding/making-up-baby-formula/",
       "title": "Cooling and Testing Formula Bottles Before Feeding",
       "category": "feeding",
-      "chunk_text": "After adding the formula powder to the hot water (at least 70°C), assemble the sterilised retaining ring, teat, and protective cap tightly, then shake the bottle thoroughly until all the powder has completely dissolved. Because the formula will be too hot for your baby to drink immediately, you must cool the bottle quickly before offering it. Cool the bottle by holding the lower half under cold running tap water or placing it upright in a jug of cold water with the lid on, ensuring the teat stays clean and covered. Always test the milk temperature by shaking a few drops onto the inside of your wrist; the liquid should feel comfortably lukewarm or body temperature, never hot. Feed your baby immediately once the bottle reaches a safe temperature. Any formula that has not been consumed within 2 hours of preparation must be thrown away, as bacteria multiply rapidly at room temperature. Never warm feeding bottles in a microwave, as microwave heating creates uneven 'hot spots' that can severely scald a baby's mouth and throat.",
+      "chunk_text": "After adding the formula powder to the hot water (at least 70°C), assemble the sterilised retaining ring, teat, and protective cap tightly, then shake the bottle thoroughly until all the powder has completely dissolved. Because the formula will be too hot for your baby to drink immediately, you must cool the bottle quickly before offering it. Cool the bottle by holding the lower half under cold running tap water or placing it upright in a jug of cold water with the lid on, ensuring the teat stays clean and covered. Always test the milk temperature by shaking a few drops onto the inside of your wrist; the liquid should feel comfortably lukewarm or body temperature, never hot. Feed your baby immediately once the bottle reaches a safe temperature. Throw away any formula left in the bottle after a feed. If you make up a feed in advance, use it within 2 hours if kept at room temperature, or within 24 hours if stored in the back of the fridge at 5°C or below. Never warm feeding bottles in a microwave, as microwave heating creates uneven 'hot spots' that can severely scald a baby's mouth and throat.",
       "chunk_index": 1,
-      "token_count": 226,
+      "token_count": 255,
       "safety_relevant": true,
       "attribution": "Source: NHS.uk",
-      "content_hash": "bc12e12603e11dbc83049babdd3706a8cf12b1305784fc2998f61f8e68c509ca"
+      "content_hash": "fae8da58eab7c5be06642fe7cb6fbb342c7fe60e12b4a1bbf9762c905cb1259b"
     },
     {
       "id": "757ef3c253dd3d6affda7d52a8dbbee3a1c5bbc04824e30ae440c9a9fbeb410f",

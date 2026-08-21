@@ -122,3 +122,27 @@ A task is complete only when all applicable criteria are met:
 - Deviations from the Spec are recorded in `CHANGELOG.md` with rationale.
 - Checkpoint commits were made per rules-06, and the task-close commit is pushed to `origin main`. A task is not complete until pushed (or a push failure is documented per rules-06.11).
 - During unsupervised runs, `OVERNIGHT-REPORT.md` is updated and committed with the task-close commit (rules-07.10–11).
+
+## 10. Terminal reliability rules
+
+1. **Self-terminating scripts**: Every scratch/diagnostic script MUST include a 90s watchdog and an explicit exit:
+   ```ts
+   const watchdog = setTimeout(() => {
+     console.error("TIMEOUT after 90s");
+     process.exit(1);
+   }, 90_000);
+
+   // ... main logic ...
+
+   clearTimeout(watchdog);
+   process.exit(0);
+   ```
+   Node's fetch keeps socket connections alive after work completes; without `process.exit()` the process lingers and the shell tool hangs.
+
+2. **Log-file pattern for long commands (>15s)**: Never run long operations (wrangler deploy, smoke checks, sampling, ingest) as bare foreground commands. Run:
+   ```cmd
+   cmd /c "set NODE_OPTIONS=--dns-result-order=ipv4first&& npx tsx <script> > scratch\run.log 2>&1"
+   ```
+   Then inspect output via `scratch\run.log`.
+
+3. **Fetch timeouts**: Every fetch in scripts must use an `AbortController` with a 30s timeout so stalled streams fail fast instead of hanging.

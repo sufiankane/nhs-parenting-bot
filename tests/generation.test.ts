@@ -144,7 +144,7 @@ describe("buildMessages prompt construction [P1-T6, rule 02.5]", () => {
 /* -------------------------------------------------------------------------- */
 
 describe("generateAnswer model call [P1-T6, Spec §4 M5, rule 04.12]", () => {
-  it('calls AI.run with "@cf/meta/llama-3.1-8b-instruct-fp8-fast" and stream: true', async () => {
+  it('calls AI.run with "@cf/meta/llama-3.1-8b-instruct-fp8-fast", stream: true, and default max_tokens: 1024', async () => {
     const aiRun = vi.fn().mockResolvedValue(sseStream([]));
     const env = { AI: { run: aiRun } };
 
@@ -157,7 +157,25 @@ describe("generateAnswer model call [P1-T6, Spec §4 M5, rule 04.12]", () => {
 
     expect(aiRun).toHaveBeenCalledTimes(1);
     expect(aiRun.mock.calls[0][0]).toBe(GENERATION_MODEL);
-    expect(aiRun.mock.calls[0][1]).toMatchObject({ stream: true });
+    expect(aiRun.mock.calls[0][1]).toMatchObject({
+      stream: true,
+      max_tokens: 1024,
+      temperature: 0.1,
+    });
+  });
+
+  it("respects env.MAX_TOKENS override when provided", async () => {
+    const aiRun = vi.fn().mockResolvedValue(sseStream([]));
+    const env = { AI: { run: aiRun }, MAX_TOKENS: "2048" };
+
+    await generateAnswer(env, {
+      message: "SYNTHETIC-FIXTURE: question",
+      context: "SYNTHETIC-FIXTURE: context",
+      sources: ["https://www.nhs.uk/x"],
+      session_id: "ses-test-custom-tokens",
+    });
+
+    expect(aiRun.mock.calls[0][1]).toMatchObject({ max_tokens: 2048 });
   });
 });
 

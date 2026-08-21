@@ -5,6 +5,7 @@ compatibility_date = "2026-08-01"
 [vars]
 SIMILARITY_THRESHOLD = "0.5"
 RATE_LIMIT_PER_MINUTE = "20"
+MAX_TOKENS = "1024"
 
 [ai]
 binding = "AI"

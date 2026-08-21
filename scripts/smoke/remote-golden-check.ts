@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Remote golden smoke check — SafetyBatch F1 prep.
  *
  * Post-deploy verification that a deployed /chat endpoint honours the frozen
@@ -232,6 +232,32 @@ async function runCheck(
       grounded = donePayload.fallback !== true;
       if (!grounded) {
         problems.push("answer fell back (done.payload.fallback === true)");
+      }
+    }
+
+    const tokenEvents = events.filter((ev) => ev.type === "token");
+    const fullText = tokenEvents
+      .map((ev) => ((ev.payload as Record<string, unknown>).text as string) || "")
+      .join("")
+      .trim();
+
+    // Truncation regression guard [protects rule 02.4 — a truncated safety answer is a grounding failure]
+    if (grounded && fullText.length > 0) {
+      const hasSentenceEnding = /[.!?]["')\]]?$/.test(fullText);
+      if (!hasSentenceEnding) {
+        problems.push(
+          `answer appears truncated (rule 02.4): does not end with sentence-ending punctuation (. ! ?), ended with: "${fullText.slice(-30)}"`
+        );
+      }
+    }
+
+    // Specific safety assertions for critical golden questions [protects rule 02.15]
+    if (grounded && q.question.toLowerCase().includes("powdered baby formula")) {
+      if (!fullText.includes("2 hours")) {
+        problems.push("formula answer missing required 2-hour discard timeframe");
+      }
+      if (!fullText.includes("24 hours")) {
+        problems.push("formula answer missing required 24-hour fridge storage timeframe");
       }
     }
 

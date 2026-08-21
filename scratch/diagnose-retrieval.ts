@@ -154,7 +154,20 @@ async function runDiagnosis() {
   console.log(vectorizeInfo);
 }
 
-runDiagnosis().catch((err) => {
-  console.error("Diagnosis failed with error:", err);
-});
+const watchdog = setTimeout(() => {
+  console.error("TIMEOUT after 90s");
+  process.exit(1);
+}, 90_000);
+
+runDiagnosis()
+  .then(() => {
+    clearTimeout(watchdog);
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error("Diagnosis failed with error:", err);
+    clearTimeout(watchdog);
+    process.exit(1);
+  });
+
 

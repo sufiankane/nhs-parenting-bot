@@ -68,6 +68,8 @@ function extractTokenText(jsonStr: string): string | null {
   }
 }
 
+export const DEFAULT_MAX_TOKENS = 1024;
+
 export async function generateAnswer(
   env: Record<string, unknown>,
   input: GenerateInput
@@ -82,9 +84,18 @@ export async function generateAnswer(
     };
     const messages = buildMessages(message, context, sources);
 
+    const maxTokens =
+      typeof env.MAX_TOKENS === "string"
+        ? parseInt(env.MAX_TOKENS, 10) || DEFAULT_MAX_TOKENS
+        : typeof env.MAX_TOKENS === "number"
+          ? env.MAX_TOKENS
+          : DEFAULT_MAX_TOKENS;
+
     const aiResponse = await ai.run(GENERATION_MODEL, {
       messages,
       stream: true,
+      max_tokens: maxTokens,
+      temperature: 0.1,
     });
 
     const streamCandidate = aiResponse as { getReader?: () => ReadableStreamDefaultReader<Uint8Array> } | null | undefined;

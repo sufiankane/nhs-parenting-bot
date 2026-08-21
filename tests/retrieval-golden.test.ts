@@ -628,6 +628,37 @@ describe("P1-T5 golden-set retrieval precision [rule 04.12]", () => {
 });
 
 /* ============================================================================
+ * P1-T9 formula preparation golden regression [rule 02.15]
+ * ========================================================================== */
+describe("P1-T9 formula preparation golden regression [rule 02.15]", () => {
+  it("formula-prep queries retrieve the formula prep chunk containing 2-hour and 24-hour discard rules", () => {
+    const query = "how do i prepare baby formula safely";
+    const [top] = rankChunks(query);
+    expect(top).toBeDefined();
+    expect(top!.chunk.title).toBe("Making Up Baby Formula: Safe Temperature and Water Guidelines");
+    expect(top!.chunk.source_id).toBe("nhs-bottle-feeding-formula-prep");
+
+    // Verifies the chunk contains the exact NHS discard timeframes
+    expect(top!.chunk.chunk_text).toContain("2 hours");
+    expect(top!.chunk.chunk_text).toContain("24 hours");
+    expect(top!.chunk.chunk_text).toContain("Throw away any formula left in the bottle after a feed.");
+    expect(top!.chunk.chunk_text).toContain(
+      "If you make up a feed in advance, use it within 2 hours if kept at room temperature, or within 24 hours if stored in the back of the fridge at 5°C or below."
+    );
+  });
+
+  it("verbatim user query retrieves formula prep chunk with discard rules", () => {
+    const query = "How do I safely make up a bottle of powdered baby formula?";
+    const [top] = rankChunks(query);
+    expect(top).toBeDefined();
+    expect(top!.chunk.source_id).toBe("nhs-bottle-feeding-formula-prep");
+    expect(top!.chunk.chunk_text).toContain("within 2 hours");
+    expect(top!.chunk.chunk_text).toContain("within 24 hours");
+  });
+
+});
+
+/* ============================================================================
  * UK-only terminology [rule 01.3]
  * ========================================================================== */
 const CORPUS_TEXT = chunks.map((c) => `${c.title} ${c.chunk_text}`).join("\n").toLowerCase();
