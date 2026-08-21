@@ -35,18 +35,47 @@ export interface Message {
   content: string;
 }
 
+export interface HistoryTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+/**
+ * Format recent conversation history as labeled, structured context (rule 02.5).
+ */
+export function formatHistory(
+  history?: readonly HistoryTurn[],
+  maxTurns = 6
+): string[] {
+  if (!history || history.length === 0) return [];
+  const recent = history.slice(-maxTurns);
+  const lines = [
+    "Previous conversation turns (structured context for resolving pronouns and follow-up questions):",
+  ];
+  for (const turn of recent) {
+    const speaker = turn.role === "user" ? "User" : "Assistant";
+    const cleaned = turn.content.replace(/"/g, '\\"');
+    lines.push(`${speaker}: "${cleaned}"`);
+  }
+  lines.push("");
+  return lines;
+}
+
 /**
  * Build the messages array for the generation model.
  *
- * Rule 02.5: user text is wrapped as quoted/labelled structured data inside
- * the user message — it is NEVER concatenated into the system prompt.
+ * Rule 02.5: user text and history are wrapped as quoted/labelled structured data
+ * inside the user message — NEVER concatenated into system-prompt instructions.
  */
 export function buildMessages(
   message: string,
   context: string,
-  sources: string[]
+  sources: string[],
+  history?: readonly HistoryTurn[]
 ): Message[] {
+  const historyLines = formatHistory(history);
   const userContent = [
+    ...historyLines,
     "Grounded NHS context (use ONLY this information to answer):",
     context,
     "",

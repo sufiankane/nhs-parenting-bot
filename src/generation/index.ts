@@ -11,13 +11,14 @@
  *    — never raw error text, never a stack trace.
  */
 
-import { GENERATION_MODEL, buildMessages } from "./prompt";
+import { GENERATION_MODEL, buildMessages, type HistoryTurn } from "./prompt";
 
 export interface GenerateInput {
   message: string;
   context: string;
   sources: string[];
   session_id: string;
+  history?: readonly HistoryTurn[];
 }
 
 const FALLBACK_MESSAGE =
@@ -76,13 +77,13 @@ export async function generateAnswer(
 ): Promise<ReadableStream> {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-  const { message, context, sources, session_id } = input;
+  const { message, context, sources, session_id, history } = input;
 
   try {
     const ai = env.AI as {
       run: (model: string, input: unknown) => Promise<unknown>;
     };
-    const messages = buildMessages(message, context, sources);
+    const messages = buildMessages(message, context, sources, history);
 
     const maxTokens =
       typeof env.MAX_TOKENS === "string"

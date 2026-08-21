@@ -7,7 +7,7 @@ import { triage } from "./triage/index";
 import { escalate } from "./escalation/index";
 import { retrieve } from "./retrieval/index";
 import { generateAnswer } from "./generation/index";
-import { createSessionId, appendMessage } from "./sessions/store";
+import { createSessionId, appendMessage, getSession } from "./sessions/store";
 import { logTriageAudit } from "./audit/index";
 
 export type { Env };
@@ -203,7 +203,23 @@ export default {
             });
           }
 
-          // Good confidence: persist session to KV via waitUntil (rule 02.9)
+          // Multi-turn context: fetch previous conversation turns from KV (Spec §4 M5, P2-T4)
+          let history: Array<{ role: "user" | "assistant"; content: string }> | undefined;
+          if (sessionId && env.SESSIONS) {
+            try {
+              const sessionRecord = await getSession(
+                env.SESSIONS as Parameters<typeof getSession>[0],
+                sessionId
+              );
+              if (sessionRecord && Array.isArray(sessionRecord.messages)) {
+                history = sessionRecord.messages;
+              }
+            } catch {
+              // Fail safe on KV read error (rule 04.14)
+            }
+          }
+
+          // Good confidence: persist user message to KV via waitUntil (rule 02.9)
           if (ctxObj && typeof ctxObj.waitUntil === "function") {
             ctxObj.waitUntil(
               appendMessage(env.SESSIONS as Parameters<typeof appendMessage>[0], session_id, {
@@ -220,6 +236,7 @@ export default {
             context: retrievalResult.context,
             sources: retrievalResult.sources,
             session_id,
+            history,
           });
 
           return new Response(answerStream, {

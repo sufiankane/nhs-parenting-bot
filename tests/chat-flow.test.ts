@@ -364,3 +364,77 @@ describe("Malformed body error envelope [P1-T6, rule 04.6, Spec �4.0]", () => 
     expect(typeof body.payload.message).toBe("string");
   });
 });
+
+/* -------------------------------------------------------------------------- */
+/* 7. Multi-Turn Session Flow [P2-T4, Spec §4 M5]                             */
+/* -------------------------------------------------------------------------- */
+
+describe("Multi-turn Session Flow [P2-T4, Spec §4 M5]", () => {
+  it("loads existing session history and passes it to generation", async () => {
+    const h = makeHarness();
+    const existingSessionId = "existing-uuid-999";
+
+    // Pre-populate KV with existing session history
+    await h.kv.put(
+      `session:${existingSessionId}`,
+      JSON.stringify({
+        session_id: existingSessionId,
+        created_at: new Date().toISOString(),
+        expires_at: new Date(Date.now() + 86400000).toISOString(),
+        messages: [
+          { role: "user", content: "My baby is 2 months old", at: new Date().toISOString() },
+        ],
+      })
+    );
+
+    h.aiRun.mockImplementation((model: string) => {
+      if (model === EMBEDDING_MODEL) {
+        return Promise.resolve({ data: [Array(768).fill(0.01)] });
+      }
+      if (model === GENERATION_MODEL) {
+        return Promise.resolve(
+          sseStream([
+            { type: "token", payload: { text: "Follow up answer." } },
+            { type: "done", payload: { session_id: existingSessionId, sources: [] } },
+          ])
+        );
+      }
+      throw new Error(`Unexpected model: ${model}`);
+    });
+
+    h.vectorQuery.mockResolvedValue({
+      matches: [{ id: "chunk-1", score: 0.9 }],
+    });
+
+    h.dbPrepare.mockImplementation(() => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(() => ({
+          results: [
+            {
+              chunk_text: "SYNTHETIC-FIXTURE: feeding guidance.",
+              source_url: "https://www.nhs.uk/feeding",
+            },
+          ],
+          success: true,
+          meta: {},
+        })),
+      })),
+    }));
+
+    const res = await postChat(h, {
+      session_id: existingSessionId,
+      message: "How much should he drink?",
+    });
+
+    expect(res.status).toBe(200);
+    const events = await readSse(res);
+    expect(events.length).toBeGreaterThan(0);
+
+    // Verify AI generation call received structured history
+    const genCall = h.aiRun.mock.calls.find((c) => c[0] === GENERATION_MODEL);
+    expect(genCall).toBeDefined();
+    const userMsg = genCall![1].messages.find((m: any) => m.role === "user");
+    expect(userMsg.content).toContain("Previous conversation turns");
+    expect(userMsg.content).toContain('User: "My baby is 2 months old"');
+  });
+});

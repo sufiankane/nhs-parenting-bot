@@ -311,3 +311,74 @@ describe("generateAnswer cross-realm stream duck-typing [P1-T9, rule 04.18]", ()
     expect(done.payload.fallback_reason).toBe("generation_error");
   });
 });
+
+/* -------------------------------------------------------------------------- */
+/* 7. Multi-Turn Conversation History [P2-T4, Spec §4 M5, rule 02.5]          */
+/* -------------------------------------------------------------------------- */
+
+describe("Multi-Turn Conversation History [P2-T4, Spec §4 M5, rule 02.5]", () => {
+  const message = "How often should I feed him?";
+  const context = "Feed on demand whenever baby shows hunger cues.";
+  const sources = ["https://www.nhs.uk/feeding"];
+
+  it("formats previous turns as structured labeled context in the user message", () => {
+    const history = [
+      { role: "user" as const, content: "My baby is 3 weeks old." },
+      { role: "assistant" as const, content: "Congratulations on your new arrival!" },
+    ];
+
+    const messages = buildMessages(message, context, sources, history);
+    const system = messages.find((m) => m.role === "system");
+    const user = messages.find((m) => m.role === "user");
+
+    // Rule 02.5: system prompt is completely untouched and isolated
+    expect(system!.content).not.toContain("My baby is 3 weeks old");
+
+    // User message contains structured history block
+    expect(user!.content).toContain("Previous conversation turns");
+    expect(user!.content).toContain('User: "My baby is 3 weeks old."');
+    expect(user!.content).toContain('Assistant: "Congratulations on your new arrival!"');
+    expect(user!.content).toContain(`User question: "${message}"`);
+  });
+
+  it("limits history context to maxTurns (default 6 turns)", () => {
+    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
+    const history = letters.map((letter, i) => ({
+      role: (i % 2 === 0 ? "user" : "assistant") as "user" | "assistant",
+      content: `Message ${letter}`,
+    }));
+
+    const messages = buildMessages(message, context, sources, history);
+    const user = messages.find((m) => m.role === "user");
+
+    // Older turns (A-F) should be omitted
+    expect(user!.content).not.toContain("Message A");
+    expect(user!.content).not.toContain("Message F");
+    // Recent turns (G-L) should be retained
+    expect(user!.content).toContain("Message G");
+    expect(user!.content).toContain("Message L");
+  });
+
+  it("generateAnswer passes history to buildMessages", async () => {
+    const mockStream = sseStream([{ type: "token", payload: { text: "Feeding advice." } }]);
+    const aiRun = vi.fn().mockResolvedValue(mockStream);
+    const env = { AI: { run: aiRun } };
+
+    const history = [
+      { role: "user" as const, content: "Prior query" },
+    ];
+
+    await generateAnswer(env, {
+      message,
+      context,
+      sources,
+      session_id: "ses-multi-1",
+      history,
+    });
+
+    expect(aiRun).toHaveBeenCalledTimes(1);
+    const passedMessages = aiRun.mock.calls[0][1].messages;
+    const userMessage = passedMessages.find((m: any) => m.role === "user");
+    expect(userMessage.content).toContain('User: "Prior query"');
+  });
+});
