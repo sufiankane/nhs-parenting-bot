@@ -28,9 +28,9 @@ Cloudflare Workers-based parenting advice chatbot with deterministic multi-tier 
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
 | R1 | Comprehensive Audit | Read-only audit of all P1 criteria, test counts, git state, 6 safety invariants | none | DONE |
-| R2 | Build & Gap Closure | Close auditor gaps, F2 corpus edits, F3 gate check, smoke script, content check, KV isolation | R1 | IN_PROGRESS |
-| R3 | Adversarial Verification | Read-only verification of builder outputs against safety non-negotiables | R2 | PLANNED |
-| R4 | Final Deliverable | DEPLOY-READINESS.md with commit hash, checklist, rollback note, pending review gate | R3 | PLANNED |
+| R2 | Build & Gap Closure | Close auditor gaps, F2 corpus edits, F3 gate check, smoke script, content check, KV isolation | R1 | DONE |
+| R3 | Adversarial Verification | Read-only verification of builder outputs against safety non-negotiables | R2 | DONE |
+| R4 | Final Deliverable | DEPLOY-READINESS.md with commit hash, checklist, rollback note, pending review gate | R3 | DONE |
 
 ## Code Layout
 - Production source: `src/` (owned by worker devs during R2)
