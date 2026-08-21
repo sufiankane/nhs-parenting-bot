@@ -9,7 +9,7 @@ import { retrieve } from "./retrieval/index";
 import { generateAnswer } from "./generation/index";
 import { createSessionId, appendMessage } from "./sessions/store";
 
-export { Env };
+export type { Env };
 
 /* -------------------------------------------------------------------------- */
 /* SSE helpers                                                                */

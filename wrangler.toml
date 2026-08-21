@@ -9,16 +9,18 @@ RATE_LIMIT_PER_MINUTE = "20"
 [ai]
 binding = "AI"
 
-[[vectorize.indexes]]
+[[vectorize]]
 binding = "VECTOR_INDEX"
 index_name = "nhs-guidance"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "nhs-parenting"
+database_id = "f41a2de8-be77-4061-80a7-c55789843e70"
 
 [[kv_namespaces]]
 binding = "SESSIONS"
+id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
 
 [[r2.buckets]]
 binding = "RAW_CONTENT"
