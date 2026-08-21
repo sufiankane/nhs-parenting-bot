@@ -31,3 +31,4 @@
 ## 3. Prerequisite
 
 Requires an update to `docs/architecture-and-action-plan.md` (Spec §4 M4/M5) defining the citation filtering rubric, safety prefixing convention, and configuration vars before implementation in Phase 2.
+
