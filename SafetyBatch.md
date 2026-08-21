@@ -1,5 +1,10 @@
 # SafetyBatch.md — Deferred Safety Reviewer Verification Queue
 
+> **STATUS: EXECUTED 2026-08-21 against commit `cc89e43` — OVERALL VERDICT: PASS, zero blocking findings.**
+> Per-item verdicts appended below each prompt. Three non-blocking findings recorded (see
+> "Post-run findings" at the end). Finding 1 (MAJOR, real-Vectorize integration gate) must be
+> resolved or explicitly accepted by a human before any production deploy.
+
 > **Purpose:** All safety-reviewer findings and required verification activities for the
 > NHS Parenting Companion Chatbot, compiled as self-contained prompts for **batch dispatch**.
 > Per human instruction, the safety reviewer is **not** to be invoked until this batch is released.
@@ -174,8 +179,22 @@ RESIDUAL RISK: <one paragraph, plain English, for the human developer>
 
 ## Batch release checklist (human)
 
-- [ ] B1 resolved: `build-seed.ts` repaired; `content/nhs_faq_seed.json` regenerated with S1–S6 corrections and fresh hashes
-- [ ] B2 resolved: chunk-length band decision recorded in `CHANGELOG.md`
-- [ ] `npm test` and `npm run test:redteam` green on finalized tree (evidence captured for S11)
-- [ ] Dispatch prompts S1–S14 to `agent-safety-reviewer` as one batch
-- [ ] Record verdicts in `CHANGELOG.md` and task handoff
+- [x] B1 resolved: `build-seed.ts` repaired; `content/nhs_faq_seed.json` regenerated with S1–S6 corrections and fresh hashes (74 chunks)
+- [x] B2 resolved: chunk-length band restored to 150–400 words; corpus complies (observed 152–199); recorded in `CHANGELOG.md`
+- [x] `npm test` (340/340) and `npm run test:redteam` (38/38) green on finalized tree `cc89e43` (evidence captured for S11/S20)
+- [x] Dispatch prompts S1–S20 (+ A1–A4) to `agent-safety-reviewer` as one batch — **EXECUTED 2026-08-21: PASS**
+- [x] Record verdicts in `CHANGELOG.md` and task handoff
+
+---
+
+## Post-run findings (from executed batch, 2026-08-21)
+
+All items S1–S20 and A1–A4: **PASS** with file:line evidence (full report in session `ses_fdd1adb5bffe8nZy97acjDe2tN` and `CHANGELOG.md`).
+
+| # | Severity | Finding | Required action | Owner |
+|---|---|---|---|---|
+| F1 | MAJOR | No real-Vectorize end-to-end integration gate in CI; TF-IDF stand-in labelled non-authoritative; M4 unit tests use mocked bindings | Add documented pre-deploy integration gate exercising real M4 retrieval against a seeded Vectorize-compatible index with embedding-identity check — **mandatory before any deploy touching M4/chunking/embedding, or explicit human acceptance** | Human decision → test-engineer |
+| F2 | MINOR | No corpus regression test asserting 999/A&E routing in emergency-indicator chunks | Add corpus assertion test | test-engineer |
+| F3 | MINOR | No runtime assertion that seed `embedding_model` matches retrieval `EMBEDDING_MODEL` | Add runtime/startup check | worker-dev |
+
+**Human action outstanding:** confirm the 45 allow-listed NHS URLs resolve to live content before production ingestion (reviewer is read-only, no network).
