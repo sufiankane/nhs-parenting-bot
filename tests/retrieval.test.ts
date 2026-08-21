@@ -95,9 +95,9 @@ describe("retrieve happy path [P1-T6, Spec §4 M4]", () => {
     aiRun.mockResolvedValue(embeddingResult());
     vectorQuery.mockResolvedValue({
       matches: [
-        { id: "chunk-a", score: 0.9 },
-        { id: "chunk-b", score: 0.7 },
-        { id: "chunk-c", score: 0.6 },
+        { id: "chunk-a", score: 0.90 },
+        { id: "chunk-b", score: 0.88 },
+        { id: "chunk-c", score: 0.85 },
       ],
     });
     // chunk-a and chunk-b share a source URL -> sources must be deduped.
@@ -500,5 +500,125 @@ describe("D1 all() result unboxing [P1-T9, rule 04.18]", () => {
     expect(result.confidence).toBe(0.89);
     expect(result.context).toBe("Unboxed D1 guidance text.");
     expect(result.sources).toEqual(["https://www.nhs.uk/formula-prep"]);
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 10. Relative Citation Relevance Margin [P2-CIT, Spec §4 M4]                */
+/* -------------------------------------------------------------------------- */
+
+describe("Relative Citation Relevance Margin [P2-CIT, Spec §4 M4]", () => {
+  it("filters out low-scoring trailing chunks outside the relevance margin (default 0.08)", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv();
+
+    aiRun.mockResolvedValue(embeddingResult());
+    vectorQuery.mockResolvedValue({
+      matches: [
+        { id: "chunk-1", score: 0.88 }, // primary match (kept)
+        { id: "chunk-2", score: 0.82 }, // within 0.08 margin (0.88 - 0.08 = 0.80) (kept)
+        { id: "chunk-3", score: 0.68 }, // below 0.80 margin threshold (filtered out)
+      ],
+    });
+
+    dbPrepare.mockImplementation(() => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(() => ({
+          results: [
+            { chunk_text: "Primary formula prep chunk.", source_url: "https://www.nhs.uk/formula" },
+            { chunk_text: "Sterilising bottles chunk.", source_url: "https://www.nhs.uk/sterilise" },
+            { chunk_text: "Tangential sleep chunk.", source_url: "https://www.nhs.uk/sleep" },
+          ],
+          success: true,
+          meta: {},
+        })),
+      })),
+    }));
+
+    const result = await retrieve(env, "how do i make up formula");
+    expect(result.confidence).toBe(0.88);
+    expect(result.context).toContain("Primary formula prep chunk.");
+    expect(result.context).toContain("Sterilising bottles chunk.");
+    expect(result.context).not.toContain("Tangential sleep chunk.");
+    expect(result.sources).toEqual([
+      "https://www.nhs.uk/formula",
+      "https://www.nhs.uk/sterilise",
+    ]);
+  });
+
+  it("respects custom RELEVANCE_MARGIN from environment", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv({
+      RELEVANCE_MARGIN: "0.25",
+    });
+
+    aiRun.mockResolvedValue(embeddingResult());
+    vectorQuery.mockResolvedValue({
+      matches: [
+        { id: "chunk-1", score: 0.88 },
+        { id: "chunk-2", score: 0.68 }, // 0.88 - 0.25 = 0.63 -> 0.68 >= 0.63 (kept under custom margin)
+      ],
+    });
+
+    dbPrepare.mockImplementation(() => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(() => ({
+          results: [
+            { chunk_text: "Primary chunk.", source_url: "https://www.nhs.uk/primary" },
+            { chunk_text: "Broader chunk.", source_url: "https://www.nhs.uk/broader" },
+          ],
+          success: true,
+          meta: {},
+        })),
+      })),
+    }));
+
+    const result = await retrieve(env, "test query");
+    expect(result.sources).toEqual([
+      "https://www.nhs.uk/primary",
+      "https://www.nhs.uk/broader",
+    ]);
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 11. Safety-Relevant Context Flagging [P2-CIT, rule 02.15]                   */
+/* -------------------------------------------------------------------------- */
+
+describe("Safety-Relevant Context Flagging [P2-CIT, Spec §4 M4, rule 02.15]", () => {
+  it("prefixes safety_relevant chunks with [SAFETY WARNING]", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv();
+
+    aiRun.mockResolvedValue(embeddingResult());
+    vectorQuery.mockResolvedValue({
+      matches: [
+        { id: "chunk-safe-1", score: 0.85 },
+        { id: "chunk-standard-2", score: 0.83 },
+      ],
+    });
+
+    dbPrepare.mockImplementation(() => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(() => ({
+          results: [
+            {
+              chunk_text: "Emergency red flag guidance.",
+              source_url: "https://www.nhs.uk/red-flags",
+              safety_relevant: 1,
+            },
+            {
+              chunk_text: "Routine advice text.",
+              source_url: "https://www.nhs.uk/routine",
+              safety_relevant: 0,
+            },
+          ],
+          success: true,
+          meta: {},
+        })),
+      })),
+    }));
+
+    const result = await retrieve(env, "baby symptoms");
+    expect(result.context).toContain("[SAFETY WARNING] Emergency red flag guidance.");
+    expect(result.context).toContain("Routine advice text.");
+    expect(result.context).not.toContain("[SAFETY WARNING] Routine advice text.");
   });
 });

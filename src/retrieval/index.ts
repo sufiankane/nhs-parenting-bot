@@ -13,8 +13,9 @@ export const EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
 // Must match content/nhs_faq_seed.json embedding_model (SafetyBatch F3, rule 04.12)
 export const INGESTION_EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
 export const EMBEDDING_DIMENSIONS = 768;
-const DEFAULT_TOP_K = 5;
-const DEFAULT_THRESHOLD = 0.5;
+export const DEFAULT_TOP_K = 5;
+export const DEFAULT_THRESHOLD = 0.5;
+export const DEFAULT_RELEVANCE_MARGIN = 0.08;
 
 export interface RetrieveResult {
   context: string;
@@ -168,24 +169,42 @@ export async function retrieve(
     const placeholders = allIds.map(() => "?").join(", ");
     const rowsResult = await db
       .prepare(
-        `SELECT chunk_text, source_url FROM guidance_chunks WHERE id IN (${placeholders})`
+        `SELECT chunk_text, source_url, safety_relevant FROM guidance_chunks WHERE id IN (${placeholders})`
       )
       .bind(...allIds)
       .all();
     const rows = Array.isArray(rowsResult)
       ? rowsResult
-      : (rowsResult as { results?: Array<{ chunk_text: string; source_url: string }> })?.results ?? [];
+      : (rowsResult as { results?: Array<{ chunk_text: string; source_url: string; safety_relevant?: number | boolean }> })?.results ?? [];
 
-    // 5. Zip rows with matches, filter by threshold, build context
+    // 5. Compute relative citation threshold (Spec §4 M4, phase-2-citation-relevance-task-note)
+    const maxScore = allMatches.reduce((max, m) => (m.score > max ? m.score : max), 0);
+    const marginRaw = env.RELEVANCE_MARGIN;
+    let relevanceMargin = DEFAULT_RELEVANCE_MARGIN;
+    if (typeof marginRaw === "string") {
+      const parsedMargin = parseFloat(marginRaw);
+      if (!isNaN(parsedMargin)) relevanceMargin = parsedMargin;
+    } else if (typeof marginRaw === "number") {
+      relevanceMargin = marginRaw;
+    }
+
+    const effectiveThreshold = Math.max(threshold, maxScore - relevanceMargin);
+
+    // 6. Zip rows with matches, filter by effectiveThreshold, build context & citations
     const contextParts: string[] = [];
     const sourcesSet = new Set<string>();
-    let maxScore = 0;
 
     for (let i = 0; i < rows.length && i < allMatches.length; i++) {
-      if (allMatches[i].score >= threshold) {
-        if (rows[i].chunk_text) contextParts.push(rows[i].chunk_text);
-        if (rows[i].source_url) sourcesSet.add(rows[i].source_url);
-        if (allMatches[i].score > maxScore) maxScore = allMatches[i].score;
+      if (allMatches[i].score >= effectiveThreshold) {
+        const row = rows[i] as { chunk_text?: string; source_url?: string; safety_relevant?: number | boolean };
+        if (row.chunk_text) {
+          const isSafety = Boolean(row.safety_relevant);
+          const chunkText = isSafety ? `[SAFETY WARNING] ${row.chunk_text}` : row.chunk_text;
+          contextParts.push(chunkText);
+        }
+        if (row.source_url) {
+          sourcesSet.add(row.source_url);
+        }
       }
     }
 
