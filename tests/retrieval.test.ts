@@ -1,4 +1,4 @@
-﻿/**
+/**
  * M4 Retrieval module contract tests (P1-T6, TDD against the worker-dev brief).
  *
  * Spec task IDs / safety rules protected:
@@ -24,7 +24,7 @@
  */
 
 import { describe, it, expect, vi } from "vitest";
-import { retrieve } from "../src/retrieval/index";
+import { retrieve, extractEmbedding } from "../src/retrieval/index";
 
 const EMBEDDING_MODEL = "@cf/baai/bge-base-en-v1.5";
 
@@ -329,5 +329,87 @@ describe("Embedding-model identity gate [SafetyBatch F3, rule 04.12]", () => {
 
     expect(result).toEqual(SAFE_EMPTY);
     expect(vectorQuery).not.toHaveBeenCalled();
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 8. Real Workers AI embedding response shape regression [P1-T6, rule 04.12] */
+/* -------------------------------------------------------------------------- */
+
+describe("Real Workers AI embedding response shape regression [P1-T6, rule 04.12, Spec §4 M4]", () => {
+  // Recorded fixture from Cloudflare Workers AI @cf/baai/bge-base-en-v1.5 REST / worker response
+  const RECORDED_AI_FIXTURE = {
+    result: {
+      data: [
+        [
+          0.00789642333984375,
+          0.043792724609375,
+          0.0745849609375,
+          0.050689697265625,
+          ...Array.from({ length: 764 }, (_, i) => ((i % 50) - 25) / 100),
+        ],
+      ],
+      shape: [1, 768],
+      pooling: "mean",
+    },
+    success: true,
+  };
+
+  it("extractEmbedding succeeds on real Cloudflare Workers AI shape { data: [[...768 numbers]] }", () => {
+    // env.AI.run in worker returns the inner result payload: { data: [[...]] }
+    const workerAiResult = {
+      data: RECORDED_AI_FIXTURE.result.data,
+      shape: [1, 768],
+    };
+
+    const vector = extractEmbedding(workerAiResult);
+    expect(vector).not.toBeNull();
+    expect(vector?.length).toBe(768);
+    expect(vector?.[0]).toBe(0.00789642333984375);
+    expect(vector?.[1]).toBe(0.043792724609375);
+  });
+
+  it("extractEmbedding succeeds on legacy/mock shape { data: [{ embedding: [...] }] }", () => {
+    const legacyResult = embeddingResult();
+    const vector = extractEmbedding(legacyResult);
+    expect(vector).not.toBeNull();
+    expect(vector?.length).toBe(768);
+  });
+
+  it("retrieve() succeeds end-to-end with real Workers AI response shape { data: [[...768 numbers]] }", async () => {
+    const { env, aiRun, vectorQuery, dbPrepare } = makeEnv();
+
+    aiRun.mockResolvedValue({
+      data: RECORDED_AI_FIXTURE.result.data,
+    });
+    vectorQuery.mockResolvedValue({
+      matches: [{ id: "chunk-1", score: 0.92 }],
+    });
+    dbPrepare.mockImplementation((sql: string) => {
+      if (!sql.includes("FROM guidance_chunks")) {
+        throw new Error(`no such table in query: ${sql}`);
+      }
+      return {
+        bind: vi.fn(() => ({
+          all: vi.fn(() => [
+            { chunk_text: "Clean guidance text.", source_url: "https://www.nhs.uk/guidance" },
+          ]),
+        })),
+      };
+    });
+
+    const result = await retrieve(env, "how do i make formula");
+    expect(result.confidence).toBe(0.92);
+    expect(result.context).toBe("Clean guidance text.");
+    expect(result.sources).toEqual(["https://www.nhs.uk/guidance"]);
+  });
+
+  it("extractEmbedding rejects malformed or wrong-dimension arrays", () => {
+    expect(extractEmbedding({ data: [[1, 2, 3]] })).toBeNull();
+    expect(extractEmbedding({ data: [Array.from({ length: 768 }, (_, i) => (i === 10 ? "not-a-number" : i))] })).toBeNull();
+    expect(extractEmbedding({ data: [Array.from({ length: 768 }, (_, i) => (i === 10 ? NaN : i))] })).toBeNull();
+    expect(extractEmbedding(null)).toBeNull();
+    expect(extractEmbedding(undefined)).toBeNull();
+    expect(extractEmbedding("invalid")).toBeNull();
   });
 });

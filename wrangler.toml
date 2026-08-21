@@ -21,15 +21,6 @@ database_id = "f41a2de8-be77-4061-80a7-c55789843e70"
 [[kv_namespaces]]
 binding = "SESSIONS"
 id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
+preview_id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
 
-[[r2.buckets]]
-binding = "RAW_CONTENT"
-bucket_name = "nhs-source-pages"
 
-[[queues.producers]]
-binding = "INGEST_QUEUE"
-queue = "nhs-ingest"
-
-[[queues.consumers]]
-queue = "nhs-ingest"
-max_batch_size = 10

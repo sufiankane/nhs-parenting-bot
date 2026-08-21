@@ -23,6 +23,7 @@ import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { generateSeedingPayload } from "../scripts/ingest/seed";
+import { retrieve } from "../src/retrieval/index";
 
 /* ============================================================================
  * Local types — modelled on the actual JSON shapes on disk. The seed JSON does
@@ -925,3 +926,80 @@ describe("Emergency routing regression [SafetyBatch F2, rule 02.14]", () => {
     ).toBeGreaterThanOrEqual(5);
   });
 });
+
+/* ============================================================================
+ * M4 retrieve() end-to-end integration test with SQL-validating D1 mock [P1-T6, Spec §4 M4, rule 04.12]
+ *
+ * Closes the mock-driven blind spot where D1 mocks ignored SQL strings,
+ * allowing query bugs (e.g. querying non-existent table "chunks" instead of
+ * "guidance_chunks") to pass tests silently.
+ * ========================================================================== */
+
+describe("M4 retrieve() end-to-end with SQL-validating D1 mock [P1-T6, rule 04.12, Spec §4 M4]", () => {
+  it("exercises retrieve() successfully against a D1 mock that validates table name 'guidance_chunks'", async () => {
+    const chunkMap = new Map(chunks.map((c) => [c.id, c]));
+    const firstChunk = chunks[0];
+
+    const dbMock = {
+      prepare: (sql: string) => {
+        // Enforce that SQL targets the canonical guidance_chunks table
+        if (!/FROM\s+guidance_chunks\b/i.test(sql)) {
+          throw new Error(`SQL syntax error: unknown table in query "${sql}". Expected FROM guidance_chunks`);
+        }
+        return {
+          bind: (...ids: string[]) => ({
+            all: async () => {
+              return ids
+                .map((id) => {
+                  const found = chunkMap.get(id);
+                  return found
+                    ? { chunk_text: found.chunk_text, source_url: found.source_url }
+                    : null;
+                })
+                .filter(Boolean);
+            },
+          }),
+        };
+      },
+    };
+
+    const mockVector = Array.from({ length: 768 }, (_, i) => (i + 1) / 1000);
+    const env = {
+      AI: {
+        run: async () => ({
+          data: [mockVector],
+        }),
+      },
+      VECTOR_INDEX: {
+        query: async () => ({
+          matches: [{ id: firstChunk.id, score: 0.88 }],
+        }),
+      },
+      DB: dbMock,
+      SIMILARITY_THRESHOLD: "0.5",
+    };
+
+    const res = await retrieve(env, firstChunk.title);
+    expect(res.confidence).toBe(0.88);
+    expect(res.context).toContain(firstChunk.chunk_text);
+    expect(res.sources).toContain(firstChunk.source_url);
+  });
+
+  it("fails safe when D1 mock throws on incorrect table name (e.g. 'chunks')", async () => {
+    const dbStrictMock = {
+      prepare: (sql: string) => {
+        if (!/FROM\s+guidance_chunks\b/i.test(sql)) {
+          throw new Error(`no such table in query: ${sql}`);
+        }
+        return {
+          bind: () => ({
+            all: async () => [],
+          }),
+        };
+      },
+    };
+
+    expect(() => dbStrictMock.prepare("SELECT * FROM chunks WHERE id = ?")).toThrow(/no such table/);
+  });
+});
+

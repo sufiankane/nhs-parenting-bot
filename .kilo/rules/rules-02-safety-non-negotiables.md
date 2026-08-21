@@ -19,7 +19,7 @@
 
 8. **No PII persistence.** Never write names, addresses, postcodes, or free-text message bodies to D1 audit logs. Log only: timestamp, tier, matched signal categories, pseudonymous session ID.
 9. KV session history must have a TTL (default: 24h) and must never be exported to external services.
-10. No secrets in code, tests, fixtures, or commit history. Use `wrangler secret`.
+10. No secrets in code, tests, fixtures, or commit history. Use `wrangler secret`. Never print, log, or inline a secret value in a command. Reference $env:CLOUDFLARE_API_TOKEN or the .env file — never the literal.
 
 ## Testing gates
 

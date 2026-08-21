@@ -30,24 +30,59 @@ const SAFE_EMPTY: RetrieveResult = {
 
 /**
  * Extract the embedding vector from the Workers AI response.
- * Handles both `{ data: [{ embedding: [...] }] }` and `[{ embedding: [...] }]`.
- * Returns null when the shape is unrecognised.
+ * Handles:
+ *  - Real Cloudflare Workers AI shape: `{ data: [[0.0078, ...]] }`
+ *  - Legacy / mock shape: `{ data: [{ embedding: [...] }] }`
+ *  - Direct array shapes: `[[0.0078, ...]]` or `[{ embedding: [...] }]`
+ *
+ * Validates that the extracted vector has exactly EMBEDDING_DIMENSIONS (768)
+ * valid numbers before returning. Returns null on any malformed or unexpected shape.
  */
-function extractEmbedding(result: unknown): number[] | null {
+export function extractEmbedding(result: unknown): number[] | null {
+  let candidate: unknown = null;
+
   if (result && typeof result === "object") {
     const obj = result as Record<string, unknown>;
     if (Array.isArray(obj.data) && obj.data.length > 0) {
-      const first = obj.data[0] as Record<string, unknown>;
-      if (Array.isArray(first.embedding)) return first.embedding as number[];
+      const first = obj.data[0];
+      if (Array.isArray(first)) {
+        candidate = first;
+      } else if (first && typeof first === "object") {
+        const firstObj = first as Record<string, unknown>;
+        if (Array.isArray(firstObj.embedding)) {
+          candidate = firstObj.embedding;
+        }
+      }
     }
   }
-  if (Array.isArray(result) && result.length > 0) {
-    const first = result[0] as Record<string, unknown>;
-    if (first && typeof first === "object" && Array.isArray(first.embedding)) {
-      return first.embedding as number[];
+
+  if (!candidate && Array.isArray(result) && result.length > 0) {
+    const first = result[0];
+    if (Array.isArray(first)) {
+      candidate = first;
+    } else if (first && typeof first === "object") {
+      const firstObj = first as Record<string, unknown>;
+      if (Array.isArray(firstObj.embedding)) {
+        candidate = firstObj.embedding;
+      }
     }
   }
-  return null;
+
+  if (!Array.isArray(candidate)) {
+    return null;
+  }
+
+  if (candidate.length !== EMBEDDING_DIMENSIONS) {
+    return null;
+  }
+
+  for (let i = 0; i < candidate.length; i++) {
+    if (typeof candidate[i] !== "number" || Number.isNaN(candidate[i])) {
+      return null;
+    }
+  }
+
+  return candidate as number[];
 }
 
 /**
@@ -132,7 +167,7 @@ export async function retrieve(
     const placeholders = allIds.map(() => "?").join(", ");
     const rows = await db
       .prepare(
-        `SELECT chunk_text, source_url FROM chunks WHERE id IN (${placeholders})`
+        `SELECT chunk_text, source_url FROM guidance_chunks WHERE id IN (${placeholders})`
       )
       .bind(...allIds)
       .all();
@@ -157,8 +192,9 @@ export async function retrieve(
       sources: Array.from(sourcesSet),
       confidence: maxScore,
     };
-  } catch {
-    // Rule 04.14 / Spec §3.2 [3]: ANY failure → safe empty, never throw
+  } catch (err) {
+    // Rule 04.14: safe-empty to client, error detail logged internally
+    console.error("RETRIEVAL_ERROR:", err instanceof Error ? err.message : String(err));
     return SAFE_EMPTY;
   }
 }
