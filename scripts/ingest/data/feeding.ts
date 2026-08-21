@@ -21,7 +21,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-breastfeeding-positioning-attachment",
-    source_url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding/how-to-breastfeed/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/",
     title: "How to Breastfeed: Positioning and the CHINS Framework",
     category: "feeding",
     chunk_index: 0,
@@ -30,7 +30,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-breastfeeding-positioning-attachment",
-    source_url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding/how-to-breastfeed/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/",
     title: "Signs of a Good Breastfeeding Latch",
     category: "feeding",
     chunk_index: 1,
@@ -66,7 +66,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-breastfeeding-challenges-sore-nipples",
-    source_url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding-challenges/sore-or-cracked-nipples/",
+    source_url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
     title: "Managing and Preventing Sore or Cracked Nipples",
     category: "feeding",
     chunk_index: 0,
@@ -75,7 +75,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-breastfeeding-challenges-sore-nipples",
-    source_url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding-challenges/sore-or-cracked-nipples/",
+    source_url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
     title: "Mastitis and Blocked Ducts: Symptoms and Treatment",
     category: "feeding",
     chunk_index: 1,
@@ -84,7 +84,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-responsive-feeding-cues",
-    source_url: "https://www.nhs.uk/start-for-life/baby/feeding-your-baby/responsive-feeding/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/bottle-feeding/bottle-feeding-your-baby/feeding-on-demand/",
     title: "Responsive Feeding and Recognising Early Hunger Cues",
     category: "feeding",
     chunk_index: 0,
@@ -93,7 +93,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-responsive-feeding-cues",
-    source_url: "https://www.nhs.uk/start-for-life/baby/feeding-your-baby/responsive-feeding/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/bottle-feeding/bottle-feeding-your-baby/feeding-on-demand/",
     title: "Winding and Burping Your Baby After Feeds",
     category: "feeding",
     chunk_index: 1,
@@ -102,7 +102,7 @@ export const feedingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-combining-breast-and-bottle-feeding",
-    source_url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/combining-breast-and-bottle-feeding/",
+    source_url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/combine-breast-and-bottle/",
     title: "Combining Breast and Bottle Feeding (Mixed Feeding)",
     category: "feeding",
     chunk_index: 0,

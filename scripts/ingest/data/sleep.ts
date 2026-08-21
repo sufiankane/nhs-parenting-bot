@@ -21,7 +21,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-bedtime-routines",
-    source_url: "https://www.nhs.uk/start-for-life/baby/baby-sleep/bedtime-routines/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/",
     title: "Creating a Calming Bedtime Routine for Babies and Toddlers",
     category: "sleep",
     chunk_index: 0,
@@ -30,7 +30,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-bedtime-routines",
-    source_url: "https://www.nhs.uk/start-for-life/baby/baby-sleep/bedtime-routines/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/",
     title: "Responsive Settling and Gentle Sleep Associations",
     category: "sleep",
     chunk_index: 1,
@@ -39,7 +39,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-co-sleeping-and-cot-safety",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/co-sleeping-with-your-baby/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
     title: "When Bed-Sharing Is Unsafe: Major Co-Sleeping Dangers",
     category: "sleep",
     chunk_index: 0,
@@ -48,7 +48,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-co-sleeping-and-cot-safety",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/co-sleeping-with-your-baby/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
     title: "Guidelines for Safer Bed-Sharing",
     category: "sleep",
     chunk_index: 1,
@@ -57,7 +57,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-daytime-naps-and-wake-windows",
-    source_url: "https://www.nhs.uk/start-for-life/baby/baby-sleep/daytime-naps/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/your-babys-sleep-patterns/",
     title: "Daytime Naps, Wake Windows, and Preventing Overtiredness",
     category: "sleep",
     chunk_index: 0,
@@ -66,7 +66,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-daytime-naps-and-wake-windows",
-    source_url: "https://www.nhs.uk/start-for-life/baby/baby-sleep/daytime-naps/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/your-babys-sleep-patterns/",
     title: "Establishing Day and Night Rhythms in Newborns",
     category: "sleep",
     chunk_index: 1,
@@ -75,7 +75,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-toddler-sleep-challenges",
-    source_url: "https://www.nhs.uk/conditions/baby/sleep-and-teething/sleep-problems-in-young-children/",
+    source_url: "https://www.nhs.uk/baby/health/sleep-and-young-children/",
     title: "Managing Toddler Bedtime Resistance and Night Waking",
     category: "sleep",
     chunk_index: 0,
@@ -84,7 +84,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-toddler-sleep-challenges",
-    source_url: "https://www.nhs.uk/conditions/baby/sleep-and-teething/sleep-problems-in-young-children/",
+    source_url: "https://www.nhs.uk/baby/health/sleep-and-young-children/",
     title: "Night Terrors Versus Nightmares in Children",
     category: "sleep",
     chunk_index: 1,
@@ -93,7 +93,7 @@ export const sleepChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-sleep-patterns-0-to-12-months",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/sleep-in-the-first-few-months/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/",
     title: "Understanding Normal Infant Sleep Cycles and Regressions",
     category: "sleep",
     chunk_index: 0,

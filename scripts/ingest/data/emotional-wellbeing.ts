@@ -21,7 +21,7 @@ export const emotionalWellbeingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-postnatal-mental-health-for-partners-fathers",
-    source_url: "https://www.nhs.uk/mental-health/conditions/post-natal-depression/support-for-partners/",
+    source_url: "https://www.nhs.uk/mental-health/conditions/postnatal-depression/",
     title: "Postnatal Mental Health Support for Fathers and Partners",
     category: "emotional-wellbeing",
     chunk_index: 0,
@@ -39,7 +39,7 @@ export const emotionalWellbeingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-bonding-with-your-newborn-baby",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/bonding-with-your-baby/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/caring-for-your-baby/skin-to-skin-contact-with-your-newborn/",
     title: "Bonding with Your Baby: Building Secure Attachment",
     category: "emotional-wellbeing",
     chunk_index: 0,
@@ -48,7 +48,7 @@ export const emotionalWellbeingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-parental-exhaustion-and-asking-for-help",
-    source_url: "https://www.nhs.uk/start-for-life/baby/mental-health-and-wellbeing/parent-mental-health/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/your-mental-health/",
     title: "Parental Exhaustion: Self-Care and Accepting Practical Help",
     category: "emotional-wellbeing",
     chunk_index: 0,
@@ -66,7 +66,7 @@ export const emotionalWellbeingChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-maternal-mental-health-services",
-    source_url: "https://www.nhs.uk/service-search/mental-health/find-an-nhs-mental-health-services/",
+    source_url: "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/",
     title: "Specialist NHS Perinatal Mental Health Services and Crisis Support",
     category: "emotional-wellbeing",
     chunk_index: 0,

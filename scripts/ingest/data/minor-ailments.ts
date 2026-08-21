@@ -30,7 +30,7 @@ export const minorAilmentsChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-reflux-and-spitting-up",
-    source_url: "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/reflux-in-babies/",
+    source_url: "https://www.nhs.uk/conditions/reflux-in-babies/",
     title: "Reflux and Possetting: Normal Spitting Up Versus Silent Reflux",
     category: "minor-ailments",
     chunk_index: 0,
@@ -39,7 +39,7 @@ export const minorAilmentsChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-reflux-and-spitting-up",
-    source_url: "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/reflux-in-babies/",
+    source_url: "https://www.nhs.uk/conditions/reflux-in-babies/",
     title: "Reflux Red Flags: When to Seek Urgent Medical Care",
     category: "minor-ailments",
     chunk_index: 1,
@@ -48,7 +48,7 @@ export const minorAilmentsChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-colic-signs-and-support",
-    source_url: "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/colic-and-crying/",
+    source_url: "https://www.nhs.uk/conditions/colic/",
     title: "Colic in Babies: Symptoms, Soothing Holds, and Parent Support",
     category: "minor-ailments",
     chunk_index: 0,

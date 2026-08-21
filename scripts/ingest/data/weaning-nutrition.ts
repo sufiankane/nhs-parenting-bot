@@ -21,7 +21,7 @@ export const weaningNutritionChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-weaning-first-foods-textures",
-    source_url: "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/first-foods/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
     title: "First Weaning Foods: Vegetables, Fruits, and Textures",
     category: "weaning-nutrition",
     chunk_index: 0,
@@ -30,7 +30,7 @@ export const weaningNutritionChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-weaning-first-foods-textures",
-    source_url: "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/first-foods/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
     title: "Finger Foods for Babies: Preparation and Shapes",
     category: "weaning-nutrition",
     chunk_index: 1,

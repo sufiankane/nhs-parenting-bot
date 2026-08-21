@@ -39,7 +39,7 @@ export const teethingDevelopmentChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-development-milestones-0-6-months",
-    source_url: "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-birth-to-6-months/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
     title: "Developmental Milestones: Birth to 6 Months",
     category: "teething-development",
     chunk_index: 0,
@@ -48,7 +48,7 @@ export const teethingDevelopmentChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-development-milestones-6-12-months",
-    source_url: "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-6-to-12-months/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
     title: "Developmental Milestones: 6 to 12 Months",
     category: "teething-development",
     chunk_index: 0,
@@ -66,7 +66,7 @@ export const teethingDevelopmentChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-speech-and-language-early-talk",
-    source_url: "https://www.nhs.uk/start-for-life/baby/learning-to-talk/talking-0-to-6-months/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/learning-to-talk/first-sounds-0-to-6-months/",
     title: "Supporting Early Speech, Language, and Communication",
     category: "teething-development",
     chunk_index: 0,
@@ -75,7 +75,7 @@ export const teethingDevelopmentChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-crawling-and-walking-development",
-    source_url: "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/walking-and-sitting/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
     title: "Sitting, Crawling, Cruising, and First Steps",
     category: "teething-development",
     chunk_index: 0,

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-08-20",
+  "last_updated": "2026-08-21",
   "embedding_model": "@cf/baai/bge-base-en-v1.5",
   "embedding_dimensions": 768,
   "total_chunks": 74,
@@ -17,7 +17,7 @@
     {
       "id": "a279ace8de49934d79e24f0f64d1a7909fe3eb041baa28fca0d0c4e70d3610fd",
       "source_id": "nhs-soothing-crying-baby",
-      "source_url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/soothing-a-crying-baby/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
       "title": "Soothing a Crying Baby: Gentle Calming Techniques",
       "category": "newborn-care",
       "chunk_text": "All babies cry, and it can be difficult to know what they need in the early weeks. Crying is your baby's main way of communicating hunger, tiredness, a wet or dirty nappy, wind, or simply wanting to be close to you. To help soothe your baby, try holding them close against your chest for skin-to-skin contact, which helps regulate their heart rate, breathing, and body temperature. Gentle rhythmic rocking, swaying, softly singing, or humming can be very calming for a restless baby. Repeating gentle 'shhh' sounds or playing rhythmic white noise (such as a fan, vacuum cleaner sound, or running water) mimics the soothing sounds of the womb. Swaddling with a lightweight, breathable cotton blanket can help some newborns feel secure, making sure their hips are free to move and their chest is not constricted. Try taking baby for a gentle walk in a pram or sling, as fresh air and rhythmic movement often help settle them. If you ever feel uncertain or need extra reassurance, your health visitor or midwife is always there to support you.",
@@ -30,7 +30,7 @@
     {
       "id": "3198ae04893b00cbee545889e04438e3716088f3eb01a968b400734ebbad6480",
       "source_id": "nhs-soothing-crying-baby",
-      "source_url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/soothing-a-crying-baby/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
       "title": "Coping with Persistent Crying: ICON Infant Safety Guidance",
       "category": "newborn-care",
       "chunk_text": "Crying is normal and all babies go through phases of intense crying, usually peaking around 6 to 8 weeks before gradually settling. If you feel stressed, exhausted, or overwhelmed by your baby's crying, remember the NHS ICON message: Infant crying is normal, Comfort methods can sometimes soothe baby, It is OK to walk away for a few minutes if you have checked baby is safe in their cot, and Never ever shake a baby. Shaking a baby can cause severe, permanent brain damage, bleeding in the eyes, or fatal head injuries. If you feel you are losing patience, place your baby safely on their back in their cot or Moses basket, step into another room, take slow deep breaths for a few minutes, or phone a trusted friend, family member, your health visitor, or the Cry-sis Helpline on 0800 028 8318. Never hesitate to seek help if you feel you cannot cope.",
@@ -95,7 +95,7 @@
     {
       "id": "3037203644302a48e356aa3f5dabf6c0b09f30b1fd92b32109714a6f5089f683",
       "source_id": "nhs-umbilical-cord-care",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/caring-for-a-newborn-baby/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/",
       "title": "Caring for Your Newborn's Umbilical Cord Stump",
       "category": "newborn-care",
       "chunk_text": "Your newborn's umbilical cord stump will take around 1 to 2 weeks to dry out, turn dark brown or black, and fall off naturally on its own. The simplest and safest way to care for the cord stump is to keep it clean, dry, and exposed to the air as much as possible. Always wash your hands thoroughly with soap and warm water before touching the cord area or changing your baby's nappy. If the cord stump becomes soiled with urine or faeces, clean around the base gently using plain water and a piece of clean cotton wool, then pat it dry very gently with a fresh cotton pad or clean towel. Avoid using surgical spirits, antiseptics, or medicated powders on the stump, as plain water is best for natural healing. Fold the top front edge of your baby's nappy down below the stump so that fresh air can circulate freely around it and wet nappy waistbands do not rub or soak the area. Allow the cord stump to separate and drop off naturally; never pull, tug, or twist it, even if it appears to be hanging by a tiny thread.",
@@ -108,7 +108,7 @@
     {
       "id": "8a1411361896c96bffb5a400a7e9e84153d7e92c504571649f0f76ce71f86beb",
       "source_id": "nhs-umbilical-cord-care",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/caring-for-a-newborn-baby/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/",
       "title": "Recognising Signs of Umbilical Cord Infection (Omphalitis)",
       "category": "newborn-care",
       "chunk_text": "While a small amount of dry crusting or an occasional tiny smear of dried blood on the nappy as the cord stump separates can be completely normal, parents should closely monitor the navel area for any signs of infection (omphalitis). In newborn infants, umbilical infections can spread quickly if left untreated, so early medical attention is important. Contact your GP, midwife, or NHS 111 immediately if you notice any of the following signs: spreading redness, warmth, or swelling on the skin around the base of the belly button; yellow, white, or greenish pus oozing from the stump; a strong, foul, or unpleasant odour coming from the cord area; active bleeding from the stump that does not stop after applying gentle pressure with a clean pad; or if your baby seems distressed, crying when you touch the skin around their tummy. Additionally, if your baby develops a fever of 38°C or higher, becomes floppy or unusually drowsy, or refuses feeds, seek urgent medical assessment immediately.",
@@ -121,7 +121,7 @@
     {
       "id": "7590068eb6927482be3d74e3da194d8ab2d9fe385871d531b6ba177f3147a92e",
       "source_id": "nhs-baby-dressing-temperature",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/keeping-your-baby-warm-or-cool/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "title": "Dressing Your Baby for Room Temperature",
       "category": "newborn-care",
       "chunk_text": "Young babies cannot regulate their own body temperature as effectively as older children and adults, making them vulnerable to both getting too cold and overheating. The NHS and The Lullaby Trust recommend keeping the room where your baby sleeps at a comfortable, safe temperature between 16°C and 20°C (61°F to 68°F). A simple room thermometer in the bedroom helps you keep track of this easily. As a practical everyday rule of thumb, dress your baby in one more light layer of clothing than you would comfortably wear yourself in the same room. In a typical room of 18°C, a cotton vest (bodysuit) and a cotton sleepsuit (babygrow), combined with a lightweight baby sleeping bag of the appropriate tog rating (such as a 2.5 tog for standard room temperatures or 1.0 tog for warmer summer weather), are usually ideal. Never put hats, bonnets, hoods, or thick outdoor fleeces on your baby while they are sleeping indoors, as babies lose excess heat primarily through their head and face to prevent overheating.",
@@ -134,7 +134,7 @@
     {
       "id": "874599eb632e6611c486ea22e207c09e6dc1f9c6b71bb73539d2379268d85fec",
       "source_id": "nhs-baby-dressing-temperature",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/keeping-your-baby-warm-or-cool/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "title": "Checking Baby's Temperature and Preventing Overheating",
       "category": "newborn-care",
       "chunk_text": "Overheating is a significant risk factor for Sudden Infant Death Syndrome (SIDS), so learning how to check your baby's temperature accurately is essential for safe sleep. To check whether your baby is too warm or too cool, place your clean hand gently on their chest or the back of their neck. Their skin should feel comfortably warm and dry to the touch. Do not judge your baby's body temperature by feeling their hands or feet; it is entirely normal for newborn hands and feet to feel cool to the touch due to their developing peripheral blood circulation. If your baby's chest or neck feels hot, damp, or clammy, remove one or more layers of blankets or clothing immediately to allow them to cool down. Common signs that a baby is uncomfortably hot include flushed red cheeks, damp hair or sweating around the neck, rapid breathing, heat rash (tiny red bumps), and fretful restlessness. Always keep cots and Moses baskets positioned well away from radiators, electric heaters, open fires, draughts, and direct sunlight.",
@@ -147,7 +147,7 @@
     {
       "id": "22f947ead95f549f33658d1f1ae10efc852fef46ca3e8364244aef1e6323ac07",
       "source_id": "nhs-holding-and-handling-newborn",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/holding-your-baby/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/what-you-will-need-for-your-baby/",
       "title": "Safe Handling, Head Support, and Bonding Holds",
       "category": "newborn-care",
       "chunk_text": "Newborn babies have relatively heavy heads and weak neck muscles, meaning they cannot support their own head for the first few months of life. Whenever you lift, hold, or carry your baby, it is essential to support their head and neck gently and securely. When picking your baby up from a cot or changing mat, slide one hand firmly under their head and neck, and slide your other hand underneath their bottom and lower back before lifting smoothly. Comforting holding positions include: the classic cradle hold, where your baby's head rests comfortably in the crook of your elbow while your forearm supports their back; the upright shoulder hold, with their head resting against your upper chest while you support their head with one hand; and the football (clutch) hold, where baby's body is tucked along your forearm. Newborns frequently experience the Moro (startle) reflex when they feel unsupported or when sudden movements occur; moving slowly, holding them close against your body, and speaking in a calm, soothing voice helps them feel secure and protected.",
@@ -186,7 +186,7 @@
     {
       "id": "ed73dadc048ec227a4a844f6027f23ff83fce71b44a1b0381822a41a799120c8",
       "source_id": "nhs-breastfeeding-positioning-attachment",
-      "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding/how-to-breastfeed/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/",
       "title": "How to Breastfeed: Positioning and the CHINS Framework",
       "category": "feeding",
       "chunk_text": "Good positioning and attachment form the foundation of comfortable, pain-free, and effective breastfeeding. A widely used NHS framework to help remember key positioning principles is the CHINS acronym: Close — hold your baby close against your body, chest to chest and tummy to tummy, so they do not have to stretch to reach the breast; Head free — allow your baby's head to tilt back gently into the nape of their neck rather than grasping or pushing the back of their head; In line — ensure your baby's head, neck, and spine are in a straight, natural line rather than twisted sideways; Nose to nipple — align your baby's nose directly opposite your nipple before latching, which encourages them to tilt their head back and open their mouth wide; Sustainable — make sure you are sitting in a comfortable, relaxed position with your back and arms supported by cushions before bringing baby to breast. When your baby tilts their head back and opens wide like a deep yawn, bring them swiftly onto the breast, aiming the nipple towards the roof of their mouth so they take a generous mouthful of breast tissue from underneath.",
@@ -199,7 +199,7 @@
     {
       "id": "3c31b8365cf1514cd17b4aba714f1dc2bfffd186482baf4971e9e9365763dd82",
       "source_id": "nhs-breastfeeding-positioning-attachment",
-      "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding/how-to-breastfeed/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/",
       "title": "Signs of a Good Breastfeeding Latch",
       "category": "feeding",
       "chunk_text": "A deep, asymmetrical latch ensures your baby can remove milk efficiently from the breast while protecting your nipples from damage and soreness. Key visual and physical signs of a deep, effective latch include: your baby's mouth is opened very wide with both upper and lower lips flanged outwards like fish lips; your baby's chin is pressed firmly and indentation-free into your breast; their nose is clear to breathe freely, resting gently near or away from the breast; more of the darker areola tissue is visible above your baby's top lip than below their bottom lip (an asymmetrical latch); and your baby's cheeks stay rounded and full rather than dimpling inward during sucks. Breastfeeding should never feel intensely painful. While you may notice a brief stretching sensation during the first few seconds as the milk-ejection reflex begins, persistent pinching, biting, or burning pain is a sign of a shallow latch. If a feed hurts, gently break the suction by sliding a clean finger into the corner of your baby's mouth between their gums, take baby off, and re-attach calmly.",
@@ -251,7 +251,7 @@
     {
       "id": "3adac183a897985e3a3fa416c6e5cc192d36c82818ab70b811b0af24ba5bec77",
       "source_id": "nhs-breastfeeding-challenges-sore-nipples",
-      "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding-challenges/sore-or-cracked-nipples/",
+      "source_url": "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
       "title": "Managing and Preventing Sore or Cracked Nipples",
       "category": "feeding",
       "chunk_text": "Sore or cracked nipples are almost always caused by a shallow latch, where the nipple rubs against the baby's hard palate rather than resting comfortably deep inside their soft palate. The most effective and lasting solution is improving positioning and attachment: ask your midwife, health visitor, or a local NHS infant feeding specialist to observe a full feed and assist with latch adjustments. To soothe tender nipples between feeds: gently express a few drops of your own breast milk and smooth it over your nipples after feeding, letting them air dry, as breast milk contains natural healing and antibacterial properties; apply 100% medical-grade purified lanolin or an approved nipple balm (which does not need to be washed off prior to the next feed); and avoid using harsh soaps, shower gels, or perfumes on your breasts as these strip away natural protective oils. If a nipple becomes cracked and bleeds slightly, it is safe to continue breastfeeding from that breast; tiny amounts of swallowed blood are completely harmless to your baby.",
@@ -264,7 +264,7 @@
     {
       "id": "42aeeb9ef593415026e6fb879cd19d451abd907c14e87fde2fd054495554b040",
       "source_id": "nhs-breastfeeding-challenges-sore-nipples",
-      "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding-challenges/sore-or-cracked-nipples/",
+      "source_url": "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
       "title": "Mastitis and Blocked Ducts: Symptoms and Treatment",
       "category": "feeding",
       "chunk_text": "A blocked milk duct can cause a localised tender lump in the breast. If milk remains trapped, it can develop into mastitis — an inflammation or bacterial infection of breast tissue. Common symptoms of mastitis include: a red, swollen, hot, and painful area on the breast (often in a wedge-shaped pattern), flu-like muscle aches, shivering, extreme tiredness, and a high temperature or fever over 38.5°C. It is important to continue breastfeeding or expressing milk frequently from the affected breast to keep milk moving and help clear the blockage; the milk remains entirely safe and nutritious for your baby. You can apply a warm flannel to the breast before feeding to encourage milk flow, gently massage the tender lump towards the nipple during feeds, ensure your baby is deeply attached, ask your GP or pharmacist about pain relief that is suitable for you while breastfeeding, and rest as much as possible. If your symptoms do not begin to improve within 12 to 24 hours, or if they suddenly worsen, contact your GP or NHS 111 promptly, as a short course of antibiotics may be necessary to clear an infection.",
@@ -277,7 +277,7 @@
     {
       "id": "0bcd6c1ccae7cd3f97eed368ac708f7c573039bf4de92be5950c73d1153aaac8",
       "source_id": "nhs-responsive-feeding-cues",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/feeding-your-baby/responsive-feeding/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/bottle-feeding/bottle-feeding-your-baby/feeding-on-demand/",
       "title": "Responsive Feeding and Recognising Early Hunger Cues",
       "category": "feeding",
       "chunk_text": "Responsive feeding means offering breast or bottle feeds in response to your baby's hunger cues and signs of needing comfort, rather than sticking to a rigid clock schedule or set routine. Babies feed for nourishment, comfort, reassurance, and closeness. Early signs that your baby is ready to feed include: stirring and wriggling, turning their head and opening their mouth (rooting), moving their eyes rapidly beneath closed eyelids, bringing hands or fists to their mouth, sucking on fingers, and making soft smacking or murmuring sounds. Crying is a late cue for hunger; trying to feed a baby who is already distressed and crying is much harder because they struggle to calm down and attach effectively. In responsive bottle feeding, hold your baby in a supported semi-upright position, make eye contact, gently brush the teat against their upper lip, let your baby draw the teat in when ready, and keep the bottle almost horizontal so milk flows only when your baby actively sucks (paced bottle feeding). Allow your baby to pause for breaks and never force them to finish a bottle.",
@@ -290,7 +290,7 @@
     {
       "id": "2ca19f97d63e3c132e171676ddddd20f1451e09b55d9d9c76bf2e69c88ee6694",
       "source_id": "nhs-responsive-feeding-cues",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/feeding-your-baby/responsive-feeding/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/bottle-feeding/bottle-feeding-your-baby/feeding-on-demand/",
       "title": "Winding and Burping Your Baby After Feeds",
       "category": "feeding",
       "chunk_text": "Babies naturally swallow small amounts of air while feeding, particularly when bottle feeding, feeding eagerly, or crying before a feed. Burping (winding) your baby helps release this trapped air from their stomach, easing discomfort and reducing possetting. You can try winding your baby halfway through a feed or when they take a natural pause, as well as once the feed has finished. Three comfortable and effective winding positions recommended by the NHS include: 1. Over your shoulder: hold your baby upright against your chest with their chin resting safely on your shoulder, supporting their bottom with one hand while gently patting or rubbing their back in upward strokes with the other. 2. Sitting on your lap: sit baby upright on your lap facing sideways, support their chin and chest gently with one hand without pressing on their throat, and rub their back with your other hand. 3. Lying across your lap: lay baby tummy-down across your knees with their head turned to the side, and gently rub their back. If your baby does not burp after a few minutes and appears settled and content, there is no need to persist; not all babies need to burp after every feed.",
@@ -303,7 +303,7 @@
     {
       "id": "92a2b9b4a52085caf4ccbf5fb6dccd7f631630a1b67134a917744439099b2b25",
       "source_id": "nhs-combining-breast-and-bottle-feeding",
-      "source_url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/combining-breast-and-bottle-feeding/",
+      "source_url": "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/combine-breast-and-bottle/",
       "title": "Combining Breast and Bottle Feeding (Mixed Feeding)",
       "category": "feeding",
       "chunk_text": "Mixed feeding, also known as combination feeding, involves offering your baby both breastfeeds and bottles (containing either expressed breast milk or first infant formula). If you are considering combination feeding, it is usually helpful to wait until breastfeeding is well-established — typically around 6 to 8 weeks after birth — if feasible, so that your milk supply is secure and your baby is confident with breastfeeding attachment. To introduce bottles gently: offer a small amount in a bottle when your baby is calm and alert rather than famished; invite your partner or a family member to offer the first few bottles while you are in another room, as babies can smell maternal breast milk; use a slow-flow teat designed for newborns; and practice paced feeding where the bottle is held almost horizontally so baby controls the flow. If you want to maintain your natural breast milk supply alongside formula feeds, continue to breastfeed or express milk regularly, particularly during the early morning hours when milk-making hormone levels (prolactin) are naturally at their highest. Your health visitor or infant feeding team can help you design a mixed feeding routine that fits your family.",
@@ -342,7 +342,7 @@
     {
       "id": "1b27502f69f0b22a274f4a2cd14ae141c6f14d5c5d57583e704552764c294649",
       "source_id": "nhs-weaning-first-foods-textures",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/first-foods/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
       "title": "First Weaning Foods: Vegetables, Fruits, and Textures",
       "category": "weaning-nutrition",
       "chunk_text": "Ideal first foods for weaning include cooked single vegetables, particularly savoury and bitter greens such as broccoli florets, cauliflower, courgette, spinach, kale, and green beans, alongside root vegetables like carrots, butternut squash, parsnips, and sweet potatoes. Introducing savoury and bitter vegetable flavours right from the start helps your baby develop an adventurous palate and can reduce fussy eating habits as they grow older. Alongside vegetables, you can offer soft unsweetened fruits (such as steamed apple, soft pear, ripe mashed banana, or avocado) and baby porridge or cereal mixed with your baby's usual breast milk or formula. Foods can be presented as smooth purées, well-mashed textures with soft lumps, or soft cooked finger foods. The NHS advises progressing quickly from smooth, runny purées to thicker mashed textures with soft lumps between 6 and 9 months of age. Moving on from purées promptly encourages your baby to practice chewing movements, strengthens jaw muscles, and supports speech development.",
@@ -355,7 +355,7 @@
     {
       "id": "60eb6736b0239ae6700884877fdf0866190c2f66292428a9eb4aef32d5f1ad12",
       "source_id": "nhs-weaning-first-foods-textures",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/first-foods/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
       "title": "Finger Foods for Babies: Preparation and Shapes",
       "category": "weaning-nutrition",
       "chunk_text": "From around 6 months of age, you can offer soft finger foods alongside mashed foods or as part of a baby-led weaning approach. Offering finger foods encourages your baby to feed themselves independently, supports fine motor skills and hand-eye coordination, and lets them explore different shapes and textures. Excellent finger foods for beginners include: steamed vegetable batons (such as tender carrot sticks, courgette batons, or soft broccoli florets with a stem handle); soft ripe fruit slices (such as banana, peeled avocado, soft pear, or melon); well-cooked pasta shapes like fusilli or penne; strips of lightly toasted bread or pitta; and soft strips of well-cooked meat, fish (carefully checked for bones), or cooked egg omelette. Always cut finger foods into long chip-sized pieces about the length and width of an adult index finger. This shape allows your baby to grasp the food in their palm with a piece poking out above their fist to gnaw on. Check that all finger foods are soft enough to squash easily between your thumb and forefinger before serving.",
@@ -498,7 +498,7 @@
     {
       "id": "0bf36dcd4e104626841a5ab6823f63944f03aa1a0200869058f90bee5ade206a",
       "source_id": "nhs-baby-bedtime-routines",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/bedtime-routines/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/",
       "title": "Creating a Calming Bedtime Routine for Babies and Toddlers",
       "category": "sleep",
       "chunk_text": "A predictable, calming bedtime routine helps signal to your baby or toddler that it is time to wind down and prepare for sleep. You can start introducing a gentle 20 to 30 minute bedtime sequence from around 3 months of age as your baby's day-night rhythm begins to develop. A classic NHS bedtime sequence includes: 1. A warm, relaxing bath to soothe muscles and provide sensory calm. 2. Gentle drying, nappy change, and dressing in comfortable sleepwear in a dimly lit, quiet bedroom. 3. A peaceful, unhurried bedtime milk feed. 4. A quiet board book, lullaby, or soft cuddles with soothing words. 5. Placing your baby gently into their cot while they are drowsy but still awake, which helps them learn to associate their bed space with drifting off peacefully. Following the same predictable steps in the same order each evening provides emotional security, lowers stimulation, and helps cues in the brain trigger natural sleepiness. Try to keep bedtime consistent, but be flexible on days when your baby is unwell or experiencing developmental changes.",
@@ -511,7 +511,7 @@
     {
       "id": "d3316a4001afde1cd007146d41349f5362ac244bc3fd2b3ae1687c933fab8687",
       "source_id": "nhs-baby-bedtime-routines",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/bedtime-routines/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/",
       "title": "Responsive Settling and Gentle Sleep Associations",
       "category": "sleep",
       "chunk_text": "Young babies need warmth, reassurance, and physical comfort to feel secure enough to fall asleep; you cannot 'spoil' a baby by responding tenderly to their cries or holding them when they need you. In responsive settling, comfort your baby with gentle hands-on touch — such as resting a warm hand on their chest, offering gentle rhythmic patting, soft shushing sounds, or gently swaying beside their cot. If your baby becomes distressed or cries, pick them up for a comforting cuddle until they are calm and settled, then place them back down in their cot to rest. Helpful sleep associations include: keeping the bedroom suitably dark using blackout blinds, playing gentle continuous white noise at a safe low volume positioned well away from the cot, and using a comfortable sleeping bag. The NHS advises against harsh sleep training or leaving young babies to cry alone for prolonged periods, as responsive parenting builds emotional security and a strong, trusting bond between parent and child.",
@@ -524,7 +524,7 @@
     {
       "id": "918987462374c1d8f7782ec0d7b9468f808ad81aaed85ae7923c7125cb5ee7b8",
       "source_id": "nhs-co-sleeping-and-cot-safety",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/co-sleeping-with-your-baby/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "title": "When Bed-Sharing Is Unsafe: Major Co-Sleeping Dangers",
       "category": "sleep",
       "chunk_text": "If you share a bed with your baby (bed-sharing / co-sleeping), it is crucial to recognise that in specific circumstances bed-sharing is extremely dangerous and significantly increases the risk of Sudden Infant Death Syndrome (SIDS) and accidental suffocation. You must NEVER co-sleep or share a bed with your baby if any of the following apply: 1. Smoking: You or your partner smoke or vape, even if you never smoke inside the house or bedroom. 2. Alcohol or drugs: You or your partner have consumed any amount of alcohol or taken recreational drugs. 3. Drowsy medications: You or your partner have taken prescription or over-the-counter medication that causes drowsiness (such as strong painkillers, antihistamines, sedatives, or sleeping tablets). 4. Premature or low birth weight: Your baby was born prematurely (before 37 completed weeks) or had a low birth weight (less than 2.5kg / 5.5lbs). 5. Extreme exhaustion: You are feeling profoundly exhausted or sleep-deprived. CRITICAL WARNING: Never fall asleep holding your baby on a sofa or armchair — sleeping on a sofa with an infant increases the risk of SIDS by up to 50 times due to suffocation and entrapment between cushions.",
@@ -537,7 +537,7 @@
     {
       "id": "a92dda848ae29bcaeeb98672cc299845c546514b5685c0e7001eab734f317fc4",
       "source_id": "nhs-co-sleeping-and-cot-safety",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/co-sleeping-with-your-baby/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "title": "Guidelines for Safer Bed-Sharing",
       "category": "sleep",
       "chunk_text": "If you choose to share a bed with your baby and none of the high-risk co-sleeping factors apply, you must follow these evidence-based safety guidelines to minimise hazards: 1. Firm, flat surface: Ensure the mattress is firm and flat — never share a bed on a waterbed, soft sagging mattress, beanbag, or memory foam topper. 2. Clear bedding: Keep all pillows, heavy adult duvets, quilts, and thick blankets well away from your baby's head and body to avoid the risk of suffocation and overheating; dress your baby in a lightweight baby sleeping bag instead. 3. Back to sleep: Always place your baby on their back to sleep, never on their side or tummy. 4. Prevent entrapment and falls: Ensure your baby cannot fall out of the bed or become trapped between the mattress and a wall or headboard. 5. No pets or siblings: Keep pets and other young children out of the shared bed. 6. Never leave unattended: Never leave your baby sleeping alone in an adult bed. 7. Position: Position your baby beside one parent, not between two adults.",
@@ -550,7 +550,7 @@
     {
       "id": "f6e82c80d381ee9949d961ab9c8d992efbb7c69f91282a931f588e5f6e4bea06",
       "source_id": "nhs-daytime-naps-and-wake-windows",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/daytime-naps/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/your-babys-sleep-patterns/",
       "title": "Daytime Naps, Wake Windows, and Preventing Overtiredness",
       "category": "sleep",
       "chunk_text": "Understanding age-appropriate wake windows — the length of time your baby can comfortably remain awake between sleeps without becoming exhausted — is a helpful tool for preventing overtiredness. When babies become overtired, stress hormones rise, making settling much more challenging. Typical wake windows evolve with age: Newborns (0 to 3 months) can usually manage only 45 to 90 minutes of awake time between naps, taking 3 to 5 daytime naps. By 4 to 6 months, wake windows gradually extend to 1.5 to 2.5 hours (usually 3 naps daily). By 7 to 9 months, wake windows reach 2.5 to 3.5 hours (transitioning to 2 naps daily). Watch closely for early, subtle tired cues: glazed eyes, staring blankly into the distance, yawning, rubbing eyes or nose, pulling at ears, becoming unusually quiet, or losing interest in toys and interaction. If your baby reaches frantic crying, back-arching, and clenched fists, they have become overtired; calm and soothe them with cuddles in a quiet, dimly lit room before trying to settle them down to sleep.",
@@ -563,7 +563,7 @@
     {
       "id": "d256eca3a1802de01963587937b4a3f9993d192b5b621bd593843378d6a5a29e",
       "source_id": "nhs-daytime-naps-and-wake-windows",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/daytime-naps/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/your-babys-sleep-patterns/",
       "title": "Establishing Day and Night Rhythms in Newborns",
       "category": "sleep",
       "chunk_text": "Newborn babies are not born with a developed circadian rhythm (body clock) and do not produce melatonin (the sleep hormone) in regular cycles during the early weeks, meaning they do not instinctively know the difference between day and night. You can gently help your baby develop healthy internal rhythms by creating clear environmental contrasts: During the daytime: keep curtains open to allow plenty of natural daylight into the room, maintain normal household sounds and background noise (such as talking, the radio, or domestic activity), and interact warmly, chatting and playing when baby is awake and fed. During the nighttime: keep the bedroom completely dark and quiet, using only a soft, dim nightlight when carrying out night feeds or nappy changes; keep interactions calm, quiet, and unhurried with minimal eye contact; avoid stimulating play or bright lights; and settle baby straight back into their cot once they are fed, winded, and clean. Over a few weeks, these consistent cues help their brain recognise nighttime as the main time for rest.",
@@ -576,7 +576,7 @@
     {
       "id": "29818ca2b6be4c8d26537d1cc3d27e6d6f979213c7bbfb35c34800ffbda20a6c",
       "source_id": "nhs-toddler-sleep-challenges",
-      "source_url": "https://www.nhs.uk/conditions/baby/sleep-and-teething/sleep-problems-in-young-children/",
+      "source_url": "https://www.nhs.uk/baby/health/sleep-and-young-children/",
       "title": "Managing Toddler Bedtime Resistance and Night Waking",
       "category": "sleep",
       "chunk_text": "Bedtime resistance, stalling tactics, and frequent night waking are very common developmental phases in toddlers, often driven by their burgeoning independence, vivid imagination, and natural separation anxiety. Helpful NHS strategies to manage toddler sleep challenges include: 1. Screen-free wind-down: Turn off all televisions, tablets, and mobile screens at least 45 to 60 minutes before bedtime, as blue screen light suppresses melatonin production and disrupts settling. 2. Offer positive limited choices: Give your toddler a sense of healthy autonomy by offering simple two-way choices (for example, 'Would you like the dinosaur pyjamas or the striped pyjamas?' or 'Which of these two bedtime stories shall we read together?'). 3. Morning cues: Consider using a toddler sleep-training clock that changes colour or opens its eyes when it is morning. 4. The quiet return: If your toddler gets out of bed, calmly and quietly guide them back to bed without engaging in lengthy conversations, negotiation, or anger; repeat this consistently with a soothing phrase like 'It is bedtime now, you are safe, go to sleep'. Reassuring presence and predictable boundaries help toddlers settle securely.",
@@ -589,7 +589,7 @@
     {
       "id": "f17c9afbc1eec8b906e66c15145ef586acd75644e8e6fe0546f4e33216f40359",
       "source_id": "nhs-toddler-sleep-challenges",
-      "source_url": "https://www.nhs.uk/conditions/baby/sleep-and-teething/sleep-problems-in-young-children/",
+      "source_url": "https://www.nhs.uk/baby/health/sleep-and-young-children/",
       "title": "Night Terrors Versus Nightmares in Children",
       "category": "sleep",
       "chunk_text": "Nightmares and night terrors are very different sleep phenomena that require different parental responses. Nightmares occur during rapid eye movement (REM) dream sleep, typically in the second half of the night. A child having a nightmare wakes up fully, feels frightened, often remembers the frightening dream, and seeks comfort; you can reassure them with a cuddle, gentle words, and a soft nightlight until they settle. In contrast, night terrors occur during deep non-REM sleep, usually within the first 2 to 3 hours after falling asleep. During a night terror, a child may sit bolt upright, scream loudly, thrash about, or have wide, glassy, staring eyes with a rapid heartbeat, but they are actually fast asleep and completely unaware of your presence. NHS guidance advises: Do not attempt to shake or forcibly wake a child experiencing a night terror, as this causes confusion and distress. Stay quietly by their side to ensure they remain physically safe from falling or bumping into furniture; they will settle back into deep sleep naturally and will have no recollection of the event in the morning.",
@@ -602,7 +602,7 @@
     {
       "id": "82feb71a928eedd9190166a17dcfe792e4ee52cc26f5a526b1ccad35481085a8",
       "source_id": "nhs-baby-sleep-patterns-0-to-12-months",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/sleep-in-the-first-few-months/",
+      "source_url": "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/",
       "title": "Understanding Normal Infant Sleep Cycles and Regressions",
       "category": "sleep",
       "chunk_text": "It is entirely normal and biologically appropriate for babies to wake multiple times during the night throughout their first year of life. Infant sleep cycles are much shorter than adult cycles, lasting roughly 45 to 50 minutes (compared to 90 minutes for adults) and alternating between active light REM sleep and quiet deep sleep. At the end of every cycle, babies enter a brief semi-conscious state where they check their surroundings. Around 4 months of age, your baby's sleep architecture matures permanently to include four distinct adult-like sleep stages; this biological transition (often referred to as the 4-month sleep shift or regression) frequently causes babies to wake more fully between sleep cycles. Subsequent temporary sleep disruptions commonly happen around 8 to 10 months and 12 months due to developmental leaps such as crawling, pulling to stand, separation anxiety, and teething. Frequent waking for nourishment and comfort is a natural protective mechanism in infancy. Night waking is never a sign of parental failure; it is a normal part of your baby's healthy development.",
@@ -667,7 +667,7 @@
     {
       "id": "fe22d93d61e73182d9d059b7121282ef52e20f438d18a8e6a85b58237db410ca",
       "source_id": "nhs-baby-development-milestones-0-6-months",
-      "source_url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-birth-to-6-months/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "title": "Developmental Milestones: Birth to 6 Months",
       "category": "teething-development",
       "chunk_text": "Every baby is an individual and develops at their own unique pace, but there are typical developmental milestones that most babies achieve during their first 6 months: At 6 to 8 weeks: your baby gives their first genuine social smile in response to your face, smile, and voice. By 3 months: your baby follows moving objects and faces smoothly with their eyes, lifts their head and chest when lying on their tummy, opens and closes their fists, and babbles with soft vowel sounds (cooing: 'ooh', 'aah'). By 4 to 5 months: your baby reaches out for colourful toys, grasps rattles, laughs aloud, and begins rolling from their tummy onto their back. By 6 months: your baby can transfer objects from one hand to the other, turns towards their own name when called, and can sit upright with gentle support. Bring your baby's red book (Personal Child Health Record) to all routine developmental reviews, and discuss any questions with your health visitor.",
@@ -680,7 +680,7 @@
     {
       "id": "4f172b45f880af89d29da236877b5517790e1df65dbc1c6138e764fcff13593e",
       "source_id": "nhs-baby-development-milestones-6-12-months",
-      "source_url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-6-to-12-months/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "title": "Developmental Milestones: 6 to 12 Months",
       "category": "teething-development",
       "chunk_text": "Between 6 and 12 months of age, babies make tremendous leaps in physical mobility, communication, and social interaction: By 6 to 8 months: your baby learns to sit without support, rolls in both directions, and babbles repeated consonant strings (such as 'ba-ba', 'ma-ma', or 'da-da'). By 9 to 10 months: your baby develops the pincer grasp (using the tips of the thumb and index finger to pick up small finger foods), crawls or bottom-shuffles, pulls themselves up to a standing position against furniture, and understands familiar words like 'bye-bye' or 'no'. By 11 to 12 months: your baby cruises along furniture holding on with one or two hands, may take their first independent steps, waves goodbye, claps hands, points to show you things, and may say one or two recognisable words with clear meaning. Every baby develops in their own rhythm, but if your baby cannot sit unsupported by 9 months, does not bear weight on their legs, or does not respond to sounds and eye contact, talk to your health visitor or GP for supportive assessment.",
@@ -706,7 +706,7 @@
     {
       "id": "c0f111c889d9a22f5d8ba4fbc3f4c54b4dd37082e16f45d34866c46f98ee49c5",
       "source_id": "nhs-speech-and-language-early-talk",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/learning-to-talk/talking-0-to-6-months/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/learning-to-talk/first-sounds-0-to-6-months/",
       "title": "Supporting Early Speech, Language, and Communication",
       "category": "teething-development",
       "chunk_text": "Talking, singing, and interacting with your baby right from birth lays the vital groundwork for early speech, language development, and emotional bonding. Simple, everyday ways to encourage your baby's communication include: 1. Eye contact and facial expressions: get close to your baby, make warm eye contact, and smile; babies naturally love studying human faces and watching mouth movements. 2. Narrate your day: describe everyday activities as you do them ('Now we are putting on your clean yellow socks', 'Let's open the curtains to see the sunshine'). 3. Conversational turn-taking: when your baby coos or babbles, pause, smile, and repeat the sounds back to them, teaching them how conversations work. 4. Rhymes and stories: sing simple nursery rhymes, play peek-a-boo, and share colourful board books together every day, pointing to and naming pictures. 5. Minimise background noise: turn off televisions, tablets, and radios during playtime and conversation, as background noise makes it harder for young babies to distinguish speech sounds. If you have any concerns about your child's hearing or language development, discuss them with your health visitor.",
@@ -719,7 +719,7 @@
     {
       "id": "846b62bc837f22f78dbee3dcd5e1adfa92d8f9ffb6c43169e6df01caa40df55b",
       "source_id": "nhs-crawling-and-walking-development",
-      "source_url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/walking-and-sitting/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "title": "Sitting, Crawling, Cruising, and First Steps",
       "category": "teething-development",
       "chunk_text": "Gross motor development follows a general physical sequence, although the exact timing varies considerably from baby to baby: Most infants learn to sit unsupported between 6 and 8 months, begin crawling or commando crawling between 7 and 10 months (some babies bottom-shuffle instead, which is completely normal), and take their first independent steps anywhere between 9 and 18 months. When your baby begins pulling themselves up to stand and cruising along furniture, let them practice barefoot indoors whenever possible. Barefoot practice allows tiny foot and ankle muscles to strengthen naturally, promotes healthy arch development, and provides sensory feedback for balance. First walking shoes are only needed outdoors for protection from weather and sharp surfaces; choose lightweight, flexible shoes with non-slip soles and a wide toe box. SAFETY WARNING: The NHS, Royal Society for the Prevention of Accidents (RoSPA), and paediatric specialists strongly advise against using baby walkers (wheeled frames with a suspended seat). Baby walkers can cause serious head injuries, burns, and falls down stairs, and they do not help babies learn to walk any faster.",
@@ -771,7 +771,7 @@
     {
       "id": "f9382e51567b2a98226531d9fd5903c9c44830604212774c2dd57e03401dc7a9",
       "source_id": "nhs-baby-reflux-and-spitting-up",
-      "source_url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/reflux-in-babies/",
+      "source_url": "https://www.nhs.uk/conditions/reflux-in-babies/",
       "title": "Reflux and Possetting: Normal Spitting Up Versus Silent Reflux",
       "category": "minor-ailments",
       "chunk_text": "Reflux occurs when milk comes back up from a baby's stomach into their food pipe (oesophagus) because the muscular ring or valve at the top of the stomach is still developing and relaxes too easily. Possetting — bringing up small mouthfuls of milk during or shortly after a feed — is completely normal, harmless, and very common in thriving, contented babies (often called 'happy spitters'). To help ease reflux and reduce possetting: feed your baby in a more upright position, keep them comfortably upright for 20 to 30 minutes after each feed, burp them gently during natural pauses in feeding, and offer slightly smaller feeds more frequently rather than large, voluminous feeds. In cases of 'silent reflux', your baby brings milk up into the food pipe and swallows it back down without actually vomiting; this can cause noticeable discomfort, arching of the back during or after feeds, sudden crying, frequent hiccuping, and sour-smelling breath. If your baby seems distressed by reflux, consult your health visitor or GP for advice.",
@@ -784,7 +784,7 @@
     {
       "id": "05f7a8cb5b76cde94b7c61f5a3e5a9d3efd6f9aca0382b9a1331aec375e87ee2",
       "source_id": "nhs-baby-reflux-and-spitting-up",
-      "source_url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/reflux-in-babies/",
+      "source_url": "https://www.nhs.uk/conditions/reflux-in-babies/",
       "title": "Reflux Red Flags: When to Seek Urgent Medical Care",
       "category": "minor-ailments",
       "chunk_text": "While mild infant reflux usually resolves naturally by around 12 months of age as the muscular stomach valve matures and your baby spends more time sitting upright, certain symptoms are red flags that require urgent clinical assessment. Contact your GP surgery or call NHS 111 promptly if your baby: brings up bright green or yellow-green bile; vomits forcefully and projectively across a distance (which can indicate pyloric stenosis, a muscular narrowing of the stomach outlet); has blood in their vomit or nappies; consistently refuses feeds and struggles to gain weight; or cries inconsolably with apparent abdominal pain after feeds. EMERGENCY RED FLAGS: Call 999 or go straight to your nearest hospital A&E immediately if your baby becomes floppy, unusually drowsy, or unresponsive; has severe difficulty breathing, grunts with breaths, or pants rapidly; turns pale, mottled, blue, or grey around the lips or tongue; or if severe choking episodes cause them to struggle for breath during or after vomiting.",
@@ -797,7 +797,7 @@
     {
       "id": "4cf6e6ad221a5adc592e0700e440dce974b3e06cf42fdc0fb7dde5e77d91db47",
       "source_id": "nhs-baby-colic-signs-and-support",
-      "source_url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/colic-and-crying/",
+      "source_url": "https://www.nhs.uk/conditions/colic/",
       "title": "Colic in Babies: Symptoms, Soothing Holds, and Parent Support",
       "category": "minor-ailments",
       "chunk_text": "Colic is defined as repeated, prolonged episodes of intense, unexplainable crying in an otherwise healthy, well-fed baby. It often peaks in the late afternoon or evening, typically starting when a baby is around 2 to 3 weeks old and resolving naturally by 3 to 4 months. Signs of colic include: piercing, inconsolable crying; drawing their knees up to their tummy; arching their back; clenching their fists tightly; a red or flushed face; and passing wind while crying. To soothe a baby experiencing colic: try the 'tiger in the tree' hold (carrying your baby tummy-down along your forearm with your hand supporting their chest); offer gentle rhythmic rocking in a quiet room; give a soothing warm bath; or play rhythmic white noise. Remember that colic is not caused by anything you have done wrong and does not harm your baby. Caring for a crying baby can be physically and emotionally exhausting; if you feel overwhelmed, place your baby safely on their back in their cot, step out of the room for a few minutes to take deep breaths, or contact your health visitor or the Cry-sis helpline (0800 028 8318) for support.",
@@ -901,7 +901,7 @@
     {
       "id": "5bc0e8774fb7af47916c1126767e2e5397526e9b25923d1dd6f892df7380be40",
       "source_id": "nhs-postnatal-mental-health-for-partners-fathers",
-      "source_url": "https://www.nhs.uk/mental-health/conditions/post-natal-depression/support-for-partners/",
+      "source_url": "https://www.nhs.uk/mental-health/conditions/postnatal-depression/",
       "title": "Postnatal Mental Health Support for Fathers and Partners",
       "category": "emotional-wellbeing",
       "chunk_text": "Postnatal mental health difficulties do not only affect mothers who have given birth; research shows that up to 1 in 10 fathers and non-birthing partners also experience postnatal depression and anxiety. Becoming a parent brings enormous life transitions: profound sleep deprivation, increased financial pressure, shifting relationship dynamics, and the emotional weight of supporting a partner and newborn. Symptoms of postnatal depression in partners often present differently, including: persistent fatigue; feeling unusually irritable, frustrated, or angry; emotional numbness or feeling disconnected from the baby and family; withdrawing from friends and social activities; working excessively long hours to escape; increased alcohol consumption; and feeling completely overwhelmed by new responsibilities. If you are a partner experiencing these feelings, remember that your mental health matters just as much. Talk openly to your GP, your family's health visitor, or access NHS Talking Therapies. Seeking timely support helps you feel like yourself again and strengthens your whole family.",
@@ -927,7 +927,7 @@
     {
       "id": "2fbe4cf552fbc47d65233b6b54de56e18ad94c113efbd8083bc631e0d0e42504",
       "source_id": "nhs-bonding-with-your-newborn-baby",
-      "source_url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/bonding-with-your-baby/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/caring-for-your-baby/skin-to-skin-contact-with-your-newborn/",
       "title": "Bonding with Your Baby: Building Secure Attachment",
       "category": "emotional-wellbeing",
       "chunk_text": "Bonding is the deep emotional connection that develops between you and your baby. While stories often portray bonding as an instantaneous rush of overwhelming love at the exact moment of birth, for many loving parents bonding is a gradual journey that unfolds steadily over days, weeks, or months. Practical ways to nurture secure attachment include: enjoying skin-to-skin cuddles against your bare chest; carrying your baby close in an ergonomic sling or wrap; making warm eye contact, smiling, and talking in gentle tones; responding tenderly and promptly when your baby cries; and trying gentle baby massage. If you feel emotionally numb, detached, or feel as though you are simply babysitting someone else's infant, please do not feel guilty or ashamed. This is a common experience, often triggered by a difficult or traumatic birth, severe exhaustion, or perinatal low mood. Share how you are feeling with your health visitor or GP; they will listen without judgment and support your bonding journey.",
@@ -940,7 +940,7 @@
     {
       "id": "e4e576491a39a9bb222fab929199fb0c8710eaf8f70fec60fef33d43cfb399ef",
       "source_id": "nhs-parental-exhaustion-and-asking-for-help",
-      "source_url": "https://www.nhs.uk/start-for-life/baby/mental-health-and-wellbeing/parent-mental-health/",
+      "source_url": "https://www.nhs.uk/best-start-in-life/baby/your-mental-health/",
       "title": "Parental Exhaustion: Self-Care and Accepting Practical Help",
       "category": "emotional-wellbeing",
       "chunk_text": "Severe sleep deprivation and the constant, round-the-clock physical demands of caring for a young baby can lead to intense exhaustion, low energy, and mental fog. Practical NHS advice for managing parental exhaustion and prioritising wellbeing includes: 1. Rest whenever possible: Even lying down with your eyes closed for 20 minutes without checking your phone or doing chores helps restore energy and lowers stress hormones. 2. Lower household expectations: Housework, tidying, laundry, and ironing can wait; focus your energy on nourishing yourself, resting, and caring for your baby. 3. Accept all practical offers of help: When friends or family ask what they can do, give them specific tasks — ask them to bring over cooked meals, do a load of washing, run errands, or hold the baby while you take an uninterrupted bath or nap. 4. Get fresh air: Step outside for a short daily walk with the pram; natural daylight and gentle movement boost mood and help regulate your own sleep. Looking after yourself is an essential part of caring for your baby.",
@@ -966,7 +966,7 @@
     {
       "id": "4712955c3d3db9951c77929374fcb7a90f987633995996b64380c3d832e1496e",
       "source_id": "nhs-maternal-mental-health-services",
-      "source_url": "https://www.nhs.uk/service-search/mental-health/find-an-nhs-mental-health-services/",
+      "source_url": "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/",
       "title": "Specialist NHS Perinatal Mental Health Services and Crisis Support",
       "category": "emotional-wellbeing",
       "chunk_text": "For mothers and birthing parents experiencing moderate to severe mental health difficulties during pregnancy or within the first 24 months following birth, the NHS provides dedicated Specialist Perinatal Mental Health Services across the UK. These specialist multidisciplinary clinical teams include perinatal consultant psychiatrists, clinical psychologists, specialist mental health nurses, nursery nurses, and peer support workers. They offer comprehensive psychiatric evaluations, specialist psychological talking therapies, tailored medication reviews that take breastfeeding into account, and mother-infant relationship bonding therapy. In severe circumstances (such as postpartum psychosis, severe bipolar episodes, or severe postnatal depression), NHS Mother and Baby Units (MBUs) provide specialist inpatient hospital care where mothers receive expert medical and psychiatric treatment without being separated from their baby. If you or someone you know is in acute mental health crisis: contact NHS 111 (select mental health option 2 in England), call 999, call the Samaritans helpline on 116 123 (available 24 hours a day, free of charge), or attend your nearest hospital A&E department for immediate medical assistance.",

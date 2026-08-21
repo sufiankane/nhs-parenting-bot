@@ -12,7 +12,7 @@ export interface RawChunk {
 export const newbornCareChunks: RawChunk[] = [
   {
     source_id: "nhs-soothing-crying-baby",
-    source_url: "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/soothing-a-crying-baby/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
     title: "Soothing a Crying Baby: Gentle Calming Techniques",
     category: "newborn-care",
     chunk_index: 0,
@@ -21,7 +21,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-soothing-crying-baby",
-    source_url: "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/soothing-a-crying-baby/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
     title: "Coping with Persistent Crying: ICON Infant Safety Guidance",
     category: "newborn-care",
     chunk_index: 1,
@@ -66,7 +66,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-umbilical-cord-care",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/caring-for-a-newborn-baby/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/",
     title: "Caring for Your Newborn's Umbilical Cord Stump",
     category: "newborn-care",
     chunk_index: 0,
@@ -75,7 +75,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-umbilical-cord-care",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/caring-for-a-newborn-baby/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/",
     title: "Recognising Signs of Umbilical Cord Infection (Omphalitis)",
     category: "newborn-care",
     chunk_index: 1,
@@ -84,7 +84,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-dressing-temperature",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/keeping-your-baby-warm-or-cool/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
     title: "Dressing Your Baby for Room Temperature",
     category: "newborn-care",
     chunk_index: 0,
@@ -93,7 +93,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-baby-dressing-temperature",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/keeping-your-baby-warm-or-cool/",
+    source_url: "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
     title: "Checking Baby's Temperature and Preventing Overheating",
     category: "newborn-care",
     chunk_index: 1,
@@ -102,7 +102,7 @@ export const newbornCareChunks: RawChunk[] = [
   },
   {
     source_id: "nhs-holding-and-handling-newborn",
-    source_url: "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/holding-your-baby/",
+    source_url: "https://www.nhs.uk/baby/caring-for-a-newborn/what-you-will-need-for-your-baby/",
     title: "Safe Handling, Head Support, and Bonding Holds",
     category: "newborn-care",
     chunk_index: 0,

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": "1.0.0",
-  "last_updated": "2026-08-20",
+  "last_updated": "2026-08-21",
   "authoritative_domain": "nhs.uk",
   "categories": [
     "newborn-care",
@@ -16,7 +16,7 @@
     {
       "id": "nhs-soothing-crying-baby",
       "title": "Soothing a crying baby",
-      "url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/soothing-a-crying-baby/",
+      "url": "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
       "category": "newborn-care",
       "description": "Guidance on why newborn babies cry, soothing techniques, skin-to-skin contact, and coping when crying feels overwhelming.",
       "authority": "NHS",
@@ -49,7 +49,7 @@
     {
       "id": "nhs-umbilical-cord-care",
       "title": "Caring for a newborn baby's umbilical cord",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/caring-for-a-newborn-baby/",
+      "url": "https://www.nhs.uk/baby/caring-for-a-newborn/",
       "category": "newborn-care",
       "description": "Guidance on keeping the umbilical cord stump clean and dry, normal healing timelines, and signs of cord infection.",
       "authority": "NHS",
@@ -60,7 +60,7 @@
     {
       "id": "nhs-baby-dressing-temperature",
       "title": "Keeping your baby warm or cool",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/keeping-your-baby-warm-or-cool/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "category": "newborn-care",
       "description": "NHS advice on dressing babies for the season, checking baby body temperature on chest or neck, and avoiding overheating.",
       "authority": "NHS",
@@ -71,7 +71,7 @@
     {
       "id": "nhs-holding-and-handling-newborn",
       "title": "Holding and handling your newborn baby",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/holding-your-baby/",
+      "url": "https://www.nhs.uk/baby/caring-for-a-newborn/what-you-will-need-for-your-baby/",
       "category": "newborn-care",
       "description": "Safe ways to hold and support a newborn head and neck, bonding holds, and understanding normal newborn startle reflexes.",
       "authority": "NHS",
@@ -93,7 +93,7 @@
     {
       "id": "nhs-breastfeeding-positioning-attachment",
       "title": "How to breastfeed: positioning and attachment",
-      "url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding/how-to-breastfeed/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/breastfeeding/",
       "category": "feeding",
       "description": "Practical steps for comfortable breastfeeding latch, body alignment, chin to breast positioning, and pain-free feeds.",
       "authority": "NHS",
@@ -126,7 +126,7 @@
     {
       "id": "nhs-breastfeeding-challenges-sore-nipples",
       "title": "Breastfeeding challenges: sore or cracked nipples",
-      "url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/breastfeeding-challenges/sore-or-cracked-nipples/",
+      "url": "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
       "category": "feeding",
       "description": "Identifying causes of nipple pain, improving deep latch, breast care tips, and seeking help from infant feeding specialists.",
       "authority": "NHS",
@@ -137,7 +137,7 @@
     {
       "id": "nhs-responsive-feeding-cues",
       "title": "Responsive feeding cues and hunger signs",
-      "url": "https://www.nhs.uk/start-for-life/baby/feeding-your-baby/responsive-feeding/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/feeding-your-baby/bottle-feeding/bottle-feeding-your-baby/feeding-on-demand/",
       "category": "feeding",
       "description": "NHS Start for Life guidance on recognising hunger cues, feeding on demand, pace feeding, and winding techniques.",
       "authority": "NHS Start for Life",
@@ -148,7 +148,7 @@
     {
       "id": "nhs-combining-breast-and-bottle-feeding",
       "title": "Combining breast and bottle feeding (mixed feeding)",
-      "url": "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/combining-breast-and-bottle-feeding/",
+      "url": "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/bottle-feeding/combine-breast-and-bottle/",
       "category": "feeding",
       "description": "Advice on introducing expressed breast milk or formula in bottles while maintaining breastfeeding comfort and milk supply.",
       "authority": "NHS",
@@ -170,7 +170,7 @@
     {
       "id": "nhs-weaning-first-foods-textures",
       "title": "What to feed your baby: first foods and textures",
-      "url": "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/first-foods/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/from-around-6-months/",
       "category": "weaning-nutrition",
       "description": "Single vegetables, fruits, porridge, mashed foods, finger foods, and introducing varied flavours gradually.",
       "authority": "NHS Start for Life",
@@ -247,7 +247,7 @@
     {
       "id": "nhs-baby-bedtime-routines",
       "title": "Bedtime routines for babies and toddlers",
-      "url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/bedtime-routines/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/",
       "category": "sleep",
       "description": "Creating a predictable, soothing wind-down sequence: bath, story, lullaby, gentle lighting, and responsive settling.",
       "authority": "NHS Start for Life",
@@ -258,7 +258,7 @@
     {
       "id": "nhs-co-sleeping-and-cot-safety",
       "title": "Co-sleeping safely with your baby",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/co-sleeping-with-your-baby/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/safe-sleep-advice-for-babies/",
       "category": "sleep",
       "description": "Clear safety guidelines on when bed-sharing is unsafe (smoking, alcohol, medications, sofa/armchair) and how to minimise risk.",
       "authority": "NHS",
@@ -269,7 +269,7 @@
     {
       "id": "nhs-daytime-naps-and-wake-windows",
       "title": "Daytime naps and sleep schedules for babies",
-      "url": "https://www.nhs.uk/start-for-life/baby/baby-sleep/daytime-naps/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/newborn-and-baby-sleeping-advice-for-parents/your-babys-sleep-patterns/",
       "category": "sleep",
       "description": "Understanding age-appropriate nap patterns, recognising tired cues before overtiredness, and day-night rhythm development.",
       "authority": "NHS Start for Life",
@@ -280,7 +280,7 @@
     {
       "id": "nhs-toddler-sleep-challenges",
       "title": "Sleep problems in young children",
-      "url": "https://www.nhs.uk/conditions/baby/sleep-and-teething/sleep-problems-in-young-children/",
+      "url": "https://www.nhs.uk/baby/health/sleep-and-young-children/",
       "category": "sleep",
       "description": "Managing toddler bedtime refusal, night waking, early waking, separation anxiety, and consistent positive boundaries.",
       "authority": "NHS",
@@ -291,7 +291,7 @@
     {
       "id": "nhs-baby-sleep-patterns-0-to-12-months",
       "title": "Baby sleep patterns in the first year",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/sleep-in-the-first-few-months/",
+      "url": "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/",
       "category": "sleep",
       "description": "Normal biological sleep development, frequent waking for feeds, sleep cycles, and navigating common 4-month sleep shifts.",
       "authority": "NHS",
@@ -324,7 +324,7 @@
     {
       "id": "nhs-baby-development-milestones-0-6-months",
       "title": "Baby development milestones: birth to 6 months",
-      "url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-birth-to-6-months/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "category": "teething-development",
       "description": "Social smiles, tracking objects with eyes, head control, rolling, babbling, and talking to your health visitor about progress.",
       "authority": "NHS",
@@ -335,7 +335,7 @@
     {
       "id": "nhs-baby-development-milestones-6-12-months",
       "title": "Baby development milestones: 6 to 12 months",
-      "url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/baby-development-6-to-12-months/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "category": "teething-development",
       "description": "Sitting unsupported, pincer grasp, waving, responding to own name, standing with support, and individual variation in milestones.",
       "authority": "NHS",
@@ -357,7 +357,7 @@
     {
       "id": "nhs-speech-and-language-early-talk",
       "title": "Learning to talk: 0 to 12 months",
-      "url": "https://www.nhs.uk/start-for-life/baby/learning-to-talk/talking-0-to-6-months/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/learning-to-talk/first-sounds-0-to-6-months/",
       "category": "teething-development",
       "description": "Conversations with baby, repeating sounds, eye contact, singing nursery rhymes, and building early communication skills.",
       "authority": "NHS Start for Life",
@@ -368,7 +368,7 @@
     {
       "id": "nhs-crawling-and-walking-development",
       "title": "Sitting, crawling, and walking milestones",
-      "url": "https://www.nhs.uk/conditions/baby/babys-development/developmental-milestones/walking-and-sitting/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-moves/",
       "category": "teething-development",
       "description": "Gross motor progression from rolling to crawling, cruising on furniture, first steps, barefoot walking, and shoe selection.",
       "authority": "NHS",
@@ -401,7 +401,7 @@
     {
       "id": "nhs-baby-reflux-and-spitting-up",
       "title": "Reflux and possetting in babies",
-      "url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/reflux-in-babies/",
+      "url": "https://www.nhs.uk/conditions/reflux-in-babies/",
       "category": "minor-ailments",
       "description": "Differences between normal posset and painful reflux, upright feeding positions, burping, and red flag symptoms requiring medical review.",
       "authority": "NHS",
@@ -412,7 +412,7 @@
     {
       "id": "nhs-baby-colic-signs-and-support",
       "title": "Colic and excessive crying in babies",
-      "url": "https://www.nhs.uk/conditions/baby/crying-colic-and-reflux/colic-and-crying/",
+      "url": "https://www.nhs.uk/conditions/colic/",
       "category": "minor-ailments",
       "description": "recognising colic crying patterns (evening crying, clenched fists), comforting measures, and emotional support for parents.",
       "authority": "NHS",
@@ -478,7 +478,7 @@
     {
       "id": "nhs-postnatal-mental-health-for-partners-fathers",
       "title": "Postnatal mental health support for partners and fathers",
-      "url": "https://www.nhs.uk/mental-health/conditions/post-natal-depression/support-for-partners/",
+      "url": "https://www.nhs.uk/mental-health/conditions/postnatal-depression/",
       "category": "emotional-wellbeing",
       "description": "Addressing mental health challenges for fathers and non-birthing partners, feelings of stress or disconnection, and accessing UK NHS support.",
       "authority": "NHS",
@@ -500,7 +500,7 @@
     {
       "id": "nhs-bonding-with-your-newborn-baby",
       "title": "Bonding with your baby: building a secure attachment",
-      "url": "https://www.nhs.uk/conditions/baby/caring-for-a-newborn/bonding-with-your-baby/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/baby-basics/caring-for-your-baby/skin-to-skin-contact-with-your-newborn/",
       "category": "emotional-wellbeing",
       "description": "Reassuring advice that bonding takes time, skin-to-skin touch, talking gently, and seeking reassurance if feeling detached.",
       "authority": "NHS",
@@ -511,7 +511,7 @@
     {
       "id": "nhs-parental-exhaustion-and-asking-for-help",
       "title": "Parent mental health: managing exhaustion and asking for help",
-      "url": "https://www.nhs.uk/start-for-life/baby/mental-health-and-wellbeing/parent-mental-health/",
+      "url": "https://www.nhs.uk/best-start-in-life/baby/your-mental-health/",
       "category": "emotional-wellbeing",
       "description": "NHS Start for Life tips on pacing yourself, resting when possible, accepting help from friends and family, and prioritising mental wellness.",
       "authority": "NHS Start for Life",
@@ -533,7 +533,7 @@
     {
       "id": "nhs-maternal-mental-health-services",
       "title": "NHS specialist perinatal mental health services",
-      "url": "https://www.nhs.uk/service-search/mental-health/find-an-nhs-mental-health-services/",
+      "url": "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/",
       "category": "emotional-wellbeing",
       "description": "How NHS perinatal mental health teams provide dedicated psychological support for pregnant and new mothers experiencing moderate to severe difficulties.",
       "authority": "NHS",
