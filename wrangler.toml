@@ -22,6 +22,7 @@ index_name = "nhs-guidance"
 binding = "DB"
 database_name = "nhs-parenting"
 database_id = "f41a2de8-be77-4061-80a7-c55789843e70"
+preview_database_id = "f41a2de8-be77-4061-80a7-c55789843e70"
 
 [[kv_namespaces]]
 binding = "SESSIONS"
@@ -31,6 +32,7 @@ preview_id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
 [[r2_buckets]]
 binding = "RAW_SOURCES"
 bucket_name = "nhs-raw-sources"
+preview_bucket_name = "nhs-raw-sources"
 
 [[queues.producers]]
 binding = "INGEST_QUEUE"
