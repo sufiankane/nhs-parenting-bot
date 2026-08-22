@@ -1,9 +1,9 @@
-﻿/**
- * M1 Frontend Widget [P1-T7].
+/**
+ * M1 Frontend Widget [P1-T7, P3-T1].
  *
  * Client half of the safety path (rules-02). Renders the frozen SSE envelope
  * contract ({ type: "token" | "signpost" | "error" | "done", payload }) from
- * the /chat gateway.
+ * the /chat gateway into accessible chat message bubbles and signpost cards.
  *
  * Safety obligations implemented here:
  *  - rule 02.4: signpost contacts are rendered verbatim, never reformatted.
@@ -61,44 +61,144 @@ export function init() {
   const input = document.getElementById("message-input");
   const sendButton = document.getElementById("send-button");
   const response = document.getElementById("response");
+  const form = document.getElementById("chat-form");
 
   let sessionId = undefined;
   let inFlight = false;
+  let currentAssistantBubble = null;
+  let typingIndicator = null;
 
-  function appendText(text) {
+  function scrollToBottom() {
+    if (response) {
+      response.scrollTop = response.scrollHeight;
+    }
+  }
+
+  function appendUserBubble(text) {
+    const turn = document.createElement("div");
+    turn.className = "message-turn user";
+
+    const label = document.createElement("span");
+    label.className = "message-label sr-only";
+    label.appendChild(document.createTextNode("You asked:"));
+    turn.appendChild(label);
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble bubble-user";
+    bubble.appendChild(document.createTextNode(text));
+    turn.appendChild(bubble);
+
+    response.appendChild(turn);
+    scrollToBottom();
+  }
+
+  function showTypingIndicator() {
+    if (typingIndicator) return;
+    typingIndicator = document.createElement("div");
+    typingIndicator.className = "typing-indicator";
+    typingIndicator.id = "typing-indicator";
+    typingIndicator.setAttribute("aria-label", "NHS Parenting Companion is writing a response");
+
+    const dot1 = document.createElement("span");
+    dot1.className = "dot";
+    const dot2 = document.createElement("span");
+    dot2.className = "dot";
+    const dot3 = document.createElement("span");
+    dot3.className = "dot";
+
+    typingIndicator.appendChild(dot1);
+    typingIndicator.appendChild(dot2);
+    typingIndicator.appendChild(dot3);
+
+    response.appendChild(typingIndicator);
+    scrollToBottom();
+  }
+
+  function hideTypingIndicator() {
+    if (typingIndicator && typingIndicator.parentNode) {
+      typingIndicator.parentNode.removeChild(typingIndicator);
+    }
+    typingIndicator = null;
+  }
+
+  function appendAssistantToken(text) {
+    hideTypingIndicator();
+
+    if (!currentAssistantBubble) {
+      const turn = document.createElement("div");
+      turn.className = "message-turn assistant";
+
+      const label = document.createElement("span");
+      label.className = "message-label sr-only";
+      label.appendChild(document.createTextNode("NHS Parenting Companion:"));
+      turn.appendChild(label);
+
+      currentAssistantBubble = document.createElement("div");
+      currentAssistantBubble.className = "bubble bubble-assistant";
+      turn.appendChild(currentAssistantBubble);
+
+      response.appendChild(turn);
+    }
+
     const node = document.createTextNode(text);
-    response.appendChild(node);
+    currentAssistantBubble.appendChild(node);
+    scrollToBottom();
   }
 
   function renderSignpost(payload) {
+    hideTypingIndicator();
+
     const card = document.createElement("section");
-    card.className = "signpost-card";
-    card.setAttribute("aria-label", "Help and support");
+    const isTier1 = payload.tier === 1 || String(payload.headline).toLowerCase().includes("emergency");
+    card.className = isTier1 ? "signpost-card tier-1" : "signpost-card";
+    card.setAttribute("role", "alert");
+    card.setAttribute("aria-label", "Help and support contact");
 
     const headline = document.createElement("h2");
-    headline.appendChild(document.createTextNode(payload.headline));
+    headline.appendChild(document.createTextNode(payload.headline || "Urgent Support"));
     card.appendChild(headline);
 
-    const reason = document.createElement("p");
-    reason.appendChild(document.createTextNode(payload.reason_plain_language));
-    card.appendChild(reason);
+    if (payload.reason_plain_language) {
+      const reason = document.createElement("p");
+      reason.appendChild(document.createTextNode(payload.reason_plain_language));
+      card.appendChild(reason);
+    }
 
-    for (const service of payload.services) {
-      const serviceBlock = document.createElement("p");
-      const name = document.createElement("strong");
-      name.appendChild(document.createTextNode(service.name));
-      serviceBlock.appendChild(name);
-      serviceBlock.appendChild(document.createTextNode(": "));
-      serviceBlock.appendChild(document.createTextNode(service.contact));
-      card.appendChild(serviceBlock);
+    if (Array.isArray(payload.services) && payload.services.length > 0) {
+      const list = document.createElement("ul");
+      list.className = "services-list";
+
+      for (const service of payload.services) {
+        const item = document.createElement("li");
+        item.className = "service-item";
+
+        const name = document.createElement("strong");
+        name.appendChild(document.createTextNode(service.name));
+        item.appendChild(name);
+        item.appendChild(document.createTextNode(": "));
+
+        const contact = document.createElement("span");
+        contact.className = "contact-detail";
+        contact.appendChild(document.createTextNode(service.contact));
+        item.appendChild(contact);
+
+        list.appendChild(item);
+      }
+      card.appendChild(list);
     }
 
     response.appendChild(card);
+    scrollToBottom();
   }
 
   function showError() {
-    const node = document.createTextNode(SAFE_ERROR_MESSAGE);
-    response.appendChild(node);
+    hideTypingIndicator();
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "chat-error";
+    errorDiv.setAttribute("role", "alert");
+    errorDiv.appendChild(document.createTextNode(SAFE_ERROR_MESSAGE));
+    response.appendChild(errorDiv);
+    scrollToBottom();
   }
 
   async function send() {
@@ -108,6 +208,10 @@ export function init() {
     inFlight = true;
     sendButton.disabled = true;
     input.value = "";
+    currentAssistantBubble = null;
+
+    appendUserBubble(message);
+    showTypingIndicator();
 
     try {
       const res = await fetch(CHAT_ENDPOINT, {
@@ -117,6 +221,11 @@ export function init() {
       });
 
       if (!res.ok) {
+        showError();
+        return;
+      }
+
+      if (!res.body || typeof res.body.getReader !== "function") {
         showError();
         return;
       }
@@ -146,13 +255,16 @@ export function init() {
           const { render } = handleSseEvent(envelope, { sessionId });
           if (!render) continue;
           if (render.type === "token") {
-            appendText(render.text);
+            appendAssistantToken(render.text);
           } else if (render.type === "signpost") {
             renderSignpost(render.payload);
           } else if (render.type === "error") {
             showError();
           } else if (render.type === "done") {
-            sessionId = render.sessionId;
+            hideTypingIndicator();
+            if (render.sessionId) {
+              sessionId = render.sessionId;
+            }
           }
         }
       }
@@ -161,17 +273,25 @@ export function init() {
     } finally {
       inFlight = false;
       sendButton.disabled = false;
+      hideTypingIndicator();
       input.focus();
     }
   }
 
-  sendButton.addEventListener("click", send);
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
+  if (form) {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       send();
-    }
-  });
+    });
+  } else {
+    sendButton.addEventListener("click", send);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        send();
+      }
+    });
+  }
 
   input.focus();
 }
