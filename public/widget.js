@@ -298,6 +298,13 @@ export function init() {
 
 export const NHSWidget = { init, buildRequest, handleSseEvent };
 
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && typeof document !== "undefined") {
   window.NHSWidget = NHSWidget;
+  if (typeof document.addEventListener === "function") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  }
 }
