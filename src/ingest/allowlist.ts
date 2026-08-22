@@ -62,3 +62,4 @@ export function validateSourceUrl(rawUrl: string): { valid: boolean; reason?: st
 export function validateCategory(category: string): category is CanonicalCategory {
   return (CANONICAL_CATEGORIES as readonly string[]).includes(category.trim());
 }
+

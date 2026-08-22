@@ -49,3 +49,4 @@ export interface IngestResult {
   readonly chunks_skipped: number;
   readonly error?: string;
 }
+
