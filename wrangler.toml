@@ -24,4 +24,17 @@ binding = "SESSIONS"
 id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
 preview_id = "c4c23432ce1a4dd2b6f987d7c4b0c8b2"
 
+[[r2_buckets]]
+binding = "RAW_SOURCES"
+bucket_name = "nhs-raw-sources"
+
+[[queues.producers]]
+binding = "INGEST_QUEUE"
+queue = "nhs-ingest-queue"
+
+[[queues.consumers]]
+queue = "nhs-ingest-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+
 

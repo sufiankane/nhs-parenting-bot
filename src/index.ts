@@ -9,6 +9,8 @@ import { retrieve } from "./retrieval/index";
 import { generateAnswer } from "./generation/index";
 import { createSessionId, appendMessage, getSession } from "./sessions/store";
 import { logTriageAudit } from "./audit/index";
+import { handleAdminIngest } from "./ingest/admin";
+import { processQueueBatch } from "./ingest/pipeline";
 
 export type { Env };
 
@@ -258,6 +260,22 @@ export default {
         );
       }
 
+      // POST /admin/ingest (M7 Ingestion endpoint — Spec §4 M2 & M7)
+      if (url.pathname === "/admin/ingest") {
+        if (request.method === "OPTIONS") {
+          return handleCorsPreflight(request, env);
+        }
+        if (request.method === "POST") {
+          return handleAdminIngest(request, env, corsHeaders);
+        }
+        return createErrorResponse(
+          405,
+          "METHOD_NOT_ALLOWED",
+          "Method not allowed on /admin/ingest",
+          corsHeaders
+        );
+      }
+
       // Catch-all unhandled routes
       return createErrorResponse(
         404,
@@ -275,5 +293,16 @@ export default {
         corsHeaders
       );
     }
+  },
+
+  /**
+   * Cloudflare Queue Consumer entrypoint (Spec §4 M7).
+   */
+  async queue(
+    batch: { messages: Array<{ body: any; ack(): void; retry(): void }> },
+    env: Env,
+    _ctx: unknown
+  ): Promise<void> {
+    await processQueueBatch(batch, env);
   },
 };

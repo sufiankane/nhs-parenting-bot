@@ -22,3 +22,4 @@ export interface AuditLogRow {
   readonly signal_categories: string; // JSON-serialized array
   readonly session_pseudonym: string;
 }
+
