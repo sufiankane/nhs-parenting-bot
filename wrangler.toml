@@ -34,11 +34,12 @@ binding = "RAW_SOURCES"
 bucket_name = "nhs-raw-sources"
 preview_bucket_name = "nhs-raw-sources"
 
-[[queues.producers]]
+[env.production]
+[[env.production.queues.producers]]
 binding = "INGEST_QUEUE"
 queue = "nhs-ingest-queue"
 
-[[queues.consumers]]
+[[env.production.queues.consumers]]
 queue = "nhs-ingest-queue"
 max_batch_size = 10
 max_batch_timeout = 30
