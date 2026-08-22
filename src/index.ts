@@ -276,6 +276,19 @@ export default {
         );
       }
 
+      // Static asset fallback for public/ directory (/, /widget.js, /index.html)
+      if (
+        env.ASSETS &&
+        typeof (env.ASSETS as { fetch: (req: Request) => Promise<Response> }).fetch === "function"
+      ) {
+        const assetRes = await (
+          env.ASSETS as { fetch: (req: Request) => Promise<Response> }
+        ).fetch(request);
+        if (assetRes.status !== 404) {
+          return assetRes;
+        }
+      }
+
       // Catch-all unhandled routes
       return createErrorResponse(
         404,

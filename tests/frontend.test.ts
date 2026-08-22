@@ -523,4 +523,30 @@ describe("P3-T1 DOM Component & Interactive Streaming Flow Tests", () => {
     expect(response.text).toContain("Sorry, something went wrong.");
     expect(response.text).toContain("NHS 111");
   });
+
+  it("worker fetch handler delegates GET / to env.ASSETS", async () => {
+    const workerModule = await import("../src/index");
+    const worker = workerModule.default;
+
+    const mockAssetResponse = new Response("<html>NHS Parenting Companion</html>", {
+      status: 200,
+      headers: { "Content-Type": "text/html" },
+    });
+
+    const envWithAssets = {
+      ASSETS: {
+        fetch: vi.fn().mockResolvedValue(mockAssetResponse),
+      },
+    };
+
+    const res = await worker.fetch(
+      new Request("http://localhost/"),
+      envWithAssets as any,
+      {}
+    );
+
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain("NHS Parenting Companion");
+    expect(envWithAssets.ASSETS.fetch).toHaveBeenCalled();
+  });
 });
