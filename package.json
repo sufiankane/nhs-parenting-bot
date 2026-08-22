@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --remote",
     "test": "vitest run",
     "test:redteam": "vitest run tests/redteam",
     "deploy": "wrangler deploy",

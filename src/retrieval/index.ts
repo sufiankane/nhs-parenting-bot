@@ -123,6 +123,11 @@ export async function retrieve(
       run: (model: string, input: unknown) => Promise<unknown>;
     };
 
+    if (!ai || typeof ai.run !== "function") {
+      console.error("RETRIEVAL_ERROR: AI binding is not available");
+      return SAFE_EMPTY;
+    }
+
     // 1. Embed the query
     const embeddingResult = await ai.run(EMBEDDING_MODEL, { text: query });
     const vector = extractEmbedding(embeddingResult);
@@ -137,7 +142,11 @@ export async function retrieve(
         vector: number[],
         opts: { topK: number }
       ) => Promise<{ matches: Array<{ id: string; score: number }> }>;
-    };
+    } | undefined;
+    if (!vectorIndex || typeof vectorIndex.query !== "function") {
+      console.error("RETRIEVAL_ERROR: VECTOR_INDEX binding is not available (run with --remote for Vectorize)");
+      return SAFE_EMPTY;
+    }
     const queryResult = await vectorIndex.query(vector, { topK: DEFAULT_TOP_K });
 
     // 3. Resolve similarity threshold (NaN → default 0.5)
