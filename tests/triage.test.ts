@@ -1,4 +1,4 @@
-﻿import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { triage, normalizeText, TIER_1_RULES, TIER_2_RULES, TIER_3_RULES } from "../src/triage/index";
 
 // Mock normalizeText so we can force an unexpected error inside triage() and
@@ -277,6 +277,30 @@ describe("M3 Triage Module v1 — Deep Immutability [rule 02.3]", () => {
         expect(Object.isFrozen(rule)).toBe(true);
         expect(Object.isFrozen(rule.phrases)).toBe(true);
       }
+    }
+  });
+});
+
+describe("M3 Triage Module — Charity & Support Query Non-Escalation [rule 02.1]", () => {
+  it("classifies benign queries about parenting charities as Tier 4 (no false escalation)", () => {
+    const benignCharityQueries = [
+      "Where can I find The Lullaby Trust safer sleep guide?",
+      "I called the Cry-sis helpline for advice on baby sleep routines",
+      "What does Home-Start UK do to help families with newborns?",
+      "How do I access Gingerbread single parent friendship groups?",
+      "Tell me about the Solihull approach from Action for Children Parent Talk",
+      "What is kangaroo care for premature babies in neonatal care according to Bliss?",
+      "What are the 4 ICON principles for coping with infant crying?",
+      "Where can I find the Institute of Health Visiting top tips for parents?",
+      "How does the Fatherhood Institute support new dads and bonding?",
+    ];
+
+    for (const query of benignCharityQueries) {
+      const res = triage(query);
+      expect(
+        res.tier,
+        `Expected query "${query}" to be classified as Tier 4, got Tier ${res.tier}`
+      ).toBe(4);
     }
   });
 });

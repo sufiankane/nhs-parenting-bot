@@ -1,4 +1,4 @@
-﻿import * as fs from "node:fs";
+import * as fs from "node:fs";
 import * as path from "node:path";
 import { ALL_RAW_CHUNKS } from "./data/index.js";
 import { FAQSeedFile, SourcesFile, hashChunk } from "./types.js";
@@ -52,6 +52,7 @@ for (const chunk of ALL_RAW_CHUNKS) {
 // ---- Map validated raw chunks to the frozen FAQSeedChunk shape ---------------
 const chunks = ALL_RAW_CHUNKS.map((chunk) => {
   const id = hashChunk(chunk.chunk_text);
+  const source = sourceById.get(chunk.source_id);
   return {
     id,
     source_id: chunk.source_id,
@@ -62,7 +63,7 @@ const chunks = ALL_RAW_CHUNKS.map((chunk) => {
     chunk_index: chunk.chunk_index,
     token_count: Math.round(wordCount(chunk.chunk_text) * 1.3),
     safety_relevant: chunk.safety_relevant,
-    attribution: ATTRIBUTION,
+    attribution: source ? `Source: ${source.authority}` : ATTRIBUTION,
     content_hash: id,
   };
 });

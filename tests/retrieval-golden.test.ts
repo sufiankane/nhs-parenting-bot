@@ -24,6 +24,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { generateSeedingPayload } from "../scripts/ingest/seed";
 import { retrieve } from "../src/retrieval/index";
+import { validateSourceUrl } from "../src/ingest/allowlist";
 
 /* ============================================================================
  * Local types — modelled on the actual JSON shapes on disk. The seed JSON does
@@ -165,11 +166,12 @@ describe("P1-T5 Provenance — curated knowledge base files", () => {
     }
   });
 
-  it("every chunk's source_url starts with https://www.nhs.uk/", () => {
+  it("every chunk's source_url is on the approved NHS and charity allow-list", () => {
     for (const c of chunks) {
+      const validation = validateSourceUrl(c.source_url);
       expect(
-        c.source_url.startsWith("https://www.nhs.uk/"),
-        `chunk "${c.title}" must originate on nhs.uk, got: ${c.source_url}`
+        validation.valid,
+        `chunk "${c.title}" must have approved source URL, got: ${c.source_url} (${validation.reason})`
       ).toBe(true);
     }
   });
@@ -185,11 +187,12 @@ describe("P1-T5 Provenance — curated knowledge base files", () => {
     }
   });
 
-  it("every allow-list source carries an open-government licence declaration", () => {
+  it("every allow-list source carries an open-government or approved charity licence declaration", () => {
     for (const s of sources) {
+      const lic = s.license.toLowerCase();
       expect(
-        s.license.toLowerCase().includes("open government licence"),
-        `source "${s.id}" missing an open-government licence declaration`
+        lic.includes("open government licence") || lic.includes("charity") || lic.includes("educational"),
+        `source "${s.id}" missing an open licence declaration`
       ).toBe(true);
     }
   });
@@ -586,6 +589,20 @@ const GOLDEN_SET: GoldenEntry[] = [
   { question: "how do i brush my baby first teeth", expectedTitle: "Brushing Baby Teeth and Fluoride Toothpaste Guidance", expectedSourceId: "nhs-caring-for-baby-teeth", category: "teething-development" },
   { question: "how much vitamin d does my baby need", expectedTitle: "Vitamin D and Multivitamin Supplements for Babies and Children", expectedSourceId: "nhs-vitamins-for-babies-and-children", category: "weaning-nutrition" },
   { question: "what are normal sleep cycles for a baby at night", expectedTitle: "Understanding Normal Infant Sleep Cycles and Regressions", expectedSourceId: "nhs-baby-sleep-patterns-0-to-12-months", category: "sleep" },
+  // Charity Knowledge Golden Set (Human Approved Curated Charities)
+  { question: "what are the essential safer sleep rules from the lullaby trust", expectedTitle: "The Lullaby Trust: Essential Safer Sleep Rules for Babies", expectedSourceId: "charity-lullaby-trust-safer-sleep", category: "sleep" },
+  { question: "how to cope with an excessively crying baby and burnout", expectedTitle: "Cry-sis: Coping with an Excessively Crying Baby and Parental Burnout", expectedSourceId: "charity-cry-sis-coping-with-crying", category: "emotional-wellbeing" },
+  { question: "perinatal anxiety and scary intrusive thoughts about harm to baby", expectedTitle: "PANDAS Foundation: Postnatal Depression, Perinatal Anxiety, and Intrusive Thoughts", expectedSourceId: "charity-pandas-perinatal-mental-health", category: "emotional-wellbeing" },
+  { question: "managing toddler temper tantrums with calm positive boundaries", expectedTitle: "Coram Family Lives: Managing Toddler Tantrums with Positive Boundaries", expectedSourceId: "charity-family-lives-parenting-support", category: "emotional-wellbeing" },
+  { question: "home-start volunteer home visiting to reduce parental isolation", expectedTitle: "Home-Start UK: Reducing Parental Isolation and Building Confidence", expectedSourceId: "charity-home-start-family-support", category: "emotional-wellbeing" },
+  { question: "support and wellbeing advice for single parents", expectedTitle: "Gingerbread: Emotional Wellbeing and Practical Support for Single Parents", expectedSourceId: "charity-gingerbread-single-parents", category: "emotional-wellbeing" },
+  { question: "parent talk solihull approach bedtime routine and sleep settling", expectedTitle: "Action for Children Parent Talk: Child Development and Sleep Routines", expectedSourceId: "charity-action-for-children-parent-talk", category: "teething-development" },
+  { question: "kangaroo care and expressing milk for premature babies in neonatal units", expectedTitle: "Bliss: Caring for Premature and Sick Babies in Neonatal Units", expectedSourceId: "charity-bliss-neonatal-care", category: "newborn-care" },
+  { question: "physical recovery after childbirth and perineal stitches healing", expectedTitle: "Tommy's: Physical Recovery After Childbirth and Maternal Health", expectedSourceId: "charity-tommys-pregnancy-postnatal", category: "newborn-care" },
+  { question: "responsive infant feeding and paced bottle feeding techniques", expectedTitle: "NCT: Responsive Infant Feeding, Breastfeeding Support, and Bottle Hygiene", expectedSourceId: "charity-nct-infant-feeding", category: "feeding" },
+  { question: "health visitor developmental reviews for children top tips", expectedTitle: "Institute of Health Visiting: Health Visitor Reviews and Child Development", expectedSourceId: "charity-ihv-parent-tips", category: "newborn-care" },
+  { question: "icon principles for coping with infant crying and safe stepping away", expectedTitle: "ICON Cope: The 4 Principles for Coping with Infant Crying", expectedSourceId: "charity-icon-infant-crying", category: "newborn-care" },
+  { question: "dads mental health paternal depression and bonding with baby", expectedTitle: "Fatherhood Institute: Dads' Mental Health and Active Fatherhood", expectedSourceId: "charity-fatherhood-institute", category: "emotional-wellbeing" },
 ];
 
 describe("P1-T5 golden-set retrieval precision [rule 04.12]", () => {
@@ -622,7 +639,7 @@ describe("P1-T5 golden-set retrieval precision [rule 04.12]", () => {
       const source = sourceById.get(expectedSourceId);
       expect(source).toBeDefined();
       expect(top!.chunk.source_url).toBe(source!.url);
-      expect(source!.url.startsWith("https://www.nhs.uk/")).toBe(true);
+      expect(validateSourceUrl(source!.url).valid).toBe(true);
     }
   );
 });

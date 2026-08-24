@@ -5,6 +5,7 @@ import { sleepChunks } from "./sleep.js";
 import { teethingDevelopmentChunks } from "./teething-development.js";
 import { minorAilmentsChunks } from "./minor-ailments.js";
 import { emotionalWellbeingChunks } from "./emotional-wellbeing.js";
+import { charitySupportChunks } from "./charity-support.js";
 
 export type { RawChunk };
 
@@ -15,5 +16,6 @@ export const ALL_RAW_CHUNKS: RawChunk[] = [
   ...sleepChunks,
   ...teethingDevelopmentChunks,
   ...minorAilmentsChunks,
-  ...emotionalWellbeingChunks
+  ...emotionalWellbeingChunks,
+  ...charitySupportChunks
 ];

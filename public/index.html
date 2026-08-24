@@ -3,110 +3,227 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NHS Parenting Companion</title>
+  <title>NHS Parenting Companion — NHS</title>
   <style>
+    /* ==========================================================================
+       NHS.UK & GDS Design System Tokens & Base Styles
+       ========================================================================== */
     :root {
-      --bg: #f7f3ee;
-      --panel: #ffffff;
-      --ink: #1f2a24;
-      --muted: #4c6254;
-      --accent: #005eb8;
-      --accent-dark: #004a92;
-      --accent-light: #e8f0fe;
-      --border: #d8d4cd;
-      --border-dark: #8c9790;
-      --disabled: #9aa3ab;
-      --user-bg: #e6f0fa;
-      --assistant-bg: #f3f7f4;
-      --alert-bg: #fdf2f2;
-      --alert-border: #d4351c;
-      --focus-ring: #ffdd00;
+      --nhsuk-blue: #005eb8;
+      --nhsuk-blue-dark: #003087;
+      --nhsuk-green: #007f3b;
+      --nhsuk-green-dark: #00662f;
+      --nhsuk-green-shadow: #00401e;
+      --nhsuk-red: #d5281b;
+      --nhsuk-yellow: #ffeb3b;
+      --nhsuk-warm-yellow: #ffdd00;
+      --nhsuk-black: #212b32;
+      --nhsuk-text-muted: #4c6254;
+      --nhsuk-grey-1: #425563;
+      --nhsuk-grey-2: #768692;
+      --nhsuk-grey-3: #aeb7bd;
+      --nhsuk-grey-4: #d8dde0;
+      --nhsuk-grey-5: #f0f4f5;
+      --nhsuk-white: #ffffff;
+      
+      --user-bubble-bg: #dbeaf8;
+      --user-bubble-border: #99c2ec;
+      --assistant-bubble-bg: #ffffff;
+      --assistant-bubble-border: #d8dde0;
+      
+      --font-stack: Frutiger, "Frutiger Linotype", Univers, Calibri, "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
-    * { box-sizing: border-box; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 18px;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--bg);
+      font-family: var(--font-stack);
+      font-size: 19px;
+      line-height: 1.5;
+      color: var(--nhsuk-black);
+      background-color: var(--nhsuk-grey-5);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
+      flex-direction: column;
     }
-    main {
-      max-width: 680px;
+
+    /* Screen reader only utility */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* GDS Skip Link */
+    .nhsuk-skip-link {
+      position: absolute;
+      top: -999px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 12px 16px;
+      background-color: var(--nhsuk-yellow);
+      color: var(--nhsuk-black);
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--nhsuk-black);
+      box-shadow: 0 4px 0 var(--nhsuk-black);
+    }
+    .nhsuk-skip-link:focus {
+      top: 8px;
+      outline: 3px solid var(--nhsuk-black);
+    }
+
+    /* NHS Header Bar */
+    .nhsuk-header {
+      background-color: var(--nhsuk-blue);
+      color: var(--nhsuk-white);
+      padding: 12px 0;
+      border-bottom: 4px solid var(--nhsuk-blue-dark);
+    }
+    .nhsuk-header__container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nhsuk-logo {
+      display: inline-block;
+      background-color: var(--nhsuk-white);
+      color: var(--nhsuk-blue);
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      line-height: 1.2;
+      user-select: none;
+    }
+    .nhsuk-header__service-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--nhsuk-white);
+      text-decoration: none;
+      margin: 0;
+    }
+
+    /* NHS Phase Banner */
+    .nhsuk-phase-banner {
+      background-color: var(--nhsuk-white);
+      border-bottom: 1px solid var(--nhsuk-grey-4);
+      padding: 10px 0;
+      font-size: 16px;
+    }
+    .nhsuk-phase-banner__container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nhsuk-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 14px;
+      font-weight: 700;
+      background-color: var(--nhsuk-blue);
+      color: var(--nhsuk-white);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .nhsuk-phase-banner__text {
+      margin: 0;
+      color: var(--nhsuk-grey-1);
+    }
+
+    /* Main Content Layout */
+    .nhsuk-main-wrapper {
+      max-width: 800px;
       width: 100%;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      margin: 20px auto 40px;
+      padding: 0 16px;
+      flex: 1;
+    }
+
+    main {
+      background: var(--nhsuk-white);
+      border: 1px solid var(--nhsuk-grey-4);
+      border-top: 4px solid var(--nhsuk-blue);
       padding: 24px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
-    @media (min-width: 600px) {
-      main { padding: 32px; }
+    @media (min-width: 640px) {
+      main {
+        padding: 32px;
+      }
     }
+
     header {
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 16px;
+      border-bottom: 1px solid var(--nhsuk-grey-4);
+      padding-bottom: 20px;
     }
     h1 {
       margin: 0 0 8px;
-      font-size: 24px;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--nhsuk-black);
+      line-height: 1.25;
     }
     p.intro {
-      margin: 0;
-      font-size: 16px;
-      color: var(--muted);
-    }
-    p.emergency-notice {
-      margin: 8px 0 0;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--alert-border);
-    }
-    
-    /* Screen reader only utility */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+      margin: 0 0 12px;
+      font-size: 19px;
+      color: var(--nhsuk-grey-1);
     }
 
-    /* Chat log and message bubbles */
+    /* NHS Warning Callout */
+    .nhsuk-warning-callout {
+      border-left: 8px solid var(--nhsuk-red);
+      background-color: #fff8f8;
+      padding: 14px 16px;
+      margin: 12px 0 0;
+    }
+    p.emergency-notice {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #7a1100;
+    }
+
+    /* Chat Conversation Log */
     #response {
-      min-height: 160px;
+      min-height: 180px;
       max-height: 480px;
       overflow-y: auto;
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #faf9f6;
+      padding: 20px;
+      border: 1px solid var(--nhsuk-grey-4);
+      background-color: var(--nhsuk-grey-5);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       scroll-behavior: smooth;
     }
+
     .message-turn {
       display: flex;
       flex-direction: column;
       gap: 4px;
-      max-width: 90%;
+      max-width: 88%;
     }
     .message-turn.user {
       align-self: flex-end;
@@ -114,56 +231,59 @@
     .message-turn.assistant {
       align-self: flex-start;
     }
+
     .message-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--nhsuk-grey-1);
       margin-bottom: 2px;
     }
+
+    /* Flat Message Bubbles */
     .bubble {
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 14px 18px;
       white-space: pre-wrap;
       word-break: break-word;
-      font-size: 17px;
-      line-height: 1.5;
+      font-size: 18px;
+      line-height: 1.55;
     }
     .bubble-user {
-      background: var(--user-bg);
-      color: var(--ink);
-      border: 1px solid #c5dbf2;
-      border-bottom-right-radius: 2px;
+      background-color: var(--user-bubble-bg);
+      color: var(--nhsuk-black);
+      border: 1px solid var(--user-bubble-border);
+      border-left: 4px solid var(--nhsuk-blue);
     }
     .bubble-assistant {
-      background: var(--assistant-bg);
-      color: var(--ink);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 2px;
+      background-color: var(--assistant-bubble-bg);
+      color: var(--nhsuk-black);
+      border: 1px solid var(--assistant-bubble-border);
+      border-left: 4px solid var(--nhsuk-grey-2);
     }
 
-    /* Typing indicator */
+    /* Flat Typing indicator */
     .typing-indicator {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      background: var(--assistant-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      gap: 8px;
+      padding: 12px 18px;
+      background-color: var(--assistant-bubble-bg);
+      border: 1px solid var(--assistant-bubble-border);
+      border-left: 4px solid var(--nhsuk-grey-3);
       align-self: flex-start;
     }
     .typing-indicator .dot {
-      width: 8px;
-      height: 8px;
-      background: var(--muted);
+      width: 10px;
+      height: 10px;
+      background-color: var(--nhsuk-grey-2);
       border-radius: 50%;
       opacity: 0.6;
-      animation: pulse 1.4s infinite ease-in-out both;
+      animation: nhsuk-pulse 1.3s infinite ease-in-out both;
     }
     .typing-indicator .dot:nth-child(1) { animation-delay: -0.32s; }
     .typing-indicator .dot:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes pulse {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+
+    @keyframes nhsuk-pulse {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
       40% { transform: scale(1); opacity: 1; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -173,142 +293,220 @@
       }
     }
 
-    /* Safety Signpost Card */
+    /* NHS Signpost Card (Flat Inset Box) */
     .signpost-card {
-      margin-top: 4px;
-      padding: 18px 20px;
-      border: 2px solid var(--accent);
-      border-radius: 10px;
-      background: var(--accent-light);
-      color: var(--ink);
+      margin-top: 6px;
+      padding: 20px;
+      border: 1px solid var(--nhsuk-grey-4);
+      border-left: 8px solid var(--nhsuk-blue);
+      background-color: var(--nhsuk-white);
+      color: var(--nhsuk-black);
       width: 100%;
     }
     .signpost-card.tier-1 {
-      border-color: var(--alert-border);
-      background: var(--alert-bg);
+      border-left-color: var(--nhsuk-red);
+      background-color: #fff8f8;
+      border-color: #e8c4c4;
+      border-left-width: 8px;
     }
     .signpost-card h2 {
-      margin: 0 0 8px;
-      font-size: 19px;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      margin: 0 0 10px;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--nhsuk-black);
+      line-height: 1.3;
     }
     .signpost-card.tier-1 h2 {
-      color: var(--alert-border);
+      color: var(--nhsuk-red);
     }
     .signpost-card p {
-      margin: 0 0 10px;
-      font-size: 16px;
+      margin: 0 0 12px;
+      font-size: 17px;
       line-height: 1.5;
     }
     .signpost-card .services-list {
-      margin: 12px 0 0;
+      margin: 14px 0 0;
       padding: 0;
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
     .signpost-card .service-item {
-      padding: 8px 12px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 16px;
+      padding: 10px 14px;
+      background-color: var(--nhsuk-white);
+      border: 1px solid var(--nhsuk-grey-4);
+      border-left: 4px solid var(--nhsuk-blue);
+      font-size: 17px;
+    }
+    .signpost-card.tier-1 .service-item {
+      border-left-color: var(--nhsuk-red);
     }
     .signpost-card .service-item strong {
-      color: var(--ink);
+      color: var(--nhsuk-black);
     }
     .signpost-card .service-item .contact-detail {
-      font-weight: 600;
-      color: var(--accent);
+      font-weight: 700;
+      color: var(--nhsuk-blue);
+    }
+    .signpost-card.tier-1 .service-item .contact-detail {
+      color: var(--nhsuk-red);
     }
 
-    /* Error Message */
+    /* Error Message (NHS Error Box) */
     .chat-error {
-      padding: 12px 16px;
-      background: var(--alert-bg);
-      border: 1px solid var(--alert-border);
-      border-radius: 8px;
+      padding: 16px;
+      background-color: #fff8f8;
+      border: 1px solid #e8c4c4;
+      border-left: 8px solid var(--nhsuk-red);
       color: #7a1100;
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: 600;
     }
 
-    /* Input area */
+    /* Form and Input Area (GDS / NHS Standards) */
     form.chat-input-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    label {
+      display: block;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--nhsuk-black);
+    }
+    .input-row {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    label {
-      display: block;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--ink);
+    @media (min-width: 540px) {
+      .input-row {
+        flex-direction: row;
+      }
     }
-    .input-row {
-      display: flex;
-      gap: 8px;
-    }
+
     input#message-input {
       flex: 1;
-      font-size: 17px;
-      padding: 14px 16px;
-      border: 2px solid var(--border-dark);
-      border-radius: 8px;
-      color: var(--ink);
-      background: #ffffff;
+      font-family: inherit;
+      font-size: 19px;
+      padding: 12px 14px;
+      border: 2px solid var(--nhsuk-black);
+      border-radius: 0;
+      color: var(--nhsuk-black);
+      background-color: var(--nhsuk-white);
+      -webkit-appearance: none;
     }
     input#message-input:focus {
-      outline: 3px solid var(--focus-ring);
-      outline-offset: 2px;
-      border-color: var(--accent);
+      outline: 3px solid var(--nhsuk-yellow);
+      outline-offset: 0;
+      box-shadow: inset 0 0 0 2px var(--nhsuk-black);
     }
+
+    /* NHS Button (Official GDS / NHS Green Flat Action Button) */
     button#send-button {
-      padding: 14px 24px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #ffffff;
-      background: var(--accent);
+      font-family: inherit;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--nhsuk-white);
+      background-color: var(--nhsuk-green);
       border: none;
-      border-radius: 8px;
+      border-radius: 4px;
+      padding: 12px 28px;
       cursor: pointer;
       white-space: nowrap;
-      transition: background 0.15s ease;
+      box-shadow: 0 4px 0 var(--nhsuk-green-shadow);
+      position: relative;
+      text-align: center;
+      transition: background-color 0.1s ease;
     }
     button#send-button:hover {
-      background: var(--accent-dark);
+      background-color: var(--nhsuk-green-dark);
+    }
+    button#send-button:active {
+      top: 2px;
+      box-shadow: 0 2px 0 var(--nhsuk-green-shadow);
     }
     button#send-button:focus {
-      outline: 3px solid var(--focus-ring);
-      outline-offset: 2px;
+      outline: 3px solid transparent;
+      background-color: var(--nhsuk-yellow);
+      color: var(--nhsuk-black);
+      box-shadow: 0 -2px var(--nhsuk-yellow), 0 4px var(--nhsuk-black);
     }
     button#send-button:disabled {
-      background: var(--disabled);
+      background-color: var(--nhsuk-grey-2);
+      box-shadow: none;
       cursor: not-allowed;
+      top: 0;
+    }
+
+    /* NHS Footer */
+    .nhsuk-footer {
+      background-color: var(--nhsuk-grey-4);
+      border-top: 4px solid var(--nhsuk-blue);
+      padding: 24px 0;
+      margin-top: auto;
+      font-size: 15px;
+      color: var(--nhsuk-grey-1);
+    }
+    .nhsuk-footer__container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    .nhsuk-footer p {
+      margin: 0;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>NHS Parenting Companion</h1>
-      <p class="intro">Non-judgmental, NHS-grounded guidance for caring for your child.</p>
-      <p class="emergency-notice">In an emergency or if a child is unresponsive, call 999 immediately.</p>
-    </header>
+  <a href="#maincontent" class="nhsuk-skip-link">Skip to main content</a>
 
-    <div id="response" aria-live="polite" role="status" aria-label="Conversation history"></div>
+  <header class="nhsuk-header" role="banner">
+    <div class="nhsuk-header__container">
+      <span class="nhsuk-logo" aria-hidden="true">NHS</span>
+      <h2 class="nhsuk-header__service-name">Parenting Companion</h2>
+    </div>
+  </header>
 
-    <form class="chat-input-form" id="chat-form" action="#">
-      <label for="message-input">Your question</label>
-      <div class="input-row">
-        <input id="message-input" type="text" autocomplete="off" placeholder="e.g. How do I safely make up a formula bottle?" required />
-        <button id="send-button" type="submit">Send</button>
-      </div>
-    </form>
-  </main>
+  <div class="nhsuk-phase-banner" aria-label="Service status">
+    <div class="nhsuk-phase-banner__container">
+      <span class="nhsuk-tag">Beta</span>
+      <p class="nhsuk-phase-banner__text">This is a new NHS guidance service for parents and carers.</p>
+    </div>
+  </div>
+
+  <div class="nhsuk-main-wrapper">
+    <main id="maincontent" role="main">
+      <header>
+        <h1>NHS Parenting Companion</h1>
+        <p class="intro">Evidence-grounded NHS advice and guidance for caring for your baby or young child.</p>
+        <div class="nhsuk-warning-callout" role="note" aria-label="Emergency warning">
+          <p class="emergency-notice">If your child is severely ill, unresponsive, or struggling to breathe, call 999 immediately.</p>
+        </div>
+      </header>
+
+      <div id="response" aria-live="polite" role="status" aria-label="Conversation history"></div>
+
+      <form class="chat-input-form" id="chat-form" action="#">
+        <label for="message-input">Ask a question about your child</label>
+        <div class="input-row">
+          <input id="message-input" type="text" autocomplete="off" placeholder="e.g. How do I safely make up a formula bottle?" required />
+          <button id="send-button" type="submit">Send</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <footer class="nhsuk-footer" role="contentinfo">
+    <div class="nhsuk-footer__container">
+      <p>Guidance is grounded in NHS.uk and approved UK public health sources. For non-urgent medical advice, visit <a href="https://111.nhs.uk" style="color: inherit; font-weight: 700;">111.nhs.uk</a> or call 111.</p>
+    </div>
+  </footer>
+
   <script type="module" src="./widget.js"></script>
 </body>
 </html>
+

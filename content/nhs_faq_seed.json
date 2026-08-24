@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-08-22",
+  "last_updated": "2026-08-24",
   "embedding_model": "@cf/baai/bge-base-en-v1.5",
   "embedding_dimensions": 768,
-  "total_chunks": 74,
+  "total_chunks": 88,
   "categories": [
     "newborn-care",
     "feeding",
@@ -24,7 +24,7 @@
       "chunk_index": 0,
       "token_count": 230,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "a279ace8de49934d79e24f0f64d1a7909fe3eb041baa28fca0d0c4e70d3610fd"
     },
     {
@@ -37,7 +37,7 @@
       "chunk_index": 1,
       "token_count": 198,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3198ae04893b00cbee545889e04438e3716088f3eb01a968b400734ebbad6480"
     },
     {
@@ -50,7 +50,7 @@
       "chunk_index": 0,
       "token_count": 247,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "04a521708988b0cfe376cc622c80bc908eaa042482c8bce146bd858182a57fe9"
     },
     {
@@ -63,7 +63,7 @@
       "chunk_index": 1,
       "token_count": 239,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3f89c85eb1a752e22f5d2961614187132e75716e70f5cb6bfeb06731d96dd267"
     },
     {
@@ -76,7 +76,7 @@
       "chunk_index": 0,
       "token_count": 250,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4400dc36519dfa7f914770180f088406d31aae839d701d3fe918a4a8b582f36b"
     },
     {
@@ -89,7 +89,7 @@
       "chunk_index": 1,
       "token_count": 216,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "2e5fb69691a051f71b480c5817d0d9b804b3c37588a1b95540c82e77968dcb2a"
     },
     {
@@ -102,7 +102,7 @@
       "chunk_index": 0,
       "token_count": 248,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3037203644302a48e356aa3f5dabf6c0b09f30b1fd92b32109714a6f5089f683"
     },
     {
@@ -115,7 +115,7 @@
       "chunk_index": 1,
       "token_count": 234,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4388685eb8cace26de0806fea7732c2d5133a421411935d37903e07dc211704e"
     },
     {
@@ -128,7 +128,7 @@
       "chunk_index": 0,
       "token_count": 220,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "7590068eb6927482be3d74e3da194d8ab2d9fe385871d531b6ba177f3147a92e"
     },
     {
@@ -141,7 +141,7 @@
       "chunk_index": 1,
       "token_count": 224,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "874599eb632e6611c486ea22e207c09e6dc1f9c6b71bb73539d2379268d85fec"
     },
     {
@@ -154,7 +154,7 @@
       "chunk_index": 0,
       "token_count": 226,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "22f947ead95f549f33658d1f1ae10efc852fef46ca3e8364244aef1e6323ac07"
     },
     {
@@ -167,7 +167,7 @@
       "chunk_index": 0,
       "token_count": 241,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "e52e7d655fb2083ff18f1c6cea101a23bdcba74885d938117f10e931664d7c3b"
     },
     {
@@ -180,7 +180,7 @@
       "chunk_index": 1,
       "token_count": 229,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "fc06a457dfba7bfdf129db7420d891ae2d815e9fe0dac3c6e21a40769ab1bb39"
     },
     {
@@ -193,7 +193,7 @@
       "chunk_index": 0,
       "token_count": 252,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "ed73dadc048ec227a4a844f6027f23ff83fce71b44a1b0381822a41a799120c8"
     },
     {
@@ -206,7 +206,7 @@
       "chunk_index": 1,
       "token_count": 231,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3c31b8365cf1514cd17b4aba714f1dc2bfffd186482baf4971e9e9365763dd82"
     },
     {
@@ -219,7 +219,7 @@
       "chunk_index": 0,
       "token_count": 300,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "016b4bf25aa988c4e17119c53d5f8cc274efe56e210decaebb87cd82163554d4"
     },
     {
@@ -232,7 +232,7 @@
       "chunk_index": 1,
       "token_count": 255,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "fae8da58eab7c5be06642fe7cb6fbb342c7fe60e12b4a1bbf9762c905cb1259b"
     },
     {
@@ -245,7 +245,7 @@
       "chunk_index": 0,
       "token_count": 241,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "757ef3c253dd3d6affda7d52a8dbbee3a1c5bbc04824e30ae440c9a9fbeb410f"
     },
     {
@@ -258,7 +258,7 @@
       "chunk_index": 0,
       "token_count": 221,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3adac183a897985e3a3fa416c6e5cc192d36c82818ab70b811b0af24ba5bec77"
     },
     {
@@ -271,7 +271,7 @@
       "chunk_index": 1,
       "token_count": 244,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "42aeeb9ef593415026e6fb879cd19d451abd907c14e87fde2fd054495554b040"
     },
     {
@@ -284,7 +284,7 @@
       "chunk_index": 0,
       "token_count": 233,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "0bcd6c1ccae7cd3f97eed368ac708f7c573039bf4de92be5950c73d1153aaac8"
     },
     {
@@ -297,7 +297,7 @@
       "chunk_index": 1,
       "token_count": 259,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "2ca19f97d63e3c132e171676ddddd20f1451e09b55d9d9c76bf2e69c88ee6694"
     },
     {
@@ -310,7 +310,7 @@
       "chunk_index": 0,
       "token_count": 250,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "92a2b9b4a52085caf4ccbf5fb6dccd7f631630a1b67134a917744439099b2b25"
     },
     {
@@ -323,7 +323,7 @@
       "chunk_index": 0,
       "token_count": 247,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "056845a8da6f6fa282a70907002305ebbebd455e0061751c9eebc357b298ac48"
     },
     {
@@ -336,7 +336,7 @@
       "chunk_index": 1,
       "token_count": 233,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "2c6d2b57a927597699fe501f2411990dcd35769328f01b923b457093920793f6"
     },
     {
@@ -349,7 +349,7 @@
       "chunk_index": 0,
       "token_count": 202,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "1b27502f69f0b22a274f4a2cd14ae141c6f14d5c5d57583e704552764c294649"
     },
     {
@@ -362,7 +362,7 @@
       "chunk_index": 1,
       "token_count": 225,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "60eb6736b0239ae6700884877fdf0866190c2f66292428a9eb4aef32d5f1ad12"
     },
     {
@@ -375,7 +375,7 @@
       "chunk_index": 0,
       "token_count": 254,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "1b35694008def0553f2e3fb8611e099142111740f739330df596b429afd4abc0"
     },
     {
@@ -388,7 +388,7 @@
       "chunk_index": 1,
       "token_count": 215,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "2ac9ab22ba9f2f2dfdfe509b3e801ef8ceb8f958623e86b5fc6ba884b5443529"
     },
     {
@@ -401,7 +401,7 @@
       "chunk_index": 0,
       "token_count": 246,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "2359e98b238e82a10b08c67c1fe97ecf289443802584ed9eb417ee7dff160aef"
     },
     {
@@ -414,7 +414,7 @@
       "chunk_index": 1,
       "token_count": 233,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "127b5fd163af8b630d874c16eb1b4262ebd37b731dc86f91bddf673260e99347"
     },
     {
@@ -427,7 +427,7 @@
       "chunk_index": 0,
       "token_count": 208,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4c9d88d8db6a22c8a29fcbcc9c881ce59b35c516e5f55715f620977672e306ba"
     },
     {
@@ -440,7 +440,7 @@
       "chunk_index": 0,
       "token_count": 230,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "be84f1234ac0001e62d96f704f1fd051caccbbda0ce2a2a7a66a2c7198f23707"
     },
     {
@@ -453,7 +453,7 @@
       "chunk_index": 0,
       "token_count": 215,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "461e6e104306bd20f0b48e517ba8c5c63ae0819c4aacebddfa05c09213971f81"
     },
     {
@@ -466,7 +466,7 @@
       "chunk_index": 1,
       "token_count": 228,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "935117f220e63ca49e6a429044eff75b36677c56369d7264306fc42d05415bc5"
     },
     {
@@ -479,7 +479,7 @@
       "chunk_index": 0,
       "token_count": 243,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "fec496a4270a4273de4a9fc9a8b3781512c9ffc6e7ee1117bf4d75a10b183d44"
     },
     {
@@ -492,7 +492,7 @@
       "chunk_index": 1,
       "token_count": 231,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "23fc95c3a0a7b969e4d2f8ea884ae242ca4ca7642035fc9f00874efb7cd1f3aa"
     },
     {
@@ -505,7 +505,7 @@
       "chunk_index": 0,
       "token_count": 226,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "0bf36dcd4e104626841a5ab6823f63944f03aa1a0200869058f90bee5ade206a"
     },
     {
@@ -518,7 +518,7 @@
       "chunk_index": 1,
       "token_count": 211,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "d3316a4001afde1cd007146d41349f5362ac244bc3fd2b3ae1687c933fab8687"
     },
     {
@@ -531,7 +531,7 @@
       "chunk_index": 0,
       "token_count": 248,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "918987462374c1d8f7782ec0d7b9468f808ad81aaed85ae7923c7125cb5ee7b8"
     },
     {
@@ -544,7 +544,7 @@
       "chunk_index": 1,
       "token_count": 234,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "a92dda848ae29bcaeeb98672cc299845c546514b5685c0e7001eab734f317fc4"
     },
     {
@@ -557,7 +557,7 @@
       "chunk_index": 0,
       "token_count": 222,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "f6e82c80d381ee9949d961ab9c8d992efbb7c69f91282a931f588e5f6e4bea06"
     },
     {
@@ -570,7 +570,7 @@
       "chunk_index": 1,
       "token_count": 220,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "d256eca3a1802de01963587937b4a3f9993d192b5b621bd593843378d6a5a29e"
     },
     {
@@ -583,7 +583,7 @@
       "chunk_index": 0,
       "token_count": 234,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "29818ca2b6be4c8d26537d1cc3d27e6d6f979213c7bbfb35c34800ffbda20a6c"
     },
     {
@@ -596,7 +596,7 @@
       "chunk_index": 1,
       "token_count": 234,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "f17c9afbc1eec8b906e66c15145ef586acd75644e8e6fe0546f4e33216f40359"
     },
     {
@@ -609,7 +609,7 @@
       "chunk_index": 0,
       "token_count": 224,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "82feb71a928eedd9190166a17dcfe792e4ee52cc26f5a526b1ccad35481085a8"
     },
     {
@@ -622,7 +622,7 @@
       "chunk_index": 0,
       "token_count": 202,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "13a2d35c9f2e5841b03b3e1066e1a55da60fcd95ce998defb01d5dd04d78584b"
     },
     {
@@ -635,7 +635,7 @@
       "chunk_index": 1,
       "token_count": 255,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "6ad39f61035f2bc57426ba56e4a70a597bf5d2901991ae8b9a43e9794cd1627d"
     },
     {
@@ -648,7 +648,7 @@
       "chunk_index": 0,
       "token_count": 205,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "d40f3d9ba7f34330998567a073369f740fb2aa20e242ee91f9aae3122c8c6f35"
     },
     {
@@ -661,7 +661,7 @@
       "chunk_index": 1,
       "token_count": 203,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "7ca4b83e186c159fe4c16552200b69d9804081ae5cdac0f51d3461d6bb0f7423"
     },
     {
@@ -674,7 +674,7 @@
       "chunk_index": 0,
       "token_count": 209,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "fe22d93d61e73182d9d059b7121282ef52e20f438d18a8e6a85b58237db410ca"
     },
     {
@@ -687,7 +687,7 @@
       "chunk_index": 0,
       "token_count": 230,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4f172b45f880af89d29da236877b5517790e1df65dbc1c6138e764fcff13593e"
     },
     {
@@ -700,7 +700,7 @@
       "chunk_index": 0,
       "token_count": 247,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "b10096b60975098d6d23b5985de2b1897b7eb6827fec0c06899de996e04f6d87"
     },
     {
@@ -713,7 +713,7 @@
       "chunk_index": 0,
       "token_count": 230,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "c0f111c889d9a22f5d8ba4fbc3f4c54b4dd37082e16f45d34866c46f98ee49c5"
     },
     {
@@ -726,7 +726,7 @@
       "chunk_index": 0,
       "token_count": 229,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "846b62bc837f22f78dbee3dcd5e1adfa92d8f9ffb6c43169e6df01caa40df55b"
     },
     {
@@ -739,7 +739,7 @@
       "chunk_index": 0,
       "token_count": 239,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "ae229f816e27a7c57202cc2626f54c56a60b07bdbf6686f2799fbba6ad551492"
     },
     {
@@ -752,7 +752,7 @@
       "chunk_index": 1,
       "token_count": 209,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "8072c00e6e12412e722eab25db9b7081f7795fb731d9a1695eca324da8db94db"
     },
     {
@@ -765,7 +765,7 @@
       "chunk_index": 0,
       "token_count": 231,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "e1a589c97fd5d60974fa7af295a5ed393d17b64839b5933a605d045aaf1964bc"
     },
     {
@@ -778,7 +778,7 @@
       "chunk_index": 0,
       "token_count": 220,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "f9382e51567b2a98226531d9fd5903c9c44830604212774c2dd57e03401dc7a9"
     },
     {
@@ -791,7 +791,7 @@
       "chunk_index": 1,
       "token_count": 205,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "05f7a8cb5b76cde94b7c61f5a3e5a9d3efd6f9aca0382b9a1331aec375e87ee2"
     },
     {
@@ -804,7 +804,7 @@
       "chunk_index": 0,
       "token_count": 248,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4cf6e6ad221a5adc592e0700e440dce974b3e06cf42fdc0fb7dde5e77d91db47"
     },
     {
@@ -817,7 +817,7 @@
       "chunk_index": 0,
       "token_count": 222,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "7e266b9e6359eab945074133cb3e41ed246ae7b7a0cb93c85adaa1cc857dc7fb"
     },
     {
@@ -830,7 +830,7 @@
       "chunk_index": 1,
       "token_count": 217,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "67c5a0fe1fcf476ee0201bea0f18fd2f8d1e29ef494e63c01e7abde24b1fb182"
     },
     {
@@ -843,7 +843,7 @@
       "chunk_index": 0,
       "token_count": 207,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "136ae2f8653fac373e7b131ff3fc9eb384c29562ef8a2cbd7704e5c345c8026a"
     },
     {
@@ -856,7 +856,7 @@
       "chunk_index": 1,
       "token_count": 224,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "64c1c57c61f3d6a075bafaf692a0daa1f49a081d7a36101895debf6d612f11f3"
     },
     {
@@ -869,7 +869,7 @@
       "chunk_index": 0,
       "token_count": 215,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "8b0492cc65a82e0813f780c9a6fc70829a7f27c12c2596182e3d0f2feb2ded60"
     },
     {
@@ -882,7 +882,7 @@
       "chunk_index": 0,
       "token_count": 203,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "543cce6026ff38c198916a69e0e2200b475867d0537b86f31b5e56634b3f0c34"
     },
     {
@@ -895,7 +895,7 @@
       "chunk_index": 1,
       "token_count": 203,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "bd7c58b1ff7835ba836b336c3628750059528d471620b364e125bce49750ed38"
     },
     {
@@ -908,7 +908,7 @@
       "chunk_index": 0,
       "token_count": 198,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "5bc0e8774fb7af47916c1126767e2e5397526e9b25923d1dd6f892df7380be40"
     },
     {
@@ -921,7 +921,7 @@
       "chunk_index": 0,
       "token_count": 203,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "3d6e4e47da0784e430848aceeedc50d468f0a6ebec3ac739c48692602e4f63dd"
     },
     {
@@ -934,7 +934,7 @@
       "chunk_index": 0,
       "token_count": 207,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "2fbe4cf552fbc47d65233b6b54de56e18ad94c113efbd8083bc631e0d0e42504"
     },
     {
@@ -947,7 +947,7 @@
       "chunk_index": 0,
       "token_count": 225,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS Start for Life",
       "content_hash": "e4e576491a39a9bb222fab929199fb0c8710eaf8f70fec60fef33d43cfb399ef"
     },
     {
@@ -960,7 +960,7 @@
       "chunk_index": 0,
       "token_count": 208,
       "safety_relevant": false,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "17607828e922a14660acfd2f5d09f5eadc62bd655e4e7623b1641411eaa0dc72"
     },
     {
@@ -973,8 +973,190 @@
       "chunk_index": 0,
       "token_count": 216,
       "safety_relevant": true,
-      "attribution": "Source: NHS.uk",
+      "attribution": "Source: NHS",
       "content_hash": "4712955c3d3db9951c77929374fcb7a90f987633995996b64380c3d832e1496e"
+    },
+    {
+      "id": "300416273d7aeda13bf029482aadd20bef1c6feda2618b33e27c2d77edf51c30",
+      "source_id": "charity-lullaby-trust-safer-sleep",
+      "source_url": "https://www.lullabytrust.org.uk/safer-sleep-advice/",
+      "title": "The Lullaby Trust: Essential Safer Sleep Rules for Babies",
+      "category": "sleep",
+      "chunk_text": "The Lullaby Trust provides evidence-based safer sleep advice to reduce the risk of Sudden Infant Death Syndrome (SIDS) and help babies sleep safely. The essential safer sleep guidelines recommend: 1. Always place your baby on their back for every sleep, day and night, as sleeping on the front or side significantly increases the risk of SIDS. 2. The safest place for a baby to sleep is in their own separate Moses basket or cot in the same room as a parent or carer for the first 6 months. 3. Ensure the sleep surface is a firm, completely flat, waterproof mattress in good condition, covered with a single, securely fitted sheet. 4. Keep the cot completely clear: never use cot bumpers, pillows, duvets, sleep positioners, stuffed toys, or loose bedding, as these create dangerous suffocation and overheating hazards. 5. Place baby in the 'feet to foot' position, with their feet touching the bottom of the cot, and tuck blankets firmly no higher than their shoulders. 6. Maintain the room temperature between 16°C and 20°C (61°F to 68°F) using a reliable room thermometer. Check your baby's temperature by feeling their chest or the back of their neck; remove layers if they feel hot or sweaty. Keep your baby's environment completely smoke-free.",
+      "chunk_index": 0,
+      "token_count": 272,
+      "safety_relevant": true,
+      "attribution": "Source: The Lullaby Trust",
+      "content_hash": "300416273d7aeda13bf029482aadd20bef1c6feda2618b33e27c2d77edf51c30"
+    },
+    {
+      "id": "32d6bccf9bdf897a64cbb1733315a6b93697dfd5cfea2651f3b46ca7ed05e83c",
+      "source_id": "charity-lullaby-trust-safer-sleep",
+      "source_url": "https://www.lullabytrust.org.uk/safer-sleep-advice/",
+      "title": "The Lullaby Trust: Co-Sleeping Safety Guidance and High-Risk Situations",
+      "category": "sleep",
+      "chunk_text": "The Lullaby Trust advises that while many families choose to share a bed with their baby, it is vital to know when bed-sharing is high-risk. Co-sleeping is strictly unsafe and significantly increases the risk of SIDS if: you or anyone sharing the bed has consumed alcohol, taken recreational drugs, or taken medication that makes you drowsy; you or your partner are a smoker (even if you never smoke inside the home); or your baby was born prematurely (before 37 weeks) or had a low birthweight (under 2.5kg or 5.5lbs). Never sleep on a sofa or armchair while holding your baby, as falling asleep together on a sofa increases the risk of SIDS and accidental suffocation by up to 50 times. If you choose to share a bed, keep adult pillows, heavy duvets, and thick quilts well away from your baby. Ensure your baby cannot get trapped between the mattress and the wall, fall out of bed, or become wedged in headboards. Never leave a baby unattended on an adult bed. For personalized safe sleep information and support, parents can consult The Lullaby Trust information service.",
+      "chunk_index": 1,
+      "token_count": 241,
+      "safety_relevant": true,
+      "attribution": "Source: The Lullaby Trust",
+      "content_hash": "32d6bccf9bdf897a64cbb1733315a6b93697dfd5cfea2651f3b46ca7ed05e83c"
+    },
+    {
+      "id": "bd1280e78f0ae68e8776b6628eb42ca31030c0f22dd5087c85397297c7f88c23",
+      "source_id": "charity-cry-sis-coping-with-crying",
+      "source_url": "https://www.cry-sis.org.uk/coping-with-crying/",
+      "title": "Cry-sis: Coping with an Excessively Crying Baby and Parental Burnout",
+      "category": "emotional-wellbeing",
+      "chunk_text": "Cry-sis is the dedicated UK charity supporting parents of excessively crying, sleepless, and demanding babies. Infant crying typically follows a natural developmental curve: crying begins to increase around 2 to 3 weeks of age, peaks around 6 to 8 weeks, and gradually lessens between 12 and 16 weeks. When an infant cries persistently despite being clean, well-fed, comfortable, and warm, parents can experience intense feelings of inadequacy, anxiety, frustration, and deep exhaustion. Cry-sis reassures parents that persistent crying is not your fault and is not a sign of poor parenting. If you find your patience wearing thin or feel overwhelmed by constant crying, it is important to protect both your baby and yourself. Gently place your baby safely on their back in their cot, ensure the environment is safe, close the door, and take a 5 to 10 minute breather in another room to calm your feelings. Never shake, hit, or roughly handle an infant, as shaking causes serious head injury. When you need understanding listening support, trained volunteer parent listeners are available through the Cry-sis National Helpline and online resources.",
+      "chunk_index": 0,
+      "token_count": 235,
+      "safety_relevant": true,
+      "attribution": "Source: Cry-sis",
+      "content_hash": "bd1280e78f0ae68e8776b6628eb42ca31030c0f22dd5087c85397297c7f88c23"
+    },
+    {
+      "id": "d9a6b8882f98202f58afbe03f4df5c53d56462643b48322c4663dc2c4856b0bc",
+      "source_id": "charity-pandas-perinatal-mental-health",
+      "source_url": "https://pandasfoundation.org.uk/perinatal-mental-health/",
+      "title": "PANDAS Foundation: Postnatal Depression, Perinatal Anxiety, and Intrusive Thoughts",
+      "category": "emotional-wellbeing",
+      "chunk_text": "PANDAS Foundation UK provides compassionate, peer-led support for parents, carers, and partners experiencing perinatal mental health difficulties, including antenatal anxiety, postnatal depression, and perinatal obsessive-compulsive challenges. Many new parents experience frightening, repetitive intrusive thoughts (such as vivid mental images of accidental harm or catastrophic scenarios involving the baby). PANDAS explains that intrusive thoughts are very common symptoms of heightened anxiety, physical exhaustion, and hormonal shifts; having an intrusive thought is not a reflection of your true intent, character, or love for your child. PANDAS offers free, confidential support through the national PANDAS Helpline, dedicated digital support, and volunteer-facilitated peer support groups across the UK. You do not need a formal clinical referral to access PANDAS support services. If you feel persistently low, anxious, tearful, or disconnected from your surroundings, reaching out for support is an important first step towards healing. For clinical treatment, your health visitor or GP can connect you with NHS Talking Therapies and specialist community perinatal mental health teams.",
+      "chunk_index": 0,
+      "token_count": 211,
+      "safety_relevant": true,
+      "attribution": "Source: PANDAS Foundation",
+      "content_hash": "d9a6b8882f98202f58afbe03f4df5c53d56462643b48322c4663dc2c4856b0bc"
+    },
+    {
+      "id": "63e76521af402facf7dc6b74bff46f1d552edde44593e35d5c3f998c3cc17bfc",
+      "source_id": "charity-family-lives-parenting-support",
+      "source_url": "https://www.familylives.org.uk/advice/early-years/",
+      "title": "Coram Family Lives: Managing Toddler Tantrums with Positive Boundaries",
+      "category": "emotional-wellbeing",
+      "chunk_text": "Coram Family Lives provides practical, evidence-informed guidance on navigating early childhood development, toddler behaviour, and family communication. Temper tantrums are a normal, healthy part of toddler development, typically emerging between 18 months and 3 years of age. Young toddlers experience intense feelings of frustration, excitement, or tiredness but lack the advanced language and emotional regulation skills required to express their needs calmly. Practical strategies for managing toddler outbursts include: 1. Staying calm: Matching your child's anger will escalate the meltdown; take a slow breath and speak in a calm, soothing tone. 2. Acknowledging their feelings: Name the emotion so your toddler feels heard and validated ('I know you are upset because we have to leave the playground'). 3. Maintaining gentle, firm boundaries: While all emotions are acceptable, harmful actions like hitting or biting are not; calmly state the limit and hold it consistently. 4. Offering simple choices: Give toddlers a sense of autonomy by offering two positive options ('Would you like the red cup or the blue cup?'). For confidential parenting advice, parents can contact the Family Lives helpline and online support service.",
+      "chunk_index": 0,
+      "token_count": 238,
+      "safety_relevant": false,
+      "attribution": "Source: Coram Family Lives",
+      "content_hash": "63e76521af402facf7dc6b74bff46f1d552edde44593e35d5c3f998c3cc17bfc"
+    },
+    {
+      "id": "e5fa7fbbca9b89915670b8d333b0fd7a4b4c7feb5281d811b0c5ad72ccade943",
+      "source_id": "charity-home-start-family-support",
+      "source_url": "https://www.home-start.org.uk/our-support/",
+      "title": "Home-Start UK: Reducing Parental Isolation and Building Confidence",
+      "category": "emotional-wellbeing",
+      "chunk_text": "Home-Start is a national UK family support charity with a network of trained community volunteers who visit families with young children at home. The transition to parenthood can often feel isolating, overwhelming, and stressful, particularly for parents dealing with postnatal depression, multiple births, child illness, family separation, or a lack of local family support. Home-Start volunteers provide free, confidential, non-judgmental support tailored to each family's individual needs. Volunteers visit once a week to offer a listening ear, help parents establish calm daily routines, encourage parent-child bonding through interactive play and reading, and support parents in building confidence to access local baby clinics, libraries, and community family hubs. Practical support from an experienced volunteer helps reduce parental anxiety and promotes a nurturing home environment for babies and young children. Parents can self-refer directly through the Home-Start UK website or ask their midwife, health visitor, or GP to make a referral to their local Home-Start scheme.",
+      "chunk_index": 0,
+      "token_count": 200,
+      "safety_relevant": false,
+      "attribution": "Source: Home-Start UK",
+      "content_hash": "e5fa7fbbca9b89915670b8d333b0fd7a4b4c7feb5281d811b0c5ad72ccade943"
+    },
+    {
+      "id": "69bca55baafd1779ed396f07438b386cf84d9030325f431a85bf823eddc3c5fa",
+      "source_id": "charity-gingerbread-single-parents",
+      "source_url": "https://www.gingerbread.org.uk/information/wellbeing-and-mental-health/",
+      "title": "Gingerbread: Emotional Wellbeing and Practical Support for Single Parents",
+      "category": "emotional-wellbeing",
+      "chunk_text": "Gingerbread is the leading UK national charity supporting single-parent families across England and Wales. Raising children as a solo parent brings distinct emotional rewards alongside unique practical pressures, including carrying sole decision-making responsibility, balancing employment with childcare, navigating tight household budgets, and coping with feelings of loneliness, stress, or parental guilt. Gingerbread emphasizes that taking care of your own emotional and physical wellbeing is essential, not selfish; when you feel rested, supported, and emotionally steady, you create a more secure and nurturing environment for your children. Gingerbread provides expert information on managing daily stress, establishing predictable family routines, communicating constructively with an ex-partner regarding child contact, creating child-centred coparenting arrangements after separation, and navigating child maintenance and statutory benefit entitlements. Connecting with other single parents who share similar experiences can significantly reduce isolation and build a supportive community network. Single mothers and fathers can access confidential guidance through the Gingerbread Single Parent Helpline, comprehensive digital guides, and local peer support groups organized throughout the UK.",
+      "chunk_index": 0,
+      "token_count": 215,
+      "safety_relevant": false,
+      "attribution": "Source: Gingerbread",
+      "content_hash": "69bca55baafd1779ed396f07438b386cf84d9030325f431a85bf823eddc3c5fa"
+    },
+    {
+      "id": "02ddc76018bb45e5d59d0bd93194da5181eb5084893e1c39a3a2d1f888400c0e",
+      "source_id": "charity-action-for-children-parent-talk",
+      "source_url": "https://parents.actionforchildren.org.uk/baby/",
+      "title": "Action for Children Parent Talk: Child Development and Sleep Routines",
+      "category": "teething-development",
+      "chunk_text": "Action for Children's Parent Talk provides free, practical parenting guidance grounded in evidence-informed frameworks such as the Solihull Approach and Incredible Years models. Every child develops at their own unique pace, achieving physical, cognitive, communication, and emotional milestones in their own time. Learning to observe your baby's subtle behavioral cues helps you understand when they are hungry, tired, overstimulated, or seeking social connection and reassurance. To encourage healthy sleep habits and reduce bedtime resistance, establish a predictable, soothing wind-down sequence (such as a warm bath, gentle baby massage, quiet story, soft lullaby, and dimmed lighting). During developmental sleep regressions, growth spurts, or phases of separation anxiety, maintain consistent bedtime steps while offering calming physical presence and emotional containment. Understanding that big feelings and boundary testing are normal parts of learning helps parents respond with warmth and patience. Action for Children offers free 1:1 online chat with qualified parenting practitioners and family coaches via the Parent Talk digital service, helping parents navigate concerns from newborn sleep and weaning to toddler behaviour.",
+      "chunk_index": 0,
+      "token_count": 221,
+      "safety_relevant": false,
+      "attribution": "Source: Action for Children",
+      "content_hash": "02ddc76018bb45e5d59d0bd93194da5181eb5084893e1c39a3a2d1f888400c0e"
+    },
+    {
+      "id": "75d7eed67a1a6dc9f65102890ccefaa352945c6de379848d9a1c1cb143cc0e19",
+      "source_id": "charity-bliss-neonatal-care",
+      "source_url": "https://www.bliss.org.uk/parents/in-hospital/",
+      "title": "Bliss: Caring for Premature and Sick Babies in Neonatal Units",
+      "category": "newborn-care",
+      "chunk_text": "Bliss is the UK's leading charity dedicated to babies born premature or sick and their families. Having a newborn admitted to a neonatal intensive care unit (NICU), high dependency unit (HDU), or special care baby unit (SCBU) can be emotionally overwhelming and frightening for parents. Bliss works closely alongside NHS neonatal clinical teams to champion family-centred care and empower parents as primary caregivers. Key evidence-based practices supported by Bliss include: Kangaroo Care (prolonged skin-to-skin contact between parent and baby), which stabilizes infant heart rate, supports breathing, regulates body temperature, promotes brain development, and strengthens emotional bonding; expressing breast milk early and frequently, which provides specialized nutrition and protective antibodies tailored for fragile infant immune systems; and understanding 'corrected age' (assessing developmental milestones from the baby's original estimated due date rather than their chronological birth date). Bliss provides free parent information guides, video consultations with family support workers, and peer support networks to help parents navigate the neonatal journey and the transition home.",
+      "chunk_index": 0,
+      "token_count": 211,
+      "safety_relevant": true,
+      "attribution": "Source: Bliss",
+      "content_hash": "75d7eed67a1a6dc9f65102890ccefaa352945c6de379848d9a1c1cb143cc0e19"
+    },
+    {
+      "id": "8f9c291d78011dba7927bb3912662f11a276ec9541c85e78aad8c01f6dc7cb77",
+      "source_id": "charity-tommys-pregnancy-postnatal",
+      "source_url": "https://www.tommys.org/baby-care/sleep/",
+      "title": "Tommy's: Physical Recovery After Childbirth and Maternal Health",
+      "category": "newborn-care",
+      "chunk_text": "Tommy's provides clinical research-backed guidance to support parents through pregnancy, birth, and the postnatal recovery period. Giving birth involves profound physical, hormonal, and emotional transitions, and healing in the 'fourth trimester' requires rest, gentle movement, adequate hydration, and nourishing food. Key postnatal care recommendations include: keeping perineal stitches or caesarean section wound incisions clean, dry, and exposed to air when resting; performing gentle daily pelvic floor exercises to restore muscle tone and bladder control; drinking plenty of water and eating fibre-rich foods to prevent constipation and avoid straining; and allowing loved ones to assist with household chores so you can rest. Contact your midwife, health visitor, or GP promptly if you observe signs of potential infection, such as worsening wound pain, spreading redness, foul-smelling vaginal discharge (lochia), or a sudden high temperature. Tommy's provides comprehensive postnatal resources and operates a midwife-led helpline offering clinical reassurance, advice on birth trauma recovery, and compassionate guidance on maternal wellbeing.",
+      "chunk_index": 0,
+      "token_count": 203,
+      "safety_relevant": false,
+      "attribution": "Source: Tommy's",
+      "content_hash": "8f9c291d78011dba7927bb3912662f11a276ec9541c85e78aad8c01f6dc7cb77"
+    },
+    {
+      "id": "3df30b9e3e1d51f6a7038d1846e68c7ba3a70b7e6ceb4e091b2b8d45ff2c8316",
+      "source_id": "charity-nct-infant-feeding",
+      "source_url": "https://www.nct.org.uk/baby-toddler/feeding/",
+      "title": "NCT: Responsive Infant Feeding, Breastfeeding Support, and Bottle Hygiene",
+      "category": "feeding",
+      "chunk_text": "The National Childbirth Trust (NCT) provides evidence-based, supportive information for parents across all feeding methods, including breastfeeding, formula feeding, and combination feeding. Responsive feeding involves recognising and responding to your baby's early hunger cues (such as rooting, turning their head, sucking on fingers, making smacking sounds, and restlessness) rather than waiting until they cry or feeding by a rigid clock schedule. For breastfeeding parents, ensuring a deep and comfortable latch helps prevent sore nipples and ensures effective milk transfer. For bottle-feeding parents, paced bottle feeding allows the baby to control the milk flow at their own pace, reducing wind and preventing overfeeding. All feeding bottles, teats, rings, and preparation equipment must be thoroughly cleaned with hot soapy water, rinsed, and sterilized before every use using cold-water sterilising solution, steam sterilising, or boiling. Parents seeking feeding guidance or emotional reassurance can contact the NCT Infant Feeding Line to speak with qualified breastfeeding counsellors or join local NCT early days parent groups.",
+      "chunk_index": 0,
+      "token_count": 208,
+      "safety_relevant": false,
+      "attribution": "Source: NCT",
+      "content_hash": "3df30b9e3e1d51f6a7038d1846e68c7ba3a70b7e6ceb4e091b2b8d45ff2c8316"
+    },
+    {
+      "id": "aa2c35ac397877a77af0d4d561d18356327d39ee276506e5a24db00629e44954",
+      "source_id": "charity-ihv-parent-tips",
+      "source_url": "https://ihv.org.uk/families/top-tips-for-parents/",
+      "title": "Institute of Health Visiting: Health Visitor Reviews and Child Development",
+      "category": "newborn-care",
+      "chunk_text": "The Institute of Health Visiting (iHV) publishes expert 'Top Tips for Parents' authored by UK health visitors. Health visitors are qualified nurses or midwives with specialist community public health training who work in partnership with families from pregnancy until school entry. Health visitors conduct routine universal child health reviews, including the new birth visit (at 10 to 14 days), the 6 to 8 week review, the 9 to 12 month review, and the 2 to 2.5 year developmental review. These assessments check your child's physical growth, gross and fine motor skills, speech and communication development, hearing, vision, and social-emotional wellbeing. Health visitors also provide evidence-based guidance on infant feeding, weaning readiness, safer sleep practices, childhood immunisations, and parental mental health. If you have concerns about your child's developmental progress, feeding difficulties, or emotional wellbeing, you can contact your local health visiting team through your GP surgery, local baby clinic, or community NHS trust.",
+      "chunk_index": 0,
+      "token_count": 199,
+      "safety_relevant": false,
+      "attribution": "Source: Institute of Health Visiting",
+      "content_hash": "aa2c35ac397877a77af0d4d561d18356327d39ee276506e5a24db00629e44954"
+    },
+    {
+      "id": "2f51af66c6203204b624f5240ef0141e3a8031681f109d07be14b5441194ce5f",
+      "source_id": "charity-icon-infant-crying",
+      "source_url": "https://iconcope.org/parents-advice/",
+      "title": "ICON Cope: The 4 Principles for Coping with Infant Crying",
+      "category": "newborn-care",
+      "chunk_text": "ICON is an evidence-based UK public health programme endorsed by the NHS, royal colleges, and safeguarding partnerships to help parents cope with crying and prevent Abusive Head Trauma (shaken baby syndrome). The programme is built around four core principles: I - Infant crying is normal: All babies cry, and it is completely normal for crying to increase in frequency and intensity during the first two months of life. C - Comforting methods can sometimes soothe baby: Check if baby is hungry, tired, too warm, too cold, or needs a clean nappy. Try skin-to-skin contact, gentle rhythmic rocking, or a quiet pram walk. O - It's OK to walk away: If you have checked baby's basic needs and the crying is causing you to feel overwhelmed, stressed, or angry, place baby safely on their back in their cot, walk into another room, and take a few minutes to breathe and calm down. Check on baby every few minutes. N - Never, ever shake or hurt a baby: Shaking an infant causes catastrophic brain injuries and can be fatal. Share these ICON principles with anyone caring for your infant.",
+      "chunk_index": 0,
+      "token_count": 243,
+      "safety_relevant": true,
+      "attribution": "Source: ICON Cope",
+      "content_hash": "2f51af66c6203204b624f5240ef0141e3a8031681f109d07be14b5441194ce5f"
+    },
+    {
+      "id": "498a1ade9c03f34766908931bf04ab6740f4c664832776a28e742cb61c0e5cdf",
+      "source_id": "charity-fatherhood-institute",
+      "source_url": "https://fatherhoodinstitute.org/for-fathers/",
+      "title": "Fatherhood Institute: Dads' Mental Health and Active Fatherhood",
+      "category": "emotional-wellbeing",
+      "chunk_text": "The Fatherhood Institute is the UK's leading charity and research organization dedicated to supporting father-inclusive parenting and paternal wellbeing. Fathers and non-birthing partners play a crucial, positive role in their children's development from the earliest days of life. Engaging in active, day-to-day caregiving — such as bathing, soothing, nappy changing, babywearing, reading stories, and skin-to-skin cuddles — stimulates oxytocin release in fathers, strengthening mutual bonding and supporting the infant's social, emotional, and cognitive growth. Around 1 in 10 new fathers experience paternal postnatal depression or perinatal anxiety, which may present as persistent irritability, emotional withdrawal from family activities, sleep disruption, or feeling overwhelmed by new parental responsibilities. The Fatherhood Institute encourages fathers to talk openly about their emotional wellbeing, share night-time caregiving duties, attend routine child health reviews, and support their partner's feeding choices. Connecting with local dad-and-baby groups helps reduce isolation and builds confidence in parenting skills. If you are a father experiencing emotional distress or low mood, speak openly with your health visitor, GP, or access NHS Talking Therapies for confidential, effective support and guidance.",
+      "chunk_index": 0,
+      "token_count": 230,
+      "safety_relevant": false,
+      "attribution": "Source: Fatherhood Institute",
+      "content_hash": "498a1ade9c03f34766908931bf04ab6740f4c664832776a28e742cb61c0e5cdf"
     }
   ]
 }

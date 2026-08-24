@@ -1,6 +1,7 @@
-﻿import * as fs from "node:fs";
+import * as fs from "node:fs";
 import * as path from "node:path";
 import { FAQSeedFile, SourcesFile, hashChunk } from "./types.js";
+import { validateSourceUrl } from "../../src/ingest/allowlist.js";
 
 export interface SeedingResult {
   totalSources: number;
@@ -52,9 +53,10 @@ export function generateSeedingPayload(): SeedingResult {
         `Provenance validation failed: Chunk ${chunk.id} URL "${chunk.source_url}" does not match allow-list source "${chunk.source_id}" URL "${source.url}"`
       );
     }
-    if (!chunk.source_url.startsWith("https://www.nhs.uk/")) {
+    const urlValidation = validateSourceUrl(chunk.source_url);
+    if (!urlValidation.valid) {
       throw new Error(
-        `Security validation failed: Chunk ${chunk.id} has non-NHS domain URL: ${chunk.source_url}`
+        `Security validation failed: Chunk ${chunk.id} has unapproved domain URL: ${chunk.source_url} (${urlValidation.reason})`
       );
     }
 

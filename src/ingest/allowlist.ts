@@ -26,7 +26,40 @@ export const ALLOWED_NHS_HOSTS = new Set([
 ]);
 
 /**
- * Validate that a source URL conforms strictly to NHS allow-list rules (rule 02.7).
+ * Curated, human-approved UK parenting charity & support partner domains (rule 02.7).
+ */
+export const APPROVED_CHARITY_HOSTS = new Set([
+  "lullabytrust.org.uk",
+  "www.lullabytrust.org.uk",
+  "cry-sis.org.uk",
+  "www.cry-sis.org.uk",
+  "pandasfoundation.org.uk",
+  "www.pandasfoundation.org.uk",
+  "familylives.org.uk",
+  "www.familylives.org.uk",
+  "home-start.org.uk",
+  "www.home-start.org.uk",
+  "gingerbread.org.uk",
+  "www.gingerbread.org.uk",
+  "parents.actionforchildren.org.uk",
+  "actionforchildren.org.uk",
+  "www.actionforchildren.org.uk",
+  "bliss.org.uk",
+  "www.bliss.org.uk",
+  "tommys.org",
+  "www.tommys.org",
+  "nct.org.uk",
+  "www.nct.org.uk",
+  "ihv.org.uk",
+  "www.ihv.org.uk",
+  "iconcope.org",
+  "www.iconcope.org",
+  "fatherhoodinstitute.org",
+  "www.fatherhoodinstitute.org",
+]);
+
+/**
+ * Validate that a source URL conforms strictly to NHS and approved charity allow-list rules (rule 02.7).
  */
 export function validateSourceUrl(rawUrl: string): { valid: boolean; reason?: string } {
   if (!rawUrl || typeof rawUrl !== "string") {
@@ -41,12 +74,14 @@ export function validateSourceUrl(rawUrl: string): { valid: boolean; reason?: st
 
     const hostname = parsed.hostname.toLowerCase();
     const isAllowedHost =
-      ALLOWED_NHS_HOSTS.has(hostname) || hostname.endsWith(".nhs.uk");
+      ALLOWED_NHS_HOSTS.has(hostname) ||
+      hostname.endsWith(".nhs.uk") ||
+      APPROVED_CHARITY_HOSTS.has(hostname);
 
     if (!isAllowedHost) {
       return {
         valid: false,
-        reason: `Domain '${hostname}' is not on the approved NHS allow-list (rule 02.7). Requires human approval.`,
+        reason: `Domain '${hostname}' is not on the approved NHS and charity allow-list (rule 02.7). Requires human approval.`,
       };
     }
 

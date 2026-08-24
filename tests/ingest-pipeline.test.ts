@@ -23,24 +23,90 @@ describe("M7 Allow-List & Governance Validation [P2-T2, rule 02.7]", () => {
     expect(validateSourceUrl("https://111.nhs.uk/urgent-care/").valid).toBe(true);
   });
 
-  it("rejects non-HTTPS URLs", () => {
-    const res = validateSourceUrl("http://www.nhs.uk/conditions/baby/");
-    expect(res.valid).toBe(false);
-    expect(res.reason).toContain("HTTPS");
+  it("accepts all approved UK parenting charity hosts with HTTPS", () => {
+    const approvedCharityUrls = [
+      "https://www.lullabytrust.org.uk/safer-sleep-advice/",
+      "https://lullabytrust.org.uk/safer-sleep-advice/",
+      "https://www.cry-sis.org.uk/coping-with-crying/",
+      "https://cry-sis.org.uk/coping-with-crying/",
+      "https://www.pandasfoundation.org.uk/perinatal-mental-health/",
+      "https://pandasfoundation.org.uk/perinatal-mental-health/",
+      "https://www.familylives.org.uk/advice/early-years/",
+      "https://familylives.org.uk/advice/early-years/",
+      "https://www.home-start.org.uk/our-support/",
+      "https://home-start.org.uk/our-support/",
+      "https://www.gingerbread.org.uk/information/wellbeing-and-mental-health/",
+      "https://gingerbread.org.uk/information/wellbeing-and-mental-health/",
+      "https://parents.actionforchildren.org.uk/baby/",
+      "https://actionforchildren.org.uk/support-us/",
+      "https://www.actionforchildren.org.uk/support-us/",
+      "https://www.bliss.org.uk/parents/in-hospital/",
+      "https://bliss.org.uk/parents/in-hospital/",
+      "https://www.tommys.org/baby-care/sleep/",
+      "https://tommys.org/baby-care/sleep/",
+      "https://www.nct.org.uk/baby-toddler/feeding/",
+      "https://nct.org.uk/baby-toddler/feeding/",
+      "https://www.ihv.org.uk/families/top-tips-for-parents/",
+      "https://ihv.org.uk/families/top-tips-for-parents/",
+      "https://www.iconcope.org/parents-advice/",
+      "https://iconcope.org/parents-advice/",
+      "https://www.fatherhoodinstitute.org/for-fathers/",
+      "https://fatherhoodinstitute.org/for-fathers/",
+    ];
+
+    for (const url of approvedCharityUrls) {
+      const res = validateSourceUrl(url);
+      expect(res.valid, `Expected URL to be valid: ${url}`).toBe(true);
+    }
   });
 
-  it("CRITICAL RULE 02.7: rejects non-NHS domains without human approval", () => {
+  it("rejects non-HTTPS URLs", () => {
+    const res1 = validateSourceUrl("http://www.nhs.uk/conditions/baby/");
+    expect(res1.valid).toBe(false);
+    expect(res1.reason).toContain("HTTPS");
+
+    const res2 = validateSourceUrl("http://www.lullabytrust.org.uk/safer-sleep-advice/");
+    expect(res2.valid).toBe(false);
+    expect(res2.reason).toContain("HTTPS");
+  });
+
+  it("CRITICAL RULE 02.7: rejects unvetted commercial domains and content mills without human approval", () => {
     const res1 = validateSourceUrl("https://commercial-parenting-site.co.uk/advice");
     expect(res1.valid).toBe(false);
-    expect(res1.reason).toContain("not on the approved NHS allow-list");
+    expect(res1.reason).toContain("not on the approved NHS and charity allow-list");
 
     const res2 = validateSourceUrl("https://example.com/health");
     expect(res2.valid).toBe(false);
+
+    const res3 = validateSourceUrl("https://mumsnet.com/talk/parenting");
+    expect(res3.valid).toBe(false);
+  });
+
+  it("SECURITY: rejects suffix and prefix domain spoofing attacks", () => {
+    const spoofedUrls = [
+      "https://lullabytrust.org.uk.malicious-domain.com/safer-sleep",
+      "https://pandasfoundation.org.uk.attacker.io/perinatal-mental-health",
+      "https://evil-cry-sis.org.uk/coping-with-crying",
+      "https://not-gingerbread.org.uk/information",
+      "https://bliss.org.uk.fake.org/parents",
+      "https://nhs.uk.phishing.com/health",
+      "https://192.168.1.1/malicious",
+    ];
+
+    for (const spoofed of spoofedUrls) {
+      const res = validateSourceUrl(spoofed);
+      expect(res.valid, `Expected spoofed URL to be rejected: ${spoofed}`).toBe(false);
+    }
   });
 
   it("validates canonical categories", () => {
     expect(validateCategory("newborn-care")).toBe(true);
     expect(validateCategory("feeding")).toBe(true);
+    expect(validateCategory("weaning-nutrition")).toBe(true);
+    expect(validateCategory("sleep")).toBe(true);
+    expect(validateCategory("teething-development")).toBe(true);
+    expect(validateCategory("minor-ailments")).toBe(true);
+    expect(validateCategory("emotional-wellbeing")).toBe(true);
     expect(validateCategory("unvetted-category")).toBe(false);
   });
 });

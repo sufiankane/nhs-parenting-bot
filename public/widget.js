@@ -16,6 +16,10 @@
 
 const CHAT_ENDPOINT = "/chat";
 
+// Natural pause (ms) before revealing response to create a realistic, conversational feel
+const THINKING_DELAY_MS =
+  typeof process !== "undefined" && process.env?.NODE_ENV === "test" ? 0 : 750;
+
 const SAFE_ERROR_MESSAGE =
   "Sorry, something went wrong. Please try again, or call NHS 111 on 111 if you need urgent help.";
 
@@ -213,6 +217,18 @@ export function init() {
     appendUserBubble(message);
     showTypingIndicator();
 
+    const requestStartTime = Date.now();
+    let hasStartedRendering = false;
+
+    async function ensureThinkingDelay() {
+      if (hasStartedRendering) return;
+      hasStartedRendering = true;
+      const elapsed = Date.now() - requestStartTime;
+      if (elapsed < THINKING_DELAY_MS) {
+        await new Promise((resolve) => setTimeout(resolve, THINKING_DELAY_MS - elapsed));
+      }
+    }
+
     try {
       const res = await fetch(CHAT_ENDPOINT, {
         method: "POST",
@@ -255,8 +271,10 @@ export function init() {
           const { render } = handleSseEvent(envelope, { sessionId });
           if (!render) continue;
           if (render.type === "token") {
+            await ensureThinkingDelay();
             appendAssistantToken(render.text);
           } else if (render.type === "signpost") {
+            await ensureThinkingDelay();
             renderSignpost(render.payload);
           } else if (render.type === "error") {
             showError();
