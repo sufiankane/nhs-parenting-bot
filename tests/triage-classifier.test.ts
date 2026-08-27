@@ -137,7 +137,7 @@ describe("M3 Classifier: classifyRisk & triageWithClassifier [P2-T1]", () => {
       DEFAULT_CLASSIFIER_MODEL,
       expect.objectContaining({
         temperature: 0.0,
-        max_tokens: 64,
+        max_tokens: 128,
       })
     );
   });

@@ -152,6 +152,7 @@ type SSEEnvelope =
 
 ### M3 — Safety & Triage Module ⚠️ *highest criticality*
 - **Purpose:** Classify every inbound message into a risk tier before any retrieval or generation.
+- **Detailed Specification:** See [Safety Architecture & Clinical Triage Flow](./safety-architecture-and-triage-flow.md) for full defense-in-depth documentation, algebraic precedence rules, and adversarial mitigations.
 - **Implementation:** `triageWithClassifier(message, env)` in `src/triage/index.ts` — active in the live `/chat` handler as of 2026-08-27.
 - **Method (defence in depth):**
   1. **Layer 1 (lexicon):** Deterministic keyword/phrase lexicon covering Tier 1 (emergency), Tier 2 (urgent medical), and Tier 3 (safeguarding/domestic abuse) with ~200+ approved phrase variants across all tiers. Expanded via 1,000-scenario adversarial testing (pre-remediation: 75.1%; post-remediation: 99.5% pass rate, 0 Critical T1 false negatives).

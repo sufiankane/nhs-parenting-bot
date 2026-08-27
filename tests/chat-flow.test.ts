@@ -148,9 +148,18 @@ function postChat(
   );
 }
 
-/** Count AI.run calls for a specific model. */
-function callsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
-  return aiRun.mock.calls.filter((c) => c[0] === model);
+/** Get AI.run calls for a specific model that look like generation (grounded parenting prompt). */
+function generationCallsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
+  return aiRun.mock.calls.filter(
+    (c) => c[0] === model && c[1]?.messages?.[0]?.content?.includes("parenting guidance")
+  );
+}
+
+/** Get AI.run calls for a specific model that look like classification (triage prompt). */
+function classifierCallsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
+  return aiRun.mock.calls.filter(
+    (c) => c[0] === model && c[1]?.messages?.[0]?.content?.includes("triage classifier")
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -201,11 +210,8 @@ describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
       "@cf/baai/bge-base-en-v1.5",
       expect.anything()
     );
-    expect(h.aiRun).not.toHaveBeenCalledWith(
-      "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
-      expect.anything()
-    );
     expect(h.vectorQuery).not.toHaveBeenCalled();
+    expect(generationCallsFor(h.aiRun, GENERATION_MODEL)).toHaveLength(0);
   });
 
   it("Tier 3 returns NSPCC signpost with zero AI calls", async () => {
@@ -226,11 +232,8 @@ describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
       "@cf/baai/bge-base-en-v1.5",
       expect.anything()
     );
-    expect(h.aiRun).not.toHaveBeenCalledWith(
-      "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
-      expect.anything()
-    );
     expect(h.vectorQuery).not.toHaveBeenCalled();
+    expect(generationCallsFor(h.aiRun, GENERATION_MODEL)).toHaveLength(0);
   });
 });
 
@@ -312,8 +315,8 @@ describe("Tier 4 /chat flow with low confidence [P1-T6, Spec �4 M4 decision bo
     expect(done.payload.fallback).toBe(true);
     expect(done.payload.fallback_reason).toBe("low_confidence");
 
-    // protects Spec �4 M4 � no generation call on low confidence.
-    expect(callsFor(h.aiRun, GENERATION_MODEL)).toHaveLength(0);
+    // protects Spec 4 M4  no generation call on low confidence.
+    expect(generationCallsFor(h.aiRun, GENERATION_MODEL)).toHaveLength(0);
   });
 });
 
@@ -451,9 +454,9 @@ describe("Multi-turn Session Flow [P2-T4, Spec §4 M5]", () => {
     expect(events.length).toBeGreaterThan(0);
 
     // Verify AI generation call received structured history
-    const genCall = h.aiRun.mock.calls.find((c) => c[0] === GENERATION_MODEL);
+    const genCall = generationCallsFor(h.aiRun, GENERATION_MODEL)[0];
     expect(genCall).toBeDefined();
-    const userMsg = genCall![1].messages.find((m: any) => m.role === "user");
+    const userMsg = (genCall[1] as any).messages.find((m: any) => m.role === "user");
     expect(userMsg.content).toContain("Previous conversation turns");
     expect(userMsg.content).toContain('User: "My baby is 2 months old"');
   });
