@@ -292,7 +292,6 @@ async function executeHttpChat(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "CF-Connecting-IP": virtualIp,
           "X-Forwarded-For": virtualIp,
         },
         body: JSON.stringify({

@@ -18,7 +18,7 @@ export interface ClassifierPrediction {
   readonly category?: string;
 }
 
-export const DEFAULT_CLASSIFIER_MODEL = "@cf/meta/llama-guard-3-8b";
+export const DEFAULT_CLASSIFIER_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
 
 /**
  * Combine synchronous lexicon triage result with classifier prediction.
