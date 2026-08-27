@@ -635,9 +635,6 @@ function parseCliArgs(): RunnerOptions {
     } else if (arg.startsWith("--url=")) {
       options.targetUrl = arg.slice(6);
       options.mode = "http";
-    } else if (arg.startsWith("--target=")) {
-      options.targetUrl = arg.slice(9);
-      options.mode = "http";
     } else if (arg.startsWith("--rpm=")) {
       options.maxRpm = parseInt(arg.slice(6), 10) || 15;
     } else if (arg.startsWith("--delay=")) {
