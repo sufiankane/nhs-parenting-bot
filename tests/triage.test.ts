@@ -94,6 +94,15 @@ describe("M3 Triage Module v1 — Tier 1 Classification [rule 02.1, rule 02.3]",
     ["Cutting myself right now and bleeding heavily", "self_harm_active"],
     ["Purple rash won't fade under glass test", "meningitis_sepsis_emergency"],
     ["Severe burn from boiling water skin peeling off", "severe_burns"],
+    ["i stabbed my child in the abdomen and he is bleeding", "severe_trauma_hemorrhage"],
+    ["my child has a stab wound from a knife", "severe_trauma_hemorrhage"],
+    ["my baby was found underwater in the bath", "drowning_submersion"],
+    ["my partner shot my child with a gun", "severe_trauma_hemorrhage"],
+    ["My baby drank vape liquid from the bottle", "poisoning_toxic_ingestion"],
+    ["Toddler swallowed a dishwasher pod", "poisoning_toxic_ingestion"],
+    ["Heavy bookcase and furniture fell on baby", "severe_trauma_hemorrhage"],
+    ["Toddler caught in blind cord hanging by cord", "respiratory_arrest"],
+    ["Baby had severe electric shock stuck finger in socket", "severe_burns"],
   ];
 
   it.each(tier1Cases)("classifies Tier 1: '%s' -> %s", (text, expectedCategory) => {
@@ -120,6 +129,9 @@ describe("M3 Triage Module v1 — Tier 2 Classification [Spec §4 M3]", () => {
     ["Toddler won't put weight on leg after falling", "suspected_fracture"],
     ["Child had a short febrile fit earlier but is awake now", "febrile_seizure_resolved"],
     ["Eye swollen shut with yellow discharge", "eye_infection_injury"],
+    ["Toddler has a very swollen testicle in pain", "testicular_acute_pain"],
+    ["Baby is doing green vomit after feed", "acute_abdominal_pain"],
+    ["5 month old with high fever 39 degrees", "infant_fever_under_3m"],
   ];
 
   it.each(tier2Cases)("classifies Tier 2: '%s' -> %s", (text, expectedCategory) => {
@@ -143,6 +155,9 @@ describe("M3 Triage Module v1 — Tier 3 Classification [Spec §4 M3]", () => {
     ["I am having intrusive thoughts about harming child", "parental_mental_health_crisis"],
     ["Worried about female genital mutilation fgm", "fgm_forced_marriage"],
     ["I am scared of my dad and want to run away", "childline_direct_disclosure"],
+    ["My partner locked me in room and smashed my phone", "domestic_abuse"],
+    ["I have severe postpartum depression cannot cope at all", "parental_mental_health_crisis"],
+    ["Found cigarette burns on baby legs", "physical_abuse"],
   ];
 
   it.each(tier3Cases)("classifies Tier 3: '%s' -> %s", (text, expectedCategory) => {
