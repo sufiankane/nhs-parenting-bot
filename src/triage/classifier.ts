@@ -98,7 +98,7 @@ export async function classifyRisk(
             "You are a clinical safety risk triage classifier for a UK parenting service. Classify the user message into exactly ONE risk tier:\n" +
             "- Tier 1: Immediate danger to life, acute emergency, unresponsiveness, breathing cessation, active severe self-harm, anaphylaxis.\n" +
             "- Tier 2: Urgent non-emergency medical symptoms needing clinical evaluation within hours (fever in infants under 3 months / temperature 38°C+, dehydration, severe rash, breathing difficulties).\n" +
-            "- Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse, grooming, forced marriage.\n" +
+            "- Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse, sexual assault, grooming, forced marriage, severe parental mental health crisis, postnatal depression, postpartum psychosis, substance abuse, and incapacitation while parenting.\n" +
             "- Tier 4: General everyday parenting questions (weaning, sleep routines, mild teething, behaviour).\n\n" +
             "Respond strictly with a JSON object: {\"tier\": 1|2|3|4, \"confidence\": float, \"category\": string}",
         },

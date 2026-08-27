@@ -165,6 +165,8 @@ export const TIER_1_RULES: readonly LexiconRule[] = deepFreeze([
       "took sleeping pills",
       "took my husbands sleeping pills",
       "took all my medication",
+      "took an overdose",
+      "taken an overdose",
       "took medication at once",
     ],
   },
@@ -231,6 +233,7 @@ export const TIER_1_RULES: readonly LexiconRule[] = deepFreeze([
       "cutting myself",
       "slashing myself",
       "hurting myself right now",
+      "harming myself",
       "bleeding from self harm",
       "took all my pills",
       "took sleeping pills",
@@ -405,6 +408,8 @@ export const TIER_3_RULES: readonly LexiconRule[] = deepFreeze([
       "domestic violence with children",
       "partner threatening me",
       "hit me in front of kids",
+      "raped me",
+      "raped",
     ],
   },
   {
@@ -423,6 +428,8 @@ export const TIER_3_RULES: readonly LexiconRule[] = deepFreeze([
       "passed out drugs with baby alone",
       "passed out and cant look after baby",
       "passed out and can t look after baby",
+      "drank a bottle",
+      "too drunk to care",
     ],
   },
   {
@@ -434,6 +441,8 @@ export const TIER_3_RULES: readonly LexiconRule[] = deepFreeze([
       "intrusive thoughts about harming child",
       "i have postpartum psychosis",
       "i think i have postpartum psychosis",
+      "postnatal psychosis",
+      "disconnected from reality",
     ],
   },
   {
