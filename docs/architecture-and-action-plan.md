@@ -155,17 +155,22 @@ type SSEEnvelope =
 - **Detailed Specification:** See [Safety Architecture & Clinical Triage Flow](./safety-architecture-and-triage-flow.md) for full defense-in-depth documentation, algebraic precedence rules, and adversarial mitigations.
 - **Implementation:** `triageWithClassifier(message, env)` in `src/triage/index.ts` — active in the live `/chat` handler as of 2026-08-27.
 - **Method (defence in depth):**
-  1. **Layer 1 (lexicon):** Deterministic keyword/phrase lexicon covering Tier 1 (emergency), Tier 2 (urgent medical), and Tier 3 (safeguarding/domestic abuse) with ~200+ approved phrase variants across all tiers. Expanded via 1,000-scenario adversarial testing (pre-remediation: 75.1%; post-remediation: 99.5% pass rate, 0 Critical T1 false negatives).
-  3. Rule-based tier resolution combining both signals — lexicon hits on Tier 1 terms always win (Rule 02.2). Tier 1 messages return immediately with zero classifier overhead.
-  4. **Precedence rule:** The classifier may escalate beyond the lexicon tier; it may NEVER downgrade any lexicon tier (Rule 02.3).
-  5. **Degradation mode:** If the classifier is unavailable, times out, or returns null, triage falls back immediately to deterministic keyword-only mode. No message is classified Tier 4 solely due to classifier failure.
+  1. **Layer 1 (lexicon):** Deterministic keyword/phrase lexicon covering Tier 1 (emergency), Tier 2 (urgent medical), and Tier 3 (safeguarding/domestic abuse) with deep-frozen rule arrays.
+  2. **Layer 2 (classifier):** `@cf/meta/llama-3.1-8b-instruct-fp8-fast` semantic risk classifier running temperature 0.0 with clinical risk boundary instructions.
+  3. **Layer 3 (precedence algebra):** $\text{Final Tier} = \min(\text{Lexicon Tier}, \text{Classifier Tier})$. The classifier may escalate; it may NEVER downgrade (Rule 02.3).
+  4. **Degradation mode:** If the classifier is unavailable, times out, or errors, triage falls back immediately to deterministic keyword-only mode (Rule 04.13).
+  5. **Asymmetric Safety Loss & Built-in ~10% Over-Escalation:** To eliminate Critical Tier 1 False Negatives on life-threatening emergencies (0.0% achieved on 1,000 scenarios), the system is intentionally calibrated to accept a ~10% over-escalation safety budget on ambiguous presentations (e.g. stillbirth/loss, homelessness, carer depletion) routing users to supportive UK helplines.
 - **Output contract:** `{ tier: 1 | 2 | 3 | 4, matched_signals: string[], signal_categories: string[], confidence: number }`
   - `confidence`: Float `0.0`–`1.0`. Lexicon-only matches return `1.0`; classifier escalations return the model's confidence score; degradation failsafe returns `0.0`.
   - `matched_signals`: In-memory array of matched lexicon terms and classifier signals for immediate rule execution (never persisted to audit log).
+- **Tiers & Escalation Matrix:**
+
+| Tier | Meaning | Action / Escalation Target |
 |---|---|---|
 | 1 | Immediate danger to life | Escalate → Emergency services (999 / A&E) |
 | 2 | Urgent, non-emergency | Escalate → NHS 111 (phone/online) |
 | 3 | Safeguarding concern, not immediate | Escalate → NSPCC Helpline (0808 800 5000) / Childline (0800 1111) / Young Minds Parents Helpline (0808 802 5544) / National Domestic Abuse Helpline (0808 2000 247) |
+| 4 | Safe general parenting query | Proceed to Retrieval (M4) & Grounded Generation (M5) |
 ### M4 — Retrieval Module
 - **Purpose:** Find the most relevant NHS guidance for a safe query.
 - **Steps:** Embed query (same model as ingestion — `@cf/baai/bge-base-en-v1.5`, 768-dim) → Vectorize top-k (k=3–5) → filter by similarity threshold (env-configurable via `SIMILARITY_THRESHOLD`, default 0.5) → fetch chunk text + source URL from D1 → assemble context string.
