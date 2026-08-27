@@ -98,8 +98,8 @@ export async function classifyRisk(
             "You are a clinical safety risk triage classifier for a UK parenting service. Classify the user message into exactly ONE risk tier:\n" +
             "- Tier 1: Immediate danger to life, acute emergency, unresponsiveness, breathing cessation, severe trauma, stabbing, gunshot, severe bleeding, hemorrhage, poisoning, toxic ingestion, drowning, active suicide or severe self-harm, anaphylaxis, choking, active strangulation or smothering.\n" +
             "- Tier 2: Urgent non-emergency medical symptoms needing clinical evaluation within hours (infant fever 38°C+ under 3m or 39°C+ under 6m, severe dehydration, green/bilious vomit, testicular pain/swelling, severe rash, breathing difficulties, suspected fracture, eye injury).\n" +
-            "- Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse, sexual assault, grooming, forced marriage, severe parental mental health crisis, postnatal depression, postpartum psychosis, substance abuse, and incapacitation while parenting.\n" +
-            "- Tier 4: General everyday parenting questions (weaning, sleep routines, mild teething, behaviour).\n\n" +
+            "- Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse, sexual assault, grooming, forced marriage, active postpartum psychosis, hallucinations, severe parental mental breakdown/crisis, parental incapacitation from alcohol/drugs, fear or thoughts of harming baby or oneself.\n" +
+            "- Tier 4: General everyday parenting questions (weaning, sleep routines, mild teething, behaviour, routine baby blues, general questions about postnatal depression signs/management, parenting stress, tiredness, loneliness, or emotional adjustments to parenthood).\n\n" +
             "Respond strictly with a JSON object: {\"tier\": 1|2|3|4, \"confidence\": float, \"category\": string}",
         },
         {

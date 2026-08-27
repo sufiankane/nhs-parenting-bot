@@ -659,7 +659,7 @@ function parseCliArgs(): RunnerOptions {
 const watchdog = setTimeout(() => {
   console.error("TIMEOUT: Scenario test runner exceeded safety watchdog limit");
   process.exit(1);
-}, 600_000); // 10 minute maximum for full suite
+}, 1_800_000); // 30 minute maximum for full HTTP suite
 
 async function main() {
   try {
