@@ -148,14 +148,18 @@ function postChat(
   );
 }
 
-/** Get AI.run calls for a specific model that look like generation (has messages array). */
+/** Get AI.run calls for a specific model that look like generation (grounded parenting prompt). */
 function generationCallsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
-  return aiRun.mock.calls.filter((c) => c[0] === model && c[1]?.messages);
+  return aiRun.mock.calls.filter(
+    (c) => c[0] === model && c[1]?.messages?.[0]?.content?.includes("parenting guidance")
+  );
 }
 
-/** Get AI.run calls for a specific model that look like classification (has prompt string). */
+/** Get AI.run calls for a specific model that look like classification (triage prompt). */
 function classifierCallsFor(aiRun: ReturnType<typeof vi.fn>, model: string): unknown[][] {
-  return aiRun.mock.calls.filter((c) => c[0] === model && typeof c[1]?.prompt === "string");
+  return aiRun.mock.calls.filter(
+    (c) => c[0] === model && c[1]?.messages?.[0]?.content?.includes("triage classifier")
+  );
 }
 
 /* -------------------------------------------------------------------------- */

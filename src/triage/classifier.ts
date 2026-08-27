@@ -90,18 +90,24 @@ export async function classifyRisk(
     (env as { CLASSIFIER_MODEL?: string }).CLASSIFIER_MODEL || DEFAULT_CLASSIFIER_MODEL;
 
   try {
-    const prompt =
-      `You are a clinical safety risk triage classifier. Classify the following user message into exactly ONE risk tier:\n` +
-      `Tier 1: Immediate danger to life, acute emergency, unresponsiveness, breathing cessation, active severe self-harm, anaphylaxis.\n` +
-      `Tier 2: Urgent non-emergency medical symptoms requiring clinical evaluation within hours (high fever in young infants, dehydration, severe rash).\n` +
-      `Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse.\n` +
-      `Tier 4: General everyday parenting questions.\n\n` +
-      `Message: "${message.replace(/"/g, '\\"')}"\n\n` +
-      `Respond strictly with a JSON object: {"tier": 1|2|3|4, "confidence": float, "category": string}`;
-
     const rawResponse = await ai.run(model, {
-      prompt,
-      max_tokens: 64,
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a clinical safety risk triage classifier for a UK parenting service. Classify the user message into exactly ONE risk tier:\n" +
+            "- Tier 1: Immediate danger to life, acute emergency, unresponsiveness, breathing cessation, active severe self-harm, anaphylaxis.\n" +
+            "- Tier 2: Urgent non-emergency medical symptoms needing clinical evaluation within hours (fever in infants under 3 months / temperature 38°C+, dehydration, severe rash, breathing difficulties).\n" +
+            "- Tier 3: Child welfare, safeguarding concern, physical/emotional abuse, domestic abuse, grooming, forced marriage.\n" +
+            "- Tier 4: General everyday parenting questions (weaning, sleep routines, mild teething, behaviour).\n\n" +
+            "Respond strictly with a JSON object: {\"tier\": 1|2|3|4, \"confidence\": float, \"category\": string}",
+        },
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+      max_tokens: 128,
       temperature: 0.0,
     });
 
