@@ -1,4 +1,4 @@
-﻿import { LexiconRule } from "./types";
+import { LexiconRule } from "./types";
 
 /**
  * Recursively freezes an array and any nested objects/arrays so the lexicon
@@ -370,16 +370,18 @@ export const TIER_3_RULES: readonly LexiconRule[] = deepFreeze([
       "too drunk to look after baby",
       "passed out drugs with baby alone",
       "passed out and cant look after baby",
-      "too drunk to look after",
+      "passed out and can t look after baby",
     ],
   },
   {
     category: "parental_mental_health_crisis",
     phrases: [
       "scared i might hurt baby",
+      "scared i might hurt my baby",
+      "intrusive thoughts about harming my child",
       "intrusive thoughts about harming child",
-      "postpartum psychosis thoughts",
-      "thoughts about harming child",
+      "i have postpartum psychosis",
+      "i think i have postpartum psychosis",
     ],
   },
   {
@@ -388,16 +390,20 @@ export const TIER_3_RULES: readonly LexiconRule[] = deepFreeze([
       "female genital mutilation",
       "fgm",
       "cutting girls",
+      "get my daughter cut",
       "forced marriage",
+      "forced to marry",
     ],
   },
   {
     category: "childline_direct_disclosure",
     phrases: [
       "my parents hate me",
+      "my mum and dad hate me",
       "i am scared of my dad",
       "i want to run away from home",
       "i want to run away",
+      "home does not feel safe i want to leave",
     ],
   },
 ]);

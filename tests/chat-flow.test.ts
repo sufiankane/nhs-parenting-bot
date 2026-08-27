@@ -194,7 +194,17 @@ describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
     expect(signpost.payload.tier).toBe(2);
     expect(signpost.payload.services[0].contact).toBe("111");
 
-    expect(h.aiRun).not.toHaveBeenCalled();
+    // rule 02.1/02.2: Retrieval (embedding) and generation must NEVER be called
+    // for T2/T3. The classifier (llama-guard) is intentionally called by
+    // triageWithClassifier() for non-T1 messages — that is correct behaviour.
+    expect(h.aiRun).not.toHaveBeenCalledWith(
+      "@cf/baai/bge-base-en-v1.5",
+      expect.anything()
+    );
+    expect(h.aiRun).not.toHaveBeenCalledWith(
+      "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+      expect.anything()
+    );
     expect(h.vectorQuery).not.toHaveBeenCalled();
   });
 
@@ -209,7 +219,17 @@ describe("Tier 2 and Tier 3 /chat flow [P1-T6, rule 02.1, rule 02.2]", () => {
       "0808 800 5000 / help@nspcc.org.uk"
     );
 
-    expect(h.aiRun).not.toHaveBeenCalled();
+    // rule 02.1/02.2: Retrieval (embedding) and generation must NEVER be called
+    // for T2/T3. The classifier (llama-guard) is intentionally called by
+    // triageWithClassifier() for non-T1 messages — that is correct behaviour.
+    expect(h.aiRun).not.toHaveBeenCalledWith(
+      "@cf/baai/bge-base-en-v1.5",
+      expect.anything()
+    );
+    expect(h.aiRun).not.toHaveBeenCalledWith(
+      "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+      expect.anything()
+    );
     expect(h.vectorQuery).not.toHaveBeenCalled();
   });
 });

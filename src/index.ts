@@ -3,7 +3,7 @@ import { getCorsHeaders, handleCorsPreflight } from "./gateway/cors";
 import { checkKvRateLimit } from "./gateway/kvRateLimit";
 import { validateChatRequest } from "./gateway/validate";
 import { Env } from "./gateway/types";
-import { triage } from "./triage/index";
+import { triageWithClassifier } from "./triage/index";
 import { escalate } from "./escalation/index";
 import { retrieve } from "./retrieval/index";
 import { generateAnswer } from "./generation/index";
@@ -97,9 +97,13 @@ export default {
           const { message, sessionId } = validation.data;
           const session_id = sessionId || createSessionId();
 
-          // ── Rule 02.1: M3 triage — mandatory, synchronous, before ANY
-          //    retrieval, generation, or content logging ──
-          const triageResult = triage(message);
+          // ── Rule 02.1: M3 triage — mandatory, before ANY retrieval, generation,
+          //    or content logging. triageWithClassifier runs the synchronous lexicon
+          //    first; Tier 1 hits return immediately with zero classifier overhead
+          //    (Rule 02.2). The classifier is a semantic catch-all for non-T1
+          //    messages, and degrades safely to the lexicon result on any failure
+          //    (Rule 02.3). ──
+          const triageResult = await triageWithClassifier(message, env);
 
           // ── M8 Audit Log: asynchronous triage audit log via ctx.waitUntil ──
           //    Rule 02.8: zero PII, coarse signal categories only.

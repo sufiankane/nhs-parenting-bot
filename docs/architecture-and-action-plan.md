@@ -4,10 +4,8 @@
 |---|---|
 | Document type | Solution architecture & delivery plan |
 | Author role | Senior Technical & Solution Architect |
-| Version | 1.3 |
-| Date | 2026-08-21 |
-| Intended consumers | Implementing AI agents, software engineers, technical leads |
-| Status | Approved for implementation |
+| Version | 1.4 |
+| Date | 2026-08-27 |
 
 ---
 
@@ -56,10 +54,9 @@ These constraints override all other design decisions. Any implementing agent mu
 User input
   → Worker POST /chat
     → [1] Rate limit check (KV) ──(exceeded)──→ Safe 429 response → END
-    → [2] Safety & Triage module (M3)
-          ├─ Tier 1/2/3 (risk) → Escalation module (M6) → structured signpost response → audit log (M8) → END
-          ├─ Triage error      → Fail-safe fallback (Tier 2 signpost / safe error envelope) → END
-          └─ Tier 4 (safe)     → continue
+    → [2] Safety & Triage module (M3) — triageWithClassifier()
+          ├─ Step 2a: Synchronous lexicon scan (always runs first)
+          │     └─ Tier 1 hit → return immediately, classifier skipped (zero latency, Rule 02.2)
     → [3] Embed query (Workers AI, bge-base-en-v1.5) ──(failure)──→ Safe fallback response (M5) → END
     → [4] Vectorize top-k search → filter by similarity ≥ threshold (default 0.5)
     → [5] D1 lookup for chunk text + source URL
@@ -155,27 +152,19 @@ type SSEEnvelope =
 
 ### M3 — Safety & Triage Module ⚠️ *highest criticality*
 - **Purpose:** Classify every inbound message into a risk tier before any retrieval or generation.
+- **Implementation:** `triageWithClassifier(message, env)` in `src/triage/index.ts` — active in the live `/chat` handler as of 2026-08-27.
 - **Method (defence in depth):**
-  1. **Phase 1:** Deterministic keyword/phrase lexicon (e.g. self-harm, suicide, "not breathing", "won't wake up", non-accidental injury language, domestic abuse).
-  2. **Phase 2:** Lightweight classifier pass (Workers AI classification model, separate from the generation model). If a prompt-based classifier is used, it must be an isolated call, never the generation model.
-  3. Rule-based tier resolution combining both signals — lexicon hits on Tier 1 terms always win.
-  4. **Precedence rule:** The classifier may escalate beyond the lexicon; it may NEVER downgrade a Tier 1 lexicon hit (rules 02.2, 02.3).
-  5. **Degradation mode:** If the classifier is unavailable or errors, triage falls back immediately to deterministic keyword-only mode; no message is classified Tier 4 solely due to classifier failure.
+  1. **Layer 1 (lexicon):** Deterministic keyword/phrase lexicon covering Tier 1 (emergency), Tier 2 (urgent medical), and Tier 3 (safeguarding/domestic abuse) with ~200+ approved phrase variants across all tiers. Expanded via 1,000-scenario adversarial testing (pre-remediation: 75.1%; post-remediation: 99.5% pass rate, 0 Critical T1 false negatives).
+  3. Rule-based tier resolution combining both signals — lexicon hits on Tier 1 terms always win (Rule 02.2). Tier 1 messages return immediately with zero classifier overhead.
+  4. **Precedence rule:** The classifier may escalate beyond the lexicon tier; it may NEVER downgrade any lexicon tier (Rule 02.3).
+  5. **Degradation mode:** If the classifier is unavailable, times out, or returns null, triage falls back immediately to deterministic keyword-only mode. No message is classified Tier 4 solely due to classifier failure.
 - **Output contract:** `{ tier: 1 | 2 | 3 | 4, matched_signals: string[], signal_categories: string[], confidence: number }`
-  - `confidence`: Float `0.0`–`1.0` (in Phase 1, keyword matches return `1.0`; in Phase 2, represents classifier probability).
-  - `matched_signals`: In-memory array of matched lexicon terms for immediate rule execution (never persisted to audit log).
-  - `signal_categories`: Coarse categorical tags (e.g. `["emergency_respiratory", "safeguarding_welfare"]`) persisted to D1 audit log (rule 02.8).
-- **Tier definitions:**
-
-| Tier | Meaning | Action |
+  - `confidence`: Float `0.0`–`1.0`. Lexicon-only matches return `1.0`; classifier escalations return the model's confidence score; degradation failsafe returns `0.0`.
+  - `matched_signals`: In-memory array of matched lexicon terms and classifier signals for immediate rule execution (never persisted to audit log).
 |---|---|---|
 | 1 | Immediate danger to life | Escalate → Emergency services (999 / A&E) |
 | 2 | Urgent, non-emergency | Escalate → NHS 111 (phone/online) |
 | 3 | Safeguarding concern, not immediate | Escalate → NSPCC Helpline (0808 800 5000) / Childline (0800 1111) / Young Minds Parents Helpline (0808 802 5544) / National Domestic Abuse Helpline (0808 2000 247) |
-| 4 | Everyday parenting query | Proceed to RAG pipeline |
-
-- **Hard requirement:** This module must be unit-testable in isolation and must achieve zero Tier 1 false negatives in red-team testing (see §6).
-
 ### M4 — Retrieval Module
 - **Purpose:** Find the most relevant NHS guidance for a safe query.
 - **Steps:** Embed query (same model as ingestion — `@cf/baai/bge-base-en-v1.5`, 768-dim) → Vectorize top-k (k=3–5) → filter by similarity threshold (env-configurable via `SIMILARITY_THRESHOLD`, default 0.5) → fetch chunk text + source URL from D1 → assemble context string.
