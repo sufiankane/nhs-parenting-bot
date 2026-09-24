@@ -177,7 +177,7 @@ describe("M3 Classifier: classifyRisk & triageWithClassifier [P2-T1]", () => {
     });
     const env = { AI: { run: aiRun } };
 
-    const result = await triageWithClassifier("infant has chest sucking in deeply with every breath", env);
+    const result = await triageWithClassifier("infant has severe belly movements with every breath", env);
     expect(result.tier).toBe(1);
     expect(result.signal_categories).toContain("acute_respiratory_distress");
   });

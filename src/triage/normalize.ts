@@ -1,4 +1,4 @@
-﻿const HOMOGLYPH_MAP: Record<string, string> = {
+const HOMOGLYPH_MAP: Record<string, string> = {
   // Cyrillic lookalikes to Latin
   "\u0430": "a", "\u0410": "a", // а, А
   "\u0431": "b", "\u0411": "b", // б, Б
@@ -39,7 +39,9 @@ export function normalizeText(input: unknown): string {
     .replace(/[\u0400-\u04FF\u0370-\u03FF]/gu, (ch) => HOMOGLYPH_MAP[ch] || ch) // Canonicalize homoglyphs
     .toLowerCase()
     .replace(/[-_/]/g, " ")
+    .replace(/(?<=\d)\.(?=\d)/g, "_dot_")
     .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/_dot_/g, ".")
     .replace(/\s+/g, " ")
     .trim();
 }
