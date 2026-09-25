@@ -28,7 +28,7 @@ These objectives directly support our core commitments to patient safety, regula
 
 | Objective No. | Description | Target | Measurement Method | Frequency of Review | Responsible Role |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **QO-01** | **Response Accuracy (Clinical Alignment)**<br>Ensure Naomi's guidance strictly aligns with published NHS guidelines and clinical protocols without hallucination. | ≥ 99% accuracy rate for audited responses | Routine sampling and evaluation of LLM outputs by Clinical Safety Officer/QA. | Monthly | Clinical Safety Officer |
+| **QO-01** | **Response Accuracy (Clinical Alignment)**<br>Ensure Naomi's guidance strictly aligns with published NHS guidelines and clinical protocols without hallucination. | ≥ 99% accuracy rate across automated test packs and clinical evaluations; zero critical clinical inaccuracies | Execution of golden test suite, automated regression tests, and full embedded test packs (approved/agreed by the Clinical Safety Officer). Test packs run daily or on deploy (whichever is more frequent). | Monthly review with CSO (Test pack runs daily or per deploy) | Clinical Safety Officer / Lead Developer |
 | **QO-02** | **Escalation Reliability**<br>Ensure the system successfully identifies clinical red flags and escalates appropriately. | 100% of simulated and identified red flags trigger correct escalation pathways | Automated regression testing and manual audits of safety guardrails. | Per Release | Lead Developer |
 | **QO-03** | **System Availability (Uptime)**<br>Maintain high availability of the SaMD infrastructure to ensure access to guidance. | ≥ 99.9% uptime (excluding planned maintenance) | Cloudflare Analytics and monitoring tools reporting. | Monthly | Lead Developer |
 | **QO-04** | **Complaint Closure Time**<br>Resolve user and stakeholder complaints in a timely manner to maintain safety and trust. | 95% of non-critical complaints closed within 14 days; Critical safety complaints acknowledged within 24 hours. | Customer feedback and complaint log tracking. | Quarterly | QA Manager |
@@ -46,18 +46,23 @@ This procedure applies to all functions and processes within the Naomi SaMD life
 *   **Quality Objective:** Something sought, or aimed for, related to quality, consistent with the Quality Policy and measurable.
 *   **SMART Criteria:** Objectives that are Specific, Measurable, Achievable, Relevant, and Time-bound.
 *   **KPI (Key Performance Indicator):** A quantifiable measure used to evaluate the success of an operational activity.
+*   **Golden Test Suite / Test Pack:** A curated, CSO-approved collection of representative clinical test prompts, edge cases, and regression scenarios used to evaluate model safety and accuracy.
 
 # 7. Responsibilities
 *   **Top Management:** Establishes and approves annual quality objectives, reviewing them during Management Reviews.
 *   **Quality Manager:** Aggregates KPI performance data and maintains the QMS metrics dashboard.
-*   **Clinical Safety Officer:** Evaluates clinical accuracy and escalation reliability metrics.
-*   **Lead Developer:** Tracks uptime, test pass rates, and security patch latency.
+*   **Clinical Safety Officer:** Evaluates clinical accuracy and escalation reliability metrics; formally approves golden test packs and participates in monthly review of QO-01 results.
+*   **Lead Developer:** Tracks uptime, test pass rates, CI/CD automated test pack runs (daily/per deploy), and security patch latency.
 
 # 8. Inputs and Outputs
-*   **Inputs:** Quality Policy (QMS-5.3-01), customer feedback, post-market surveillance data, audit results, business strategy.
-*   **Outputs:** Monitored KPI metrics, Quality Objective progress reports presented at Management Review (QMS-5.6-01).
+*   **Inputs:** Quality Policy (QMS-5.3-01), customer feedback, post-market surveillance data, audit logs and audit findings, non-conformance reports (QMS-8.3-01), training matrix and training records (QMS-6.2-01 / QMS-7-03), automated test pack/regression results, business strategy.
+*   **Outputs:** Monitored KPI metrics, Quality Objective progress reports presented at Management Review (QMS-5.6-01), updated CAPA triggers where objectives are breached (QMS-8.5-01).
 
 # 9. Records Generated
 *   Quarterly Quality Objective Performance Dashboards.
+*   Automated test pack execution logs / CI test reports (daily or per deploy).
+*   CSO Monthly Review Records & signed test pack approval records.
+*   Audit logs and Non-Conformance Reports (QMS-8.3-01).
+*   Personnel Training Matrix and Training Records (QMS-7-03).
 *   Management Review Minutes (QMS-7-05).
 

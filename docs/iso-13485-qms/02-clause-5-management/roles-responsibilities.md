@@ -89,11 +89,13 @@ This procedure applies to all operational, clinical, technical, and executive pe
 See Section 3 and Section 4 above for individual job role descriptions and RACI mapping.
 
 # 9. Inputs and Outputs
-*   **Inputs:** Organisational chart, ISO 13485:2016 (Clause 5.5), UK MDR 2002 requirements, NHS DCB0129 standards.
-*   **Outputs:** Formally assigned job descriptions, documented delegations of authority, and Management Representative appointment.
+*   **Inputs:** Organisational structure and business plan, ISO 13485:2016 (Clause 5.5), UK MDR 2002 requirements, NHS DCB0129 standards, Software Lifecycle Plan (QMS-62304-01), Information Security / DPIA guidelines (QMS-REG-03), and Training Procedure requirements (QMS-6.2-01).
+*   **Outputs:** Formally assigned job descriptions, documented delegations of authority, RACI governance matrix, formal Management Representative appointment, and Clinical Safety Officer appointment.
 
 # 10. Records Generated
 *   Signed Management Representative Appointment Letter.
-*   Signed Clinical Safety Officer Appointment Letter.
-*   Job Descriptions and Training Matrix records (QMS-7-03).
+*   Signed Clinical Safety Officer Appointment Letter and professional registration verification.
+*   Approved Job Descriptions and role profiles.
+*   Signed employee role acknowledgements and Competency / Training Matrix records (QMS-6.2-01 / QMS-7-03).
+*   Management Review Minutes recording review of organisational adequacy and resource allocation (QMS-7-05).
 

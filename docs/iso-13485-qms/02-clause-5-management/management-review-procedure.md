@@ -21,13 +21,24 @@
 # 1. Purpose
 The purpose of this procedure is to define the process for conducting Management Reviews at «[INSERT: Organisation Name]» in accordance with ISO 13485:2016 (Clause 5.6). Management reviews ensure the continuing suitability, adequacy, and effectiveness of the Quality Management System (QMS) in supporting the Naomi SaMD.
 
+> **Current Status — Pre-commercialisation:** At the time of writing (Version 0.1), the organisation consists of a sole developer/owner who fulfils multiple QMS roles (Top Management, Lead Developer, and interim Management Representative). No formal management reviews have yet taken place. Quality objectives, implementation targets, and post-market surveillance activities remain pending until:
+>
+> 1. Agreement is reached with the relevant regulatory and procurement bodies — specifically the **Medicines and Healthcare products Regulatory Agency (MHRA)** for device registration/UKCA marking, **NHS England / NHS Transformation Directorate** for NHS DTAC assessment, and any commissioning **Integrated Care Board (ICB)** or NHS Trust for procurement;
+> 2. An accepted use arrangement is established with an identified **end-customer** (e.g., an NHS Trust, local authority public health team, or maternity/health visiting service) to validate the product under real-world conditions.
+>
+> Once either condition is met, the first Management Review shall be convened within 90 days and the schedule described below shall come into effect. Until that point, the sole developer shall maintain an informal decision log capturing any QMS relevant decisions, which will be retrospectively reviewed at the first formal Management Review.
+
 # 2. Scope
 This procedure applies to the formal review of the QMS and its alignment with the Quality Policy, Quality Objectives, and regulatory requirements (e.g., UK MDR 2002, NHS DTAC).
 
 # 3. Frequency and Attendance
-- **Frequency:** Management reviews shall be conducted at least annually. Given the early stage of the Naomi application, semi-annual reviews are recommended.
-- **Attendees:** The review must be chaired by the CEO/Director (Top Management). Required attendees include the Management Representative (QA Manager), Clinical Safety Officer (CSO), and Lead Developer.
-- **Quorum:** At a minimum, Top Management and the Management Representative must be present to constitute a valid review.
+- **Frequency:** Management reviews shall be conducted at least annually. Given the early stage of the Naomi application, semi-annual reviews are recommended once the schedule is activated (see Section 1).
+- **Current organisational context:** The owner is presently the sole developer and fulfils the roles of Top Management, Lead Developer, and interim Management Representative. As the organisation grows, these roles will be separated in line with QMS-5.5.1-01.
+- **Attendees:**
+  - **Owner / Top Management** (chair) — mandatory at every review.
+  - **Clinical Safety Officer (CSO)** — shall attend or provide a written clinical safety update for every review. The CSO is an external or contracted appointee per DCB0129 requirements and is independent of the development function.
+  - Additional personnel (e.g., QA Manager, Data Protection Officer) shall be invited as the organisation scales.
+- **Quorum:** At a minimum, the Owner (as Top Management) must be present to constitute a valid review. If the CSO is unable to attend, their written clinical safety report shall be tabled and minuted as a standing input.
 
 # 4. Review Inputs (Clause 5.6.2)
 The Management Representative is responsible for collating and presenting the data required for the review. The agenda shall include the following mandatory inputs:
@@ -61,19 +72,21 @@ Action items identified during the management review shall be tracked by the Man
 # 9. Terms and Definitions
 *   **Management Review:** Formal evaluation by Top Management of the status and adequacy of the quality management system in relation to quality policy and objectives.
 *   **Review Input:** Information and performance data supplied to Top Management for critical assessment.
-*   **Review Output:** Decisions, directives, resource authorizations, and action items resulting from the review.
+*   **Review Output:** Decisions, directives, resource authorisations, and action items resulting from the review.
 
 # 10. Responsibilities
-*   **Top Management (CEO):** Chairs the review, evaluates suitability of the QMS, and authorizes necessary resource allocations.
-*   **Quality Manager:** Compiles input data package, records minutes, and tracks post-meeting action item completion.
-*   **Clinical Safety Officer:** Presents clinical safety performance, adverse events, and hazard log updates.
-*   **Lead Developer:** Presents infrastructure availability, technical security posture, and engineering release metrics.
+*   **Owner / Top Management (sole developer):** Chairs the review, compiles input data, evaluates suitability of the QMS, authorises necessary resource allocations, records minutes, and tracks post-meeting action item completion. In the current single-person organisation, the owner also fulfils the interim Management Representative and Lead Developer roles.
+*   **Clinical Safety Officer (CSO):** Presents clinical safety performance, adverse events, hazard log updates, and DCB0129 compliance status. The CSO is independent of the development function and provides objective clinical safety oversight during the review.
+
+> **Note:** As the organisation grows, the responsibilities currently consolidated under the owner shall be redistributed to dedicated QA Manager, Management Representative, and Lead Developer roles per QMS-5.5.1-01.
 
 # 11. Inputs and Outputs
-*   **Inputs:** All mandatory agenda inputs defined in Section 4 (audit results, customer feedback, CAPA status, PMS reports, KPI metrics).
-*   **Outputs:** Documented decisions, resource commitments, product enhancement directives, and formal minutes (QMS-7-05).
+*   **Inputs:** Mandatory Clause 5.6.2 inputs defined in Section 4, including: Customer feedback reports (QMS-8.2.1-01), Complaint records (QMS-8.2.2-01 / QMS-7-02), Vigilance / Adverse Event reports (QMS-8.2.3-01), Internal Audit reports and checklists (QMS-8.2.4-01 / QMS-7-04), Quality Objective metrics and dashboards (QMS-5.4.1-01), Post-Market Surveillance reports (QMS-PMS-01), Clinical Safety reviews and Hazard Log updates (QMS-14971-01 / QMS-14971-02), Non-conformance reports (QMS-8.3-01), CAPA status reports (QMS-8.5-01 / QMS-7-01), Training compliance records (QMS-6.2-01 / QMS-7-03), and previous Management Review minutes and action logs (QMS-7-05).
+*   **Outputs:** Formal decisions on QMS suitability and process improvements, product enhancement directives (AI model safety guardrails and software releases per QMS-62304-01), regulatory compliance actions (UK MDR, NHS DTAC, DCB0129), resource authorisations and budget allocations, updated Quality Objectives (QMS-5.4.1-01), and CAPA initiations (QMS-8.5-01).
 
 # 12. Records Generated
-*   Management Review Agenda and Presentation Deck.
+*   Management Review Agenda and Input Data Presentation Pack.
 *   Signed Management Review Minutes (QMS-7-05) retained per QMS-4.2.5-01.
+*   Management Review Action Item Tracking Log.
+*   Pre-commercialisation decision log (informal, pending first formal review).
 

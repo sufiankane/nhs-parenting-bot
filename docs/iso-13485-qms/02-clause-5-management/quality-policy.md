@@ -62,10 +62,11 @@ This Quality Policy applies to all staff, contractors, and operations at «[INSE
 *   **All Employees:** Understand, implement, and maintain compliance with the Quality Policy in their daily work.
 
 # 9. Inputs and Outputs
-*   **Inputs:** Organisational mission, patient safety imperatives, UK MDR 2002 regulations, NHS DTAC requirements.
-*   **Outputs:** Formal Quality Policy statement and established framework for Quality Objectives (QMS-5.4.1-01).
+*   **Inputs:** Organisational mission and business strategy, patient safety imperatives, UK MDR 2002 regulations, NHS DTAC requirements, clinical risk management guidance (DCB0129), Management Review outputs and suitability evaluations (QMS-5.6-01 / QMS-7-05).
+*   **Outputs:** Formal Quality Policy statement, established framework for Quality Objectives (QMS-5.4.1-01), input to document control master repository (QMS-4.2.4-01).
 
 # 10. Records Generated
-*   Signed Quality Policy master document.
-*   Employee training and policy acknowledgement records (QMS-7-03).
+*   Signed Quality Policy master document retained per QMS-4.2.4-01 and QMS-4.2.5-01.
+*   Employee training and policy acknowledgement records (QMS-6.2-01 / QMS-7-03).
+*   Management Review records verifying periodic policy suitability review (QMS-7-05).
 
