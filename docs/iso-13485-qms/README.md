@@ -78,6 +78,8 @@
 | QMS-7.3.7-01 | Design Validation Plan | [design-validation-plan.md](./04-clause-7-product-realisation/design-validation-plan.md) | 7.3.7 | IEC 62366-1 · DCB0129 |
 | QMS-7.3.10-01 | Design History File (DHF Index) | [design-history-file.md](./04-clause-7-product-realisation/design-history-file.md) | 7.3.10 | UK MDR 2002 |
 | QMS-62304-01 | Software Lifecycle Plan | [software-lifecycle-plan.md](./04-clause-7-product-realisation/software-lifecycle-plan.md) | 7.3 | IEC 62304:2015+AMD1 |
+| QMS-62304-02 | SOUP Inventory and Evaluation Log | [soup-log.md](./04-clause-7-product-realisation/soup-log.md) | 7.3, 7.4 | IEC 62304:2015+AMD1 · ISO 14971 |
+| QMS-62304-03 | Software Safety Classification Record | [software-safety-classification-record.md](./04-clause-7-product-realisation/software-safety-classification-record.md) | 7.3 | IEC 62304:2015+AMD1 · ISO 14971 |
 | QMS-7.4-01 | Supplier and Purchasing Procedure | [supplier-purchasing-procedure.md](./04-clause-7-product-realisation/supplier-purchasing-procedure.md) | 7.4 | NHS DTAC · UK GDPR |
 | QMS-7.5.9-01 | Traceability Procedure | [traceability-procedure.md](./04-clause-7-product-realisation/traceability-procedure.md) | 7.5.9 | UK MDR 2002 |
 

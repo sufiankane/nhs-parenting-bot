@@ -32,46 +32,66 @@ In accordance with ISO 13485 (Clause 6.2(a)), «[INSERT: Organisation Name]» de
 - **Clinical Safety Officer (CSO)**: Active clinician registration, specific training in DCB0129 and DCB0160 clinical risk management standards, and understanding of NHS DTAC requirements.
 - **Data Protection Officer (DPO)**: Expertise in UK GDPR, Data Protection Act 2018, and NHS data security standards.
 
-## 4. Identification of Training Needs
-Training needs are identified (Clause 6.2(b)) through the following mechanisms:
-- New employee onboarding and induction.
-- Annual performance reviews.
-- Changes in the Quality Management System (QMS), regulations (e.g., UK MDR 2002 updates), or technology stack.
-- Identification of non-conformances or corrective and preventive actions (CAPA) where lack of training is a root cause.
+## 4. Identification of Training Needs and Training Needs Analysis (TNA)
+Training needs are identified (Clause 6.2(b)) through a formal **Training Needs Analysis (TNA)** process:
+- A TNA is carried out against all primary job roles and profiles across the organisation.
+- The TNA is reviewed and updated **at least annually**, or more frequently upon specific operational triggers.
+- **Triggers to update the TNA include:**
+  - Major changes in healthcare, medical device, or data protection legislation and guidance (e.g., UK MDR 2002 amendments, NHS DTAC revisions, DCB0129 updates, UK GDPR statutory guidance).
+  - Identified competency gaps arising during internal or external audits (QMS-8.2.4-01).
+  - Non-conformances or Corrective and Preventive Actions (CAPA per QMS-8.5-01 / QMS-8.3-01) where human factors, procedural error, or training deficits are identified as contributing root causes.
+  - Deployment of major new technologies, architecture shifts, or safety guardrail revisions.
+- Following any trigger or annual review, the TNA shall be formally amended and the **Training Compliance Matrix** updated accordingly to establish revised mandatory training baselines.
 
 ## 5. Training Delivery
-Training to satisfy identified needs (Clause 6.2(c)) is provided through a combination of:
-- Internal sessions (e.g., QMS overviews, peer code reviews).
-- External courses and certifications (e.g., NHS DTAC workshops, Cloudflare certifications).
-- Guided self-study (reading required procedures, technical documentation).
+«[INSERT: Organisation Name]» operates as a lean medical software organisation and is not structured or resourced to design and deliver proprietary internal training curricula. Therefore:
+- The organisation aims to source training externally from accredited, industry-recognised training providers, professional bodies, and authoritative platforms.
+- Sourced external programmes include accredited courses in UK Medical Device Regulation, NHS DTAC / DCB0129 clinical risk management, UK GDPR / Data Security and Protection Toolkit (DSPT), and cloud infrastructure security.
+- Self-study modules covering internal QMS policies and procedures (reading and comprehension of controlled procedures) are tracked with documented acknowledgements.
 
 ## 6. Evaluation of Effectiveness
-The effectiveness of the training provided (Clause 6.2(d)) must be evaluated. Methods of evaluation include:
-- Successful completion of an examination or quiz.
-- Demonstrated application of skills (e.g., successful code deployment, completion of a clinical safety report).
-- Direct observation by a manager or peer.
-- Feedback during subsequent performance reviews.
+The effectiveness of the training provided (Clause 6.2(d)) must be verified:
+- **Assessment of Effectiveness:** Effectiveness will be evaluated by confirming completion of the relevant training module through external training providers where formal assessment, quizzes, practical evaluations, or certifications are administered at the end of the module.
+- For internal procedural reviews, comprehension checks and confirmation of adherence during operational delivery (e.g., code review, verification logs) serve as effectiveness evidence.
+- **Clinical Safety & Hazard Escalation:** Any training-related issues, persistent procedural errors, or major non-compliances that could compromise product quality or patient safety shall be recorded in the **Hazard Log (QMS-14971-02)** and immediately flagged to the **Clinical Safety Officer (CSO)** for formal clinical risk evaluation and mitigation.
 
 ## 7. Quality Awareness
-All personnel shall be made aware of the relevance and importance of their activities and how they contribute to the achievement of the quality objectives (Clause 6.2(e)). This is achieved through the onboarding process, regular company meetings, and specific QMS awareness training covering the Quality Policy and patient safety goals of the Naomi application.
+All personnel shall be made aware of the relevance and importance of their activities and how they contribute to achieving quality and clinical safety objectives (Clause 6.2(e)):
+- Personnel are formally read-in to the QMS and must understand how their specific role and daily deliverables integrate into the wider Naomi programme and patient safety framework.
+- **Current Organisational Context:** Currently, there are no employees, as the owner is operating as the sole developer. However, this procedure establishes the binding framework and the QMS and training matrix will be amended as the product scales and personnel or contractors are recruited.
 
 ## 8. Onboarding Process
-New personnel must complete an onboarding process within their first month, ensuring immediate awareness of QMS fundamentals, security policies, and their specific role in maintaining product quality.
+New personnel joining the organisation must complete a structured onboarding programme within their first 30 days of appointment. The onboarding process explicitly covers:
+- **QMS Induction:** Review of Quality Policy (QMS-5.3-01), Quality Objectives (QMS-5.4.1-01), Document Control (QMS-4.2.4-01), and CAPA/Non-conformance escalation pathways.
+- **Mandatory Workspace Training:** Physical and remote workspace security, device management, and workstation hygiene.
+- **Codebase and Product Engineering:** Architecture walk-through, secure coding guidelines, Cloudflare runtime constraints, and local development stack standards.
+- **Data Protection and UK GDPR:** Safe handling of user interactions, NHS data confidentiality, session pseudonymisation, and reporting data breaches.
+- **Security Training & Data Use:** Multi-factor authentication (2FA) enforcement, secret/key management protocols, prohibiting personal data ingestion in development environments, and adherence to cyber hygiene policies.
 
-## 9. Records
-Appropriate records of education, training, skills, and experience shall be maintained (Clause 6.2(f)). The Training Record Form (Document ID: QMS-7-03) and individual competence matrices are managed by «[INSERT: Role, e.g., HR / Quality Manager]» in a secure access-controlled repository per QMS-4.2.5-01.
+## 9. Records Management
+Appropriate records of education, training, skills, and experience shall be maintained (Clause 6.2(f)):
+- **Management of Records:** In the current lean structure and in lieu of a dedicated HR manager, the **Owner** directly manages and maintains all personnel training and competence documentation.
+- **Records Utilised:** The **Training Compliance Matrix** and individual **Training Record Form (QMS-7-03)** are systematically utilised to record, track, and verify all completed training and certifications.
+- All training records are retained in a secure, access-controlled repository in accordance with Record Control Procedure (QMS-4.2.5-01).
 
 ## 10. Terms and Definitions
 *   **Competence:** Demonstrated ability to apply knowledge and skills to achieve intended results.
-*   **Training Needs Analysis:** Systematic assessment identifying skill or knowledge gaps relative to job role demands.
-*   **Effectiveness Evaluation:** Formal appraisal confirming the trainee successfully integrated and applies acquired competencies.
+*   **Training Needs Analysis (TNA):** Systematic assessment identifying skill, clinical safety, or regulatory knowledge gaps relative to job role demands.
+*   **Training Compliance Matrix:** A tracking register mapping personnel and roles against required training modules, renewal intervals, and completion status.
+*   **Effectiveness Evaluation:** Formal appraisal confirming the trainee successfully passed end-of-module assessments and integrates acquired competencies.
 
 ## 11. Responsibilities
-*   **Quality Manager:** Administers the company training programme, tracks training completion, and maintains training records.
-*   **Department Leads:** Identify role-specific training requirements and evaluate post-training effectiveness.
-*   **All Personnel:** Complete assigned training modules within specified timeframes and maintain personal training logs.
+*   **Owner / Top Management:** In lieu of a dedicated HR manager, administers the training programme, maintains the Training Compliance Matrix, schedules TNA reviews, and verifies training records.
+*   **Clinical Safety Officer (CSO):** Evaluates clinical safety competence requirements under DCB0129 and reviews any training non-compliances flagged in the Hazard Log.
+*   **All Personnel / Contractors:** Complete assigned external training modules, pass requisite assessments, and submit completion certificates.
 
 ## 12. Inputs and Outputs
-*   **Inputs:** Job role descriptions (QMS-5.5.1-01), CAPA training actions (QMS-8.5-01), new standard releases (ISO 13485, IEC 62304), onboarding curricula.
-*   **Outputs:** Competent workforce, verified Training Record Forms (QMS-7-03), up-to-date Organisational Competence Matrix.
+*   **Inputs:** Role profiles and job descriptions (QMS-5.5.1-01), legislative/regulatory amendments (UK MDR, NHS DTAC, DCB0129), audit findings and non-conformance reports (QMS-8.2.4-01 / QMS-8.3-01), CAPA training actions (QMS-8.5-01), user and clinical incident trends.
+*   **Outputs:** Up-to-date Training Needs Analysis (TNA), active Training Compliance Matrix, competent workforce, verified Training Record Forms (QMS-7-03), and entries into Hazard Log (QMS-14971-02) where training-related risks are detected.
+
+## 13. Records Generated
+*   Training Needs Analysis (TNA) Document.
+*   Organisational Training Compliance Matrix.
+*   Completed Training Record Forms (QMS-7-03) and external certificates.
+*   Hazard Log training entries (QMS-14971-02).
 
