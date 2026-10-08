@@ -26,7 +26,7 @@
  */
 
 import { describe, it, expect, vi } from "vitest";
-import { SYSTEM_PROMPT, buildMessages } from "../src/generation/prompt";
+import { SYSTEM_PROMPT, buildMessages, formatHistory } from "../src/generation/prompt";
 import { generateAnswer } from "../src/generation/index";
 
 const GENERATION_MODEL = "@cf/meta/llama-3.1-8b-instruct-fp8-fast";
@@ -380,5 +380,52 @@ describe("Multi-Turn Conversation History [P2-T4, Spec §4 M5, rule 02.5]", () =
     const passedMessages = aiRun.mock.calls[0][1].messages;
     const userMessage = passedMessages.find((m: any) => m.role === "user");
     expect(userMessage.content).toContain('User: "Prior query"');
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/* 8. formatHistory [Unit Tests]                                              */
+/* -------------------------------------------------------------------------- */
+
+describe("formatHistory unit tests", () => {
+  it("returns an empty array when history is undefined or empty", () => {
+    expect(formatHistory()).toEqual([]);
+    expect(formatHistory([])).toEqual([]);
+  });
+
+  it("formats conversation history with correct header and speaker labels", () => {
+    const history = [
+      { role: "user" as const, content: "Hello" },
+      { role: "assistant" as const, content: "Hi there" },
+    ];
+    const result = formatHistory(history);
+    expect(result).toHaveLength(4); // header, 2 turns, empty line
+    expect(result[0]).toBe("Previous conversation turns (structured context for resolving pronouns and follow-up questions):");
+    expect(result[1]).toBe('User: "Hello"');
+    expect(result[2]).toBe('Assistant: "Hi there"');
+    expect(result[3]).toBe("");
+  });
+
+  it("limits the output to maxTurns", () => {
+    const history = [
+      { role: "user" as const, content: "Turn 1" },
+      { role: "assistant" as const, content: "Turn 2" },
+      { role: "user" as const, content: "Turn 3" },
+    ];
+    const resultDefault = formatHistory(history); // default maxTurns is 6
+    expect(resultDefault.length).toBe(1 + 3 + 1);
+
+    const resultLimited = formatHistory(history, 2);
+    expect(resultLimited.length).toBe(1 + 2 + 1); // header, 2 turns, empty line
+    expect(resultLimited[1]).toBe('Assistant: "Turn 2"');
+    expect(resultLimited[2]).toBe('User: "Turn 3"');
+  });
+
+  it("properly escapes double quotes within the message content", () => {
+    const history = [
+      { role: "user" as const, content: 'She said "hello" to me.' },
+    ];
+    const result = formatHistory(history);
+    expect(result[1]).toBe('User: "She said \\"hello\\" to me."');
   });
 });
