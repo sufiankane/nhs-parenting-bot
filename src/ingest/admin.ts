@@ -10,6 +10,23 @@ import { validateSourceUrl, validateCategory } from "./allowlist";
 import { processIngestJob } from "./pipeline";
 import type { AdminIngestRequest, IngestJobPayload } from "./types";
 
+
+/**
+ * Securely compare two strings in constant time.
+ */
+function secureCompare(a: string, b: string): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  // Use a simple constant-time comparison loop
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
 /**
  * Handle POST /admin/ingest requests.
  */
@@ -29,7 +46,7 @@ export async function handleAdminIngest(
     request.headers.get("x-admin-key") ||
     request.headers.get("Authorization")?.replace(/^Bearer\s+/i, "");
 
-  if (!adminSecret || !authHeader || authHeader !== adminSecret) {
+  if (!adminSecret || !authHeader || !secureCompare(authHeader, adminSecret)) {
     return new Response(
       JSON.stringify({
         type: "error",
