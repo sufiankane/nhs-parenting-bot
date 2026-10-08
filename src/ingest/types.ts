@@ -50,3 +50,7 @@ export interface IngestResult {
   readonly error?: string;
 }
 
+
+export interface AiEmbeddingResponse {
+  data?: Array<number[] | { embedding?: number[] }>;
+}

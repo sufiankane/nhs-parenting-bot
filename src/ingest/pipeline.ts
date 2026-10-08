@@ -9,7 +9,7 @@
 
 import { chunkContent } from "./chunker";
 import { EMBEDDING_MODEL, EMBEDDING_DIMENSIONS } from "../retrieval/index";
-import type { IngestJobPayload, IngestResult, IngestChunk } from "./types";
+import type { IngestJobPayload, IngestResult, IngestChunk, AiEmbeddingResponse } from "./types";
 
 /**
  * Process a single ingestion job (from Queue or direct Admin trigger).
@@ -105,11 +105,14 @@ export async function processIngestJob(
 
         if (ai && typeof ai.run === "function") {
           try {
-            const aiRes = (await ai.run(EMBEDDING_MODEL, { text: [chunk.chunk_text] })) as any;
-            if (aiRes && Array.isArray(aiRes.data) && Array.isArray(aiRes.data[0])) {
-              embedding = aiRes.data[0];
-            } else if (aiRes && Array.isArray(aiRes.data) && aiRes.data[0]?.embedding) {
-              embedding = aiRes.data[0].embedding;
+            const aiRes = (await ai.run(EMBEDDING_MODEL, { text: [chunk.chunk_text] })) as AiEmbeddingResponse;
+            if (aiRes?.data && Array.isArray(aiRes.data)) {
+              const first = aiRes.data[0];
+              if (Array.isArray(first)) {
+                embedding = first;
+              } else if (first && !Array.isArray(first) && first.embedding) {
+                embedding = first.embedding;
+              }
             }
           } catch (err) {
             console.error("INGEST_EMBED_ERROR:", err instanceof Error ? err.message : String(err));
