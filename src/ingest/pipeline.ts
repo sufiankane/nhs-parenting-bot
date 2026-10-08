@@ -68,6 +68,7 @@ export async function processIngestJob(
           run: () => Promise<unknown>;
         };
       };
+      batch: (statements: any[]) => Promise<any[]>;
     } | undefined;
 
     let existingIds = new Set<string>();
@@ -99,6 +100,7 @@ export async function processIngestJob(
       } | undefined;
 
       const vectorsToUpsert: Array<{ id: string; values: number[]; metadata?: Record<string, unknown> }> = [];
+      const dbStatements: any[] = [];
 
       for (const chunk of newChunks) {
         let embedding: number[] | null = null;
@@ -130,26 +132,38 @@ export async function processIngestJob(
 
         // Insert into D1
         if (db && typeof db.prepare === "function") {
-          try {
-            await db
-              .prepare(
-                `INSERT OR REPLACE INTO guidance_chunks (id, source_id, source_url, title, category, chunk_text, chunk_index, token_count, safety_relevant, attribution, content_hash, updated_at)
+          dbStatements.push(
+            db.prepare(
+              `INSERT OR REPLACE INTO guidance_chunks (id, source_id, source_url, title, category, chunk_text, chunk_index, token_count, safety_relevant, attribution, content_hash, updated_at)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))`
-              )
-              .bind(
-                chunk.id,
-                chunk.source_id,
-                chunk.source_url,
-                chunk.title,
-                chunk.category,
-                chunk.chunk_text,
-                chunk.chunk_index,
-                chunk.token_count,
-                chunk.safety_relevant ? 1 : 0,
-                chunk.attribution,
-                chunk.content_hash
-              )
-              .run();
+            ).bind(
+              chunk.id,
+              chunk.source_id,
+              chunk.source_url,
+              chunk.title,
+              chunk.category,
+              chunk.chunk_text,
+              chunk.chunk_index,
+              chunk.token_count,
+              chunk.safety_relevant ? 1 : 0,
+              chunk.attribution,
+              chunk.content_hash
+            )
+          );
+        }
+      }
+
+      if (db && typeof db.batch === "function" && dbStatements.length > 0) {
+        try {
+          await db.batch(dbStatements);
+        } catch (err) {
+          console.error("INGEST_D1_BATCH_ERROR:", err instanceof Error ? err.message : String(err));
+        }
+      } else if (db && dbStatements.length > 0) {
+        // Fallback for mocks without batch
+        for (const stmt of dbStatements) {
+          try {
+            await stmt.run();
           } catch (err) {
             console.error("INGEST_D1_ERROR:", err instanceof Error ? err.message : String(err));
           }
