@@ -99,22 +99,35 @@ export async function processIngestJob(
       } | undefined;
 
       const vectorsToUpsert: Array<{ id: string; values: number[]; metadata?: Record<string, unknown> }> = [];
+      let batchEmbeddings: Array<number[] | null> = new Array(newChunks.length).fill(null);
 
-      for (const chunk of newChunks) {
-        let embedding: number[] | null = null;
+      if (ai && typeof ai.run === "function" && newChunks.length > 0) {
+        try {
+          // BGE models on Cloudflare typically support batches up to 100
+          const MAX_BATCH_SIZE = 100;
+          for (let i = 0; i < newChunks.length; i += MAX_BATCH_SIZE) {
+            const batchChunks = newChunks.slice(i, i + MAX_BATCH_SIZE);
+            const textsToEmbed = batchChunks.map((c) => c.chunk_text);
+            const aiRes = (await ai.run(EMBEDDING_MODEL, { text: textsToEmbed })) as any;
 
-        if (ai && typeof ai.run === "function") {
-          try {
-            const aiRes = (await ai.run(EMBEDDING_MODEL, { text: [chunk.chunk_text] })) as any;
-            if (aiRes && Array.isArray(aiRes.data) && Array.isArray(aiRes.data[0])) {
-              embedding = aiRes.data[0];
-            } else if (aiRes && Array.isArray(aiRes.data) && aiRes.data[0]?.embedding) {
-              embedding = aiRes.data[0].embedding;
+            if (aiRes && Array.isArray(aiRes.data)) {
+              for (let j = 0; j < aiRes.data.length; j++) {
+                if (Array.isArray(aiRes.data[j])) {
+                  batchEmbeddings[i + j] = aiRes.data[j];
+                } else if (aiRes.data[j]?.embedding) {
+                  batchEmbeddings[i + j] = aiRes.data[j].embedding;
+                }
+              }
             }
-          } catch (err) {
-            console.error("INGEST_EMBED_ERROR:", err instanceof Error ? err.message : String(err));
           }
+        } catch (err) {
+          console.error("INGEST_EMBED_ERROR:", err instanceof Error ? err.message : String(err));
         }
+      }
+
+      for (let i = 0; i < newChunks.length; i++) {
+        const chunk = newChunks[i];
+        let embedding = batchEmbeddings[i];
 
         if (embedding && embedding.length === EMBEDDING_DIMENSIONS) {
           vectorsToUpsert.push({
