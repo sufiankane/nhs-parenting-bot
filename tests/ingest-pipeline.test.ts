@@ -234,6 +234,7 @@ describe("M7 Pipeline Execution & Idempotency [P2-T2]", () => {
           })),
         };
       }),
+      batch: vi.fn(async (stmts) => stmts.map(() => ({ success: true }))),
     };
 
     const env = {
@@ -274,6 +275,7 @@ describe("M7 Pipeline Execution & Idempotency [P2-T2]", () => {
             run: vi.fn().mockResolvedValue({ success: true }),
           })),
         })),
+        batch: vi.fn(async (stmts) => stmts.map(() => ({ success: true }))),
       },
     };
 
