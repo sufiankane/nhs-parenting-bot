@@ -113,14 +113,21 @@ export async function classifyRisk(
 
     if (!rawResponse || typeof rawResponse !== "object") return null;
 
+    type RawResponse = {
+      response?: string;
+      choices?: Array<{ message?: { content?: string } }>;
+    };
+
+    const typedResponse = rawResponse as RawResponse;
+
     let responseText = "";
-    if (typeof (rawResponse as { response?: string }).response === "string") {
-      responseText = (rawResponse as { response: string }).response;
+    if (typeof typedResponse.response === "string") {
+      responseText = typedResponse.response;
     } else if (
-      Array.isArray((rawResponse as { choices?: Array<{ message?: { content?: string } }> }).choices) &&
-      typeof (rawResponse as any).choices[0]?.message?.content === "string"
+      Array.isArray(typedResponse.choices) &&
+      typeof typedResponse.choices[0]?.message?.content === "string"
     ) {
-      responseText = (rawResponse as any).choices[0].message.content;
+      responseText = typedResponse.choices[0]!.message!.content!;
     }
 
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
