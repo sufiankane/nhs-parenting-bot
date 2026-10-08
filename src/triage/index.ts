@@ -20,20 +20,75 @@ interface PhraseMatch {
  * (e.g. "coma" must not match "comatose", "seizure" must not match
  * "seizures") while still matching at the start/end of the message.
  */
-function matchRules(normalizedText: string, rules: readonly LexiconRule[]): PhraseMatch[] {
-  const matches: PhraseMatch[] = [];
-  const padded = ` ${normalizedText} `;
+interface CompiledLexiconFilter {
+  regex: RegExp;
+  wordToPhrases: Map<string, { phrase: string; category: string; search: string }[]>;
+}
+
+function compileLexiconFilter(rules: readonly LexiconRule[]): CompiledLexiconFilter {
+  const firstWords = new Set<string>();
+  const wordToPhrases = new Map<string, { phrase: string; category: string; search: string }[]>();
 
   for (const rule of rules) {
     for (const phrase of rule.phrases) {
-      if (padded.includes(` ${phrase} `)) {
-        matches.push({ phrase, category: rule.category });
+      const firstWord = phrase.split(' ')[0];
+      firstWords.add(firstWord);
+
+      if (!wordToPhrases.has(firstWord)) {
+        wordToPhrases.set(firstWord, []);
+      }
+      wordToPhrases.get(firstWord)!.push({ phrase, category: rule.category, search: ` ${phrase} ` });
+    }
+  }
+
+  const sortedFirstWords = Array.from(firstWords).sort((a, b) => b.length - a.length);
+
+  let regexStr = "";
+  for (let i = 0; i < sortedFirstWords.length; i++) {
+    const w = sortedFirstWords[i];
+    let escaped = "";
+    for (let j = 0; j < w.length; j++) {
+      if (".*+?^$()|[]{}".includes(w[j]) || w[j] === "\\") {
+        escaped += "\\" + w[j];
+      } else {
+        escaped += w[j];
+      }
+    }
+    if (i > 0) regexStr += "|";
+    regexStr += escaped;
+  }
+
+  const regex = new RegExp(`(?<= )(?:${regexStr})(?= )`, 'g');
+
+  return { regex, wordToPhrases };
+}
+
+const TIER_1_FILTER = compileLexiconFilter(TIER_1_RULES);
+const TIER_2_FILTER = compileLexiconFilter(TIER_2_RULES);
+const TIER_3_FILTER = compileLexiconFilter(TIER_3_RULES);
+
+function matchRules(normalizedText: string, filter: CompiledLexiconFilter): PhraseMatch[] {
+  const matches: PhraseMatch[] = [];
+  const padded = ` ${normalizedText} `;
+
+  const foundWords = new Set<string>();
+  const results = padded.matchAll(filter.regex);
+  for (const match of results) {
+     foundWords.add(match[0]);
+  }
+
+  for (const word of foundWords) {
+    const phrases = filter.wordToPhrases.get(word)!;
+    for (let i = 0; i < phrases.length; i++) {
+      if (padded.includes(phrases[i].search)) {
+         matches.push({ phrase: phrases[i].phrase, category: phrases[i].category });
       }
     }
   }
 
   return matches;
 }
+
 
 export function triage(message: unknown): TriageResult {
   try {
@@ -49,9 +104,9 @@ export function triage(message: unknown): TriageResult {
     }
 
     // Scan all three tiers to collect comprehensive signal categories for the audit log (rule 02.8)
-    const tier1Matches = matchRules(normalized, TIER_1_RULES);
-    const tier2Matches = matchRules(normalized, TIER_2_RULES);
-    const tier3Matches = matchRules(normalized, TIER_3_RULES);
+    const tier1Matches = matchRules(normalized, TIER_1_FILTER);
+    const tier2Matches = matchRules(normalized, TIER_2_FILTER);
+    const tier3Matches = matchRules(normalized, TIER_3_FILTER);
 
     const hasTier1 = tier1Matches.length > 0;
     const hasTier2 = tier2Matches.length > 0;
