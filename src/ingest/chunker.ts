@@ -49,27 +49,27 @@ export async function chunkContent(
     chunkTexts.push(currentWords.join(" "));
   }
 
-  const chunks: IngestChunk[] = [];
-  for (let i = 0; i < chunkTexts.length; i++) {
-    const text = chunkTexts[i];
-    const hash = await computeChunkHash(text);
-    const wordCount = text.split(/\s+/).length;
-    const tokenEstimate = Math.round(wordCount * 1.35);
+  const chunks: IngestChunk[] = await Promise.all(
+    chunkTexts.map(async (text, i) => {
+      const hash = await computeChunkHash(text);
+      const wordCount = text.split(/\s+/).length;
+      const tokenEstimate = Math.round(wordCount * 1.35);
 
-    chunks.push({
-      id: hash,
-      source_id: job.source_id,
-      source_url: job.source_url,
-      title: job.title || "NHS Guidance",
-      category: job.category,
-      chunk_text: text,
-      chunk_index: i,
-      token_count: tokenEstimate,
-      safety_relevant: Boolean(job.safety_relevant),
-      attribution: "Source: NHS.uk",
-      content_hash: hash,
-    });
-  }
+      return {
+        id: hash,
+        source_id: job.source_id,
+        source_url: job.source_url,
+        title: job.title || "NHS Guidance",
+        category: job.category,
+        chunk_text: text,
+        chunk_index: i,
+        token_count: tokenEstimate,
+        safety_relevant: Boolean(job.safety_relevant),
+        attribution: "Source: NHS.uk",
+        content_hash: hash,
+      };
+    })
+  );
 
   return chunks;
 }
