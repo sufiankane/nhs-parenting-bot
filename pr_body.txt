@@ -1,0 +1,8 @@
+🎯 **What:**
+Fixed a vulnerability in `src/gateway/kvRateLimit.ts` and `src/gateway/rateLimit.ts` where the `X-Forwarded-For` header was used as a fallback for the client IP address.
+
+⚠️ **Risk:**
+Attackers could supply arbitrary IP addresses in the `X-Forwarded-For` header, allowing them to bypass rate limiting easily by spoofing different IPs.
+
+🛡️ **Solution:**
+Removed the `X-Forwarded-For` fallback in both rate limiting functions. Now relying solely on `CF-Connecting-IP` (with a safe default of `anonymous` or `127.0.0.1` respectively), ensuring attackers cannot manipulate rate limits using spoofed HTTP headers. Tested changes to ensure functionality is preserved.

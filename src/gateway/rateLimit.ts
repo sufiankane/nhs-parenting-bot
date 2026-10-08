@@ -9,7 +9,7 @@ const inMemoryStore = new Map<string, RateLimitEntry>();
 
 export async function checkRateLimit(
   request: Request,
-  env: Env
+  env: Env,
 ): Promise<{ allowed: boolean; retryAfter?: string }> {
   const rawLimit = env.RATE_LIMIT_PER_MINUTE;
   let limit = 20;
@@ -22,10 +22,7 @@ export async function checkRateLimit(
     limit = rawLimit;
   }
 
-  const ip =
-    request.headers.get("CF-Connecting-IP") ||
-    request.headers.get("X-Forwarded-For") ||
-    "127.0.0.1";
+  const ip = request.headers.get("CF-Connecting-IP") || "127.0.0.1";
 
   const now = Date.now();
   const windowMs = 60 * 1000;
@@ -37,7 +34,10 @@ export async function checkRateLimit(
   }
 
   if (entry.count >= limit) {
-    const retryAfter = Math.max(1, Math.ceil((entry.resetTime - now) / 1000)).toString();
+    const retryAfter = Math.max(
+      1,
+      Math.ceil((entry.resetTime - now) / 1000),
+    ).toString();
     return { allowed: false, retryAfter };
   }
 

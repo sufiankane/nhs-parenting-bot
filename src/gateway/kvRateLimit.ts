@@ -15,7 +15,7 @@ interface KVLike {
   put(
     key: string,
     value: string,
-    options?: { expirationTtl?: number }
+    options?: { expirationTtl?: number },
   ): Promise<void>;
 }
 
@@ -44,11 +44,7 @@ export function resolveLimit(env: RateLimitEnv): number {
 }
 
 function clientIp(request: Request): string {
-  return (
-    request.headers.get("CF-Connecting-IP") ||
-    request.headers.get("X-Forwarded-For") ||
-    "anonymous"
-  );
+  return request.headers.get("CF-Connecting-IP") || "anonymous";
 }
 
 /**
@@ -57,7 +53,7 @@ function clientIp(request: Request): string {
  */
 export async function checkKvRateLimit(
   request: Request,
-  env: RateLimitEnv
+  env: RateLimitEnv,
 ): Promise<{ allowed: boolean; retryAfter?: string }> {
   const kv = env.SESSIONS;
   if (!kv) return { allowed: true };
@@ -71,11 +67,9 @@ export async function checkKvRateLimit(
     const raw = await kv.get(key);
 
     if (raw === null) {
-      await kv.put(
-        key,
-        JSON.stringify({ count: 1, resetAt: now + windowMs }),
-        { expirationTtl: WINDOW_SECONDS }
-      );
+      await kv.put(key, JSON.stringify({ count: 1, resetAt: now + windowMs }), {
+        expirationTtl: WINDOW_SECONDS,
+      });
       return { allowed: true };
     }
 
@@ -93,17 +87,15 @@ export async function checkKvRateLimit(
       typeof parsed.resetAt !== "number" ||
       now > parsed.resetAt
     ) {
-      await kv.put(
-        key,
-        JSON.stringify({ count: 1, resetAt: now + windowMs }),
-        { expirationTtl: WINDOW_SECONDS }
-      );
+      await kv.put(key, JSON.stringify({ count: 1, resetAt: now + windowMs }), {
+        expirationTtl: WINDOW_SECONDS,
+      });
       return { allowed: true };
     }
 
     if (parsed.count >= limit) {
       const retryAfter = String(
-        Math.max(1, Math.ceil((parsed.resetAt - now) / 1000))
+        Math.max(1, Math.ceil((parsed.resetAt - now) / 1000)),
       );
       return { allowed: false, retryAfter };
     }
@@ -114,7 +106,7 @@ export async function checkKvRateLimit(
     await kv.put(
       key,
       JSON.stringify({ count: newCount, resetAt: parsed.resetAt }),
-      { expirationTtl: ttl }
+      { expirationTtl: ttl },
     );
     return { allowed: true };
   } catch {
