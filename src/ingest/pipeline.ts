@@ -219,18 +219,28 @@ export async function processQueueBatch(
   let processed = 0;
   let failed = 0;
 
-  for (const message of batch.messages) {
-    try {
-      const result = await processIngestJob(env, message.body);
-      if (result.success) {
-        message.ack();
-        processed++;
-      } else {
+  const results = await Promise.allSettled(
+    batch.messages.map(async (message) => {
+      try {
+        const result = await processIngestJob(env, message.body);
+        if (result.success) {
+          message.ack();
+          return true;
+        } else {
+          message.retry();
+          return false;
+        }
+      } catch {
         message.retry();
-        failed++;
+        return false;
       }
-    } catch {
-      message.retry();
+    })
+  );
+
+  for (const result of results) {
+    if (result.status === "fulfilled" && result.value) {
+      processed++;
+    } else {
       failed++;
     }
   }
