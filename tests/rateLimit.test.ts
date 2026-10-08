@@ -14,7 +14,7 @@
  *   checkKvRateLimit(request, env): Promise<{ allowed: boolean; retryAfter?: string }>
  *   - KV namespace: env.SESSIONS, key prefix `ratelimit:`, fixed window 60s.
  *   - Limit from env.RATE_LIMIT_PER_MINUTE (default 20; malformed/<=0 -> 20).
- *   - IP from CF-Connecting-IP || X-Forwarded-For || "anonymous".
+ *   - IP from CF-Connecting-IP || "anonymous".
  *   - Missing KV binding or KV get/put throw -> { allowed: true } (fail open).
  */
 
@@ -48,7 +48,7 @@ class MockKv {
   async put(
     key: string,
     value: string,
-    options?: { expirationTtl?: number }
+    options?: { expirationTtl?: number },
   ): Promise<void> {
     if (this.failPut) throw new Error("simulated KV put failure");
     this.putCalls.push({ key, value, options });
@@ -116,21 +116,36 @@ describe("checkKvRateLimit — fixed-window enforcement [P1-T8, Spec §4 M2]", (
     const ipB = "192.0.2.2";
 
     // Exhaust ipA's window.
-    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(true);
-    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(true);
-    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(false);
+    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(
+      true,
+    );
+    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(
+      true,
+    );
+    expect((await checkKvRateLimit(requestWithIp(ipA), env)).allowed).toBe(
+      false,
+    );
 
     // ipB must still be allowed — its window is independent.
-    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(true);
-    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(true);
-    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(false);
+    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(
+      true,
+    );
+    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(
+      true,
+    );
+    expect((await checkKvRateLimit(requestWithIp(ipB), env)).allowed).toBe(
+      false,
+    );
   });
 
   it("fails OPEN when the KV binding is missing or KV get/put throws (rule 02.1)", async () => {
     // protects rule 02.1 — rate limiting is abuse control only; the safety gate
     // is M3 triage, so a limiter outage must never block a user in crisis.
     const envNoKv: RateLimitEnv = { RATE_LIMIT_PER_MINUTE: "1" };
-    const resNoKv = await checkKvRateLimit(requestWithIp("192.0.2.50"), envNoKv);
+    const resNoKv = await checkKvRateLimit(
+      requestWithIp("192.0.2.50"),
+      envNoKv,
+    );
     expect(resNoKv.allowed).toBe(true);
     expect(resNoKv.retryAfter).toBeUndefined();
 
@@ -161,18 +176,24 @@ describe("checkKvRateLimit — fixed-window enforcement [P1-T8, Spec §4 M2]", (
 
       await checkKvRateLimit(requestWithIp(ip), env);
       await checkKvRateLimit(requestWithIp(ip), env);
-      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(false);
+      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(
+        false,
+      );
 
       // Key shape: exactly one key, prefixed `ratelimit:` and carrying the IP.
       expect([...kv.store.keys()]).toEqual([`ratelimit:${ip}`]);
 
       // Still inside the 60s window at +59s -> still blocked.
       vi.advanceTimersByTime(59_000);
-      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(false);
+      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(
+        false,
+      );
 
       // Window expired at +61s -> allowed again.
       vi.advanceTimersByTime(2_000);
-      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(true);
+      expect((await checkKvRateLimit(requestWithIp(ip), env)).allowed).toBe(
+        true,
+      );
     } finally {
       vi.useRealTimers();
     }
